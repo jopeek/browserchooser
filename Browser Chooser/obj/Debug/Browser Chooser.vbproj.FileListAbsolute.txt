@@ -1,0 +1,27 @@
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\bin\Debug\Browser Chooser.exe
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\bin\Debug\Browser Chooser.pdb
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\bin\Debug\Browser Chooser.xml
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser_Chooser.frmMain.resources
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser_Chooser.Resources.resources
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser Chooser.vbproj.GenerateResource.Cache
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser Chooser.exe
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser Chooser.xml
+C:\Documents and Settings\jpeek\Local Settings\Application Data\Temporary Projects\Browser Chooser\obj\Debug\Browser Chooser.pdb
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.exe
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.xml
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.pdb
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.exe
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.pdb
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.xml
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser_Chooser.frmMain.resources
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser_Chooser.Resources.resources
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.vbproj.GenerateResource.Cache
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser_Chooser.About.resources
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser_Chooser.Options.resources
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.exe.config
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.exe.manifest
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\bin\Debug\Browser Chooser.application
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.exe.manifest
+C:\Documents and Settings\jpeek\My Documents\Visual Studio 2008\Projects\Browser Chooser\Browser Chooser\obj\Debug\Browser Chooser.application
