@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resources\BrowserChooser3.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Browser Chooser" version="1.0.3534.23163" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Browser Chooser" version="1.0.3534.24369" language="neutral" processorArchitecture="msil" />
     <commandLine file="Browser Chooser.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -63,14 +63,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Browser Chooser.exe" size="2582016">
-      <assemblyIdentity name="Browser Chooser" version="1.0.3534.23163" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Browser Chooser.exe" size="2582528">
+      <assemblyIdentity name="Browser Chooser" version="1.0.3534.24369" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>CgNTKY+O8ebkyelkH39rmwF979w=</dsig:DigestValue>
+        <dsig:DigestValue>nRSHoKeos39e3DkXh0Npq+t24Xg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

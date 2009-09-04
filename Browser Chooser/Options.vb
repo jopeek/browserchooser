@@ -54,6 +54,8 @@ Public Class Options
             Dim sw As StreamWriter = New StreamWriter(ConfigFile.ToString)
 
             sw.WriteLine("DefaultBrowser=" & IsDefaultBrowser)
+            sw.WriteLine("ShowURL=" & cbURL.Checked)
+            Module1.showURL = cbURL.Checked
 
             sw.WriteLine("Browser1Name=" & Browser1Name.Text)
             sw.WriteLine("Browser1Target=" & Browser1Target.Text)
@@ -110,6 +112,8 @@ Public Class Options
         Browser3Image.SelectedItem = Module1.Browser3Image
         Browser4Image.SelectedItem = Module1.Browser4Image
         Browser5Image.SelectedItem = Module1.Browser5Image
+
+        cbURL.Checked = Module1.showURL
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

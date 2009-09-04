@@ -98,6 +98,7 @@ Partial Class Options
         Me.TextBox4 = New System.Windows.Forms.TextBox
         Me.Button2 = New System.Windows.Forms.Button
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
+        Me.cbURL = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -595,6 +596,7 @@ Partial Class Options
         '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.cbURL)
         Me.Panel6.Controls.Add(Me.btnSetDefault)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(3, 3)
@@ -606,7 +608,7 @@ Partial Class Options
         '
         Me.btnSetDefault.AutoSize = True
         Me.btnSetDefault.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnSetDefault.Location = New System.Drawing.Point(3, 15)
+        Me.btnSetDefault.Location = New System.Drawing.Point(3, 3)
         Me.btnSetDefault.Name = "btnSetDefault"
         Me.btnSetDefault.Size = New System.Drawing.Size(250, 23)
         Me.btnSetDefault.TabIndex = 10
@@ -773,6 +775,16 @@ Partial Class Options
         Me.Button2.Text = "..."
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'cbURL
+        '
+        Me.cbURL.AutoSize = True
+        Me.cbURL.Location = New System.Drawing.Point(329, 7)
+        Me.cbURL.Name = "cbURL"
+        Me.cbURL.Size = New System.Drawing.Size(84, 17)
+        Me.cbURL.TabIndex = 11
+        Me.cbURL.Text = "Show URL?"
+        Me.cbURL.UseVisualStyleBackColor = True
+        '
         'Options
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -888,4 +900,5 @@ Partial Class Options
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents Panel5 As System.Windows.Forms.Panel
     Friend WithEvents Panel6 As System.Windows.Forms.Panel
+    Friend WithEvents cbURL As System.Windows.Forms.CheckBox
 End Class

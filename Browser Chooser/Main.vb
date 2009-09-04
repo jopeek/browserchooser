@@ -30,7 +30,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp1_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseHover, btnApp1.MouseEnter
-        Me.Text = "Open in " & Browser1Name
+        If showURL = True And strURL <> "" Then
+            Me.Text = "Open in " & Browser1Name & " - " & strURL
+        Else
+            Me.Text = "Open in " & Browser1Name
+        End If
     End Sub
 
     Private Sub btnApp1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseLeave
@@ -38,7 +42,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseHover, btnApp2.MouseEnter
-        Me.Text = "Open in " & Browser2Name
+        If showURL = True And strURL <> "" Then
+            Me.Text = "Open in " & Browser2Name & " - " & strURL
+        Else
+            Me.Text = "Open in " & Browser2Name
+        End If
     End Sub
 
     Private Sub btnApp2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseLeave
@@ -46,7 +54,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp3_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseHover, btnApp3.MouseEnter
-        Me.Text = "Open in " & Browser3Name
+        If showURL = True And strURL <> "" Then
+            Me.Text = "Open in " & Browser3Name & " - " & strURL
+        Else
+            Me.Text = "Open in " & Browser3Name
+        End If
     End Sub
 
     Private Sub btnApp3_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseLeave
@@ -54,7 +66,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp4_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseHover, btnApp4.MouseEnter
-        Me.Text = "Open in " & Browser4Name
+        If showURL = True And strURL <> "" Then
+            Me.Text = "Open in " & Browser4Name & " - " & strURL
+        Else
+            Me.Text = "Open in " & Browser4Name
+        End If
     End Sub
 
     Private Sub btnApp4_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseLeave
@@ -62,7 +78,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp5_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseHover, btnApp5.MouseEnter
-        Me.Text = "Open in " & Browser5Name
+        If showURL = True And strURL <> "" Then
+            Me.Text = "Open in " & Browser5Name & " - " & strURL
+        Else
+            Me.Text = "Open in " & Browser5Name
+        End If
     End Sub
 
     Private Sub btnApp5_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseLeave
@@ -91,7 +111,6 @@ Public Class frmMain
         Dim hwnd As IntPtr = Me.Handle
         Dim result As Integer = DwmExtendFrameIntoClientArea(hwnd, margins)
 
-
         InitializeMain()
 
         'Load url from parameter
@@ -112,6 +131,8 @@ Public Class frmMain
 
                         Case "DefaultBrowser"
                             IsDefaultBrowser = sLine.Substring(15, sLine.Length - 15)
+                        Case "ShowURL"
+                            showURL = sLine.Substring(8, sLine.Length - 8)
 
                         Case "Browser1Name"
                             Browser1Name = sLine.Substring(13, sLine.Length - 13)
@@ -269,7 +290,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnInfo_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseLeave
-        Me.Text = "Choose a Browser"
+        Me.Text = DefaultMessage
     End Sub
 
     Private Sub btnOptions_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.MouseEnter, btnOptions.MouseHover
@@ -277,7 +298,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnOptions_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.MouseLeave
-        Me.Text = "Choose a Browser"
+        Me.Text = DefaultMessage
     End Sub
 
     Private Sub btnClose_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -285,7 +306,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnClose_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Text = "Choose a Browser"
+        Me.Text = DefaultMessage
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click
