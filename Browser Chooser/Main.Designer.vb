@@ -146,7 +146,7 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(500, 80)
+        Me.ClientSize = New System.Drawing.Size(501, 80)
         Me.Controls.Add(Me.lblEmpty)
         Me.Controls.Add(Me.btnApp5)
         Me.Controls.Add(Me.btnApp4)

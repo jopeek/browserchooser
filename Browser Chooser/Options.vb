@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Win32
+Imports System.IO
 
 Public Class Options
 
@@ -30,64 +31,93 @@ Public Class Options
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         'Save settings from textboxes
-        My.Settings.Browser1Disable = Browser1Disable.Checked
-        My.Settings.Browser2Disable = Browser2Disable.Checked
-        My.Settings.Browser3Disable = Browser3Disable.Checked
-        My.Settings.Browser4Disable = Browser4Disable.Checked
-        My.Settings.Browser5Disable = Browser5Disable.Checked
+        Try
+            'Offer to make default browser if not already
+            If IsDefaultBrowser = False Then
 
-        My.Settings.Browser1Name = Browser1Name.Text
-        My.Settings.Browser2Name = Browser2Name.Text
-        My.Settings.Browser3Name = Browser3Name.Text
-        My.Settings.Browser4Name = Browser4Name.Text
-        My.Settings.Browser5Name = Browser5Name.Text
+                Dim Answer As MsgBoxResult = MsgBox("Browser Chooser is not currently set as your default browser. Would you like to make it so now?" & vbCrLf & "(Without being the default browser, Browser Chooser's usefullness rapidly declines...)", MsgBoxStyle.YesNo)
 
-        My.Settings.Browser1Target = Browser1Target.Text
-        My.Settings.Browser2Target = Browser2Target.Text
-        My.Settings.Browser3Target = Browser3Target.Text
-        My.Settings.Browser4Target = Browser4Target.Text
-        My.Settings.Browser5Target = Browser5Target.Text
+                If Answer = MsgBoxResult.Yes Then
+                    IsDefaultBrowser = True
+                Else
+                    IsDefaultBrowser = False
+                End If
 
-        My.Settings.Browser1Image = Browser1Image.SelectedItem
-        My.Settings.Browser2Image = Browser2Image.SelectedItem
-        My.Settings.Browser3Image = Browser3Image.SelectedItem
-        My.Settings.Browser4Image = Browser4Image.SelectedItem
-        My.Settings.Browser5Image = Browser5Image.SelectedItem
+            End If
+
+            'Remove existing config.ini
+            If ConfigFile.Exists Then
+                ConfigFile.Delete()
+            End If
+
+            'Write settings to config.ini
+            Dim sw As StreamWriter = New StreamWriter(ConfigFile.ToString)
+
+            sw.WriteLine("DefaultBrowser=" & IsDefaultBrowser)
+
+            sw.WriteLine("Browser1Name=" & Browser1Name.Text)
+            sw.WriteLine("Browser1Target=" & Browser1Target.Text)
+            sw.WriteLine("Browser1Image=" & Browser1Image.Text)
+
+            sw.WriteLine("Browser2Name=" & Browser2Name.Text)
+            sw.WriteLine("Browser2Target=" & Browser2Target.Text)
+            sw.WriteLine("Browser2Image=" & Browser2Image.Text)
+
+            sw.WriteLine("Browser3Name=" & Browser3Name.Text)
+            sw.WriteLine("Browser3Target=" & Browser3Target.Text)
+            sw.WriteLine("Browser3Image=" & Browser3Image.Text)
+
+            sw.WriteLine("Browser4Name=" & Browser4Name.Text)
+            sw.WriteLine("Browser4Target=" & Browser4Target.Text)
+            sw.WriteLine("Browser4Image=" & Browser4Image.Text)
+
+            sw.WriteLine("Browser5Name=" & Browser5Name.Text)
+            sw.WriteLine("Browser5Target=" & Browser5Target.Text)
+            sw.WriteLine("Browser5Image=" & Browser5Image.Text)
+
+            sw.Close()
+
+        Catch ex As Exception
+
+            MsgBox("There was an error saving to the configuration file." & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+
+        End Try
 
         Me.Close()
-        MsgBox("Please restart the application for the settings to take effect.")
+
+        frmMain.InitializeMain()
+
+        'MsgBox("Please restart the application for the settings to take effect.")
     End Sub
 
 
     Private Sub Options_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load settings into textboxes
-        Browser1Name.Text = My.Settings.Browser1Name
-        Browser2Name.Text = My.Settings.Browser2Name
-        Browser3Name.Text = My.Settings.Browser3Name
-        Browser4Name.Text = My.Settings.Browser4Name
-        Browser5Name.Text = My.Settings.Browser5Name
+        Browser1Name.Text = Module1.Browser1Name
+        Browser2Name.Text = Module1.Browser2Name
+        Browser3Name.Text = Module1.Browser3Name
+        Browser4Name.Text = Module1.Browser4Name
+        Browser5Name.Text = Module1.Browser5Name
 
-        Browser1Target.Text = My.Settings.Browser1Target
-        Browser2Target.Text = My.Settings.Browser2Target
-        Browser3Target.Text = My.Settings.Browser3Target
-        Browser4Target.Text = My.Settings.Browser4Target
-        Browser5Target.Text = My.Settings.Browser5Target
+        Browser1Target.Text = Module1.Browser1Target
+        Browser2Target.Text = Module1.Browser2Target
+        Browser3Target.Text = Module1.Browser3Target
+        Browser4Target.Text = Module1.Browser4Target
+        Browser5Target.Text = Module1.Browser5Target
 
-        Browser1Image.SelectedItem = My.Settings.Browser1Image
-        Browser2Image.SelectedItem = My.Settings.Browser2Image
-        Browser3Image.SelectedItem = My.Settings.Browser3Image
-        Browser4Image.SelectedItem = My.Settings.Browser4Image
-        Browser5Image.SelectedItem = My.Settings.Browser5Image
-
-        Browser1Disable.Checked = My.Settings.Browser1Disable
-        Browser2Disable.Checked = My.Settings.Browser2Disable
-        Browser3Disable.Checked = My.Settings.Browser3Disable
-        Browser4Disable.Checked = My.Settings.Browser4Disable
-        Browser5Disable.Checked = My.Settings.Browser5Disable
+        Browser1Image.SelectedItem = Module1.Browser1Image
+        Browser2Image.SelectedItem = Module1.Browser2Image
+        Browser3Image.SelectedItem = Module1.Browser3Image
+        Browser4Image.SelectedItem = Module1.Browser4Image
+        Browser5Image.SelectedItem = Module1.Browser5Image
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
+        If ConfigFile.Exists Then
+            Me.Close()
+        Else
+            Application.Exit()
+        End If
     End Sub
 
     Private Sub btnSetDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetDefault.Click
@@ -147,58 +177,29 @@ Public Class Options
 
         Catch ex As Exception
             Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
+            IsDefaultBrowser = False
         End Try
+
+        IsDefaultBrowser = True
+
         Return "Default browser has been set to Browser Chooser."
 
     End Function
 
-    Private Sub Browser1Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1Disable.CheckedChanged
-        If Browser1Disable.Checked = False Then
-            If Browser1Name.Text = "" Or Browser1Target.Text = "" Or Browser1Image.SelectedItem = "" Then
-                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
-                Browser1Disable.Checked = True
-                Exit Sub
-            End If
-        End If
+   
+    Private Sub Browser1Target_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1Target.TextChanged
+        If Browser1Target.Text <> "" Then Panel2.Enabled = True Else Panel2.Enabled = False
     End Sub
 
-    Private Sub Browser2Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser2Disable.CheckedChanged
-        If Browser2Disable.Checked = False Then
-            If Browser2Name.Text = "" Or Browser2Target.Text = "" Or Browser2Image.SelectedItem = "" Then
-                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
-                Browser2Disable.Checked = True
-                Exit Sub
-            End If
-        End If
+    Private Sub Browser2Target_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser2Target.TextChanged
+        If Browser2Target.Text <> "" Then Panel3.Enabled = True Else Panel3.Enabled = False
     End Sub
 
-    Private Sub Browser3Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser3Disable.CheckedChanged
-        If Browser3Disable.Checked = False Then
-            If Browser3Name.Text = "" Or Browser3Target.Text = "" Or Browser3Image.SelectedItem = "" Then
-                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
-                Browser3Disable.Checked = True
-                Exit Sub
-            End If
-        End If
+    Private Sub Browser3Target_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser3Target.TextChanged
+        If Browser3Target.Text <> "" Then Panel4.Enabled = True Else Panel4.Enabled = False
     End Sub
 
-    Private Sub Browser4Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser4Disable.CheckedChanged
-        If Browser4Disable.Checked = False Then
-            If Browser4Name.Text = "" Or Browser4Target.Text = "" Or Browser4Image.SelectedItem = "" Then
-                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
-                Browser4Disable.Checked = True
-                Exit Sub
-            End If
-        End If
-    End Sub
-
-    Private Sub Browser5Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser5Disable.CheckedChanged
-        If Browser5Disable.Checked = False Then
-            If Browser5Name.Text = "" Or Browser5Target.Text = "" Or Browser5Image.SelectedItem = "" Then
-                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
-                Browser5Disable.Checked = True
-                Exit Sub
-            End If
-        End If
+    Private Sub Browser4Target_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser4Target.TextChanged
+        If Browser4Target.Text <> "" Then Panel5.Enabled = True Else Panel5.Enabled = False
     End Sub
 End Class
