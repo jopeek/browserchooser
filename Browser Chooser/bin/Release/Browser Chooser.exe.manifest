@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resources\BrowserChooser3.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Browser Chooser" version="1.0.3530.25322" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Browser Chooser" version="1.0.3534.16547" language="neutral" processorArchitecture="msil" />
     <commandLine file="Browser Chooser.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -63,24 +63,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Browser Chooser.exe" size="2594304">
-      <assemblyIdentity name="Browser Chooser" version="1.0.3530.25322" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Browser Chooser.exe" size="2605056">
+      <assemblyIdentity name="Browser Chooser" version="1.0.3534.16547" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>mVTe8Fr+YgDbymjtS6wqe9RFAYc=</dsig:DigestValue>
+        <dsig:DigestValue>bii5zuUMgMaKsAoUYqi0gbS/ifY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Browser Chooser.exe.config" size="3835">
+  <file name="Browser Chooser.exe.config" size="4311">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>cP2KwDd7btPboXGQvMYK+G3bh9I=</dsig:DigestValue>
+      <dsig:DigestValue>ZOpXVfJm1+y7Mr066uaZRPGgKt8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Browser-256.ico" size="1644118">

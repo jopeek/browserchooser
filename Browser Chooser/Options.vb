@@ -23,27 +23,36 @@ Public Class Options
         Browser4Target.Text = Browser4FileDialog.FileName.ToString
     End Sub
 
+    Private Sub btnBrowse5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser5.Click
+        Browser5FileDialog.ShowDialog()
+        Browser5Target.Text = Browser5FileDialog.FileName.ToString
+    End Sub
+
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         'Save settings from textboxes
         My.Settings.Browser1Disable = Browser1Disable.Checked
         My.Settings.Browser2Disable = Browser2Disable.Checked
         My.Settings.Browser3Disable = Browser3Disable.Checked
         My.Settings.Browser4Disable = Browser4Disable.Checked
+        My.Settings.Browser5Disable = Browser5Disable.Checked
 
         My.Settings.Browser1Name = Browser1Name.Text
         My.Settings.Browser2Name = Browser2Name.Text
         My.Settings.Browser3Name = Browser3Name.Text
         My.Settings.Browser4Name = Browser4Name.Text
+        My.Settings.Browser5Name = Browser5Name.Text
 
         My.Settings.Browser1Target = Browser1Target.Text
         My.Settings.Browser2Target = Browser2Target.Text
         My.Settings.Browser3Target = Browser3Target.Text
         My.Settings.Browser4Target = Browser4Target.Text
+        My.Settings.Browser5Target = Browser5Target.Text
 
         My.Settings.Browser1Image = Browser1Image.SelectedItem
         My.Settings.Browser2Image = Browser2Image.SelectedItem
         My.Settings.Browser3Image = Browser3Image.SelectedItem
         My.Settings.Browser4Image = Browser4Image.SelectedItem
+        My.Settings.Browser5Image = Browser5Image.SelectedItem
 
         Me.Close()
         MsgBox("Please restart the application for the settings to take effect.")
@@ -56,21 +65,25 @@ Public Class Options
         Browser2Name.Text = My.Settings.Browser2Name
         Browser3Name.Text = My.Settings.Browser3Name
         Browser4Name.Text = My.Settings.Browser4Name
+        Browser5Name.Text = My.Settings.Browser5Name
 
         Browser1Target.Text = My.Settings.Browser1Target
         Browser2Target.Text = My.Settings.Browser2Target
         Browser3Target.Text = My.Settings.Browser3Target
         Browser4Target.Text = My.Settings.Browser4Target
+        Browser5Target.Text = My.Settings.Browser5Target
 
         Browser1Image.SelectedItem = My.Settings.Browser1Image
         Browser2Image.SelectedItem = My.Settings.Browser2Image
         Browser3Image.SelectedItem = My.Settings.Browser3Image
         Browser4Image.SelectedItem = My.Settings.Browser4Image
+        Browser5Image.SelectedItem = My.Settings.Browser5Image
 
         Browser1Disable.Checked = My.Settings.Browser1Disable
         Browser2Disable.Checked = My.Settings.Browser2Disable
         Browser3Disable.Checked = My.Settings.Browser3Disable
         Browser4Disable.Checked = My.Settings.Browser4Disable
+        Browser5Disable.Checked = My.Settings.Browser5Disable
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -174,6 +187,16 @@ Public Class Options
             If Browser4Name.Text = "" Or Browser4Target.Text = "" Or Browser4Image.SelectedItem = "" Then
                 MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
                 Browser4Disable.Checked = True
+                Exit Sub
+            End If
+        End If
+    End Sub
+
+    Private Sub Browser5Disable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser5Disable.CheckedChanged
+        If Browser5Disable.Checked = False Then
+            If Browser5Name.Text = "" Or Browser5Target.Text = "" Or Browser5Image.SelectedItem = "" Then
+                MsgBox("You must fill in all the fields!", MsgBoxStyle.Exclamation)
+                Browser5Disable.Checked = True
                 Exit Sub
             End If
         End If

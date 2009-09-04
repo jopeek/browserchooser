@@ -65,18 +65,45 @@ Partial Class Options
         Me.Browser4Name = New System.Windows.Forms.TextBox
         Me.btnBrowser4 = New System.Windows.Forms.Button
         Me.TabPage5 = New System.Windows.Forms.TabPage
+        Me.Browser5Disable = New System.Windows.Forms.CheckBox
+        Me.Browser5Image = New System.Windows.Forms.ComboBox
+        Me.Label20 = New System.Windows.Forms.Label
+        Me.Label21 = New System.Windows.Forms.Label
+        Me.Browser5Target = New System.Windows.Forms.TextBox
+        Me.Label22 = New System.Windows.Forms.Label
+        Me.Browser5Name = New System.Windows.Forms.TextBox
+        Me.btnBrowser5 = New System.Windows.Forms.Button
+        Me.TabPage6 = New System.Windows.Forms.TabPage
         Me.btnSetDefault = New System.Windows.Forms.Button
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.btnCancel = New System.Windows.Forms.Button
         Me.Browser2FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.Browser3FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.Browser4FileDialog = New System.Windows.Forms.OpenFileDialog
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.TextBox1 = New System.Windows.Forms.TextBox
+        Me.Label16 = New System.Windows.Forms.Label
+        Me.TextBox2 = New System.Windows.Forms.TextBox
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.TextBox3 = New System.Windows.Forms.TextBox
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.TextBox4 = New System.Windows.Forms.TextBox
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -114,10 +141,6 @@ Partial Class Options
         Me.btnBrowser1.TabIndex = 4
         Me.btnBrowser1.Text = "..."
         Me.btnBrowser1.UseVisualStyleBackColor = True
-        '
-        'Browser1FileDialog
-        '
-        Me.Browser1FileDialog.FileName = "OpenFileDialog1"
         '
         'btnSave
         '
@@ -171,6 +194,7 @@ Partial Class Options
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
+        Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Location = New System.Drawing.Point(173, 42)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -471,14 +495,102 @@ Partial Class Options
         '
         'TabPage5
         '
-        Me.TabPage5.Controls.Add(Me.btnSetDefault)
+        Me.TabPage5.Controls.Add(Me.Browser5Disable)
+        Me.TabPage5.Controls.Add(Me.Browser5Image)
+        Me.TabPage5.Controls.Add(Me.Label20)
+        Me.TabPage5.Controls.Add(Me.Label21)
+        Me.TabPage5.Controls.Add(Me.Browser5Target)
+        Me.TabPage5.Controls.Add(Me.Label22)
+        Me.TabPage5.Controls.Add(Me.Browser5Name)
+        Me.TabPage5.Controls.Add(Me.btnBrowser5)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage5.Size = New System.Drawing.Size(422, 76)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Miscellaneous"
+        Me.TabPage5.TabIndex = 6
+        Me.TabPage5.Text = "Browser 5"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Browser5Disable
+        '
+        Me.Browser5Disable.AutoSize = True
+        Me.Browser5Disable.Location = New System.Drawing.Point(328, 6)
+        Me.Browser5Disable.Name = "Browser5Disable"
+        Me.Browser5Disable.Size = New System.Drawing.Size(67, 17)
+        Me.Browser5Disable.TabIndex = 32
+        Me.Browser5Disable.Text = "Disabled"
+        Me.Browser5Disable.UseVisualStyleBackColor = True
+        '
+        'Browser5Image
+        '
+        Me.Browser5Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Browser5Image.FormattingEnabled = True
+        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser5Image.Location = New System.Drawing.Point(275, 38)
+        Me.Browser5Image.Name = "Browser5Image"
+        Me.Browser5Image.Size = New System.Drawing.Size(134, 21)
+        Me.Browser5Image.TabIndex = 33
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(6, 16)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(75, 13)
+        Me.Label20.TabIndex = 26
+        Me.Label20.Text = "Display Name:"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(272, 16)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(39, 13)
+        Me.Label21.TabIndex = 31
+        Me.Label21.Text = "Image:"
+        '
+        'Browser5Target
+        '
+        Me.Browser5Target.Location = New System.Drawing.Point(53, 39)
+        Me.Browser5Target.Name = "Browser5Target"
+        Me.Browser5Target.Size = New System.Drawing.Size(180, 20)
+        Me.Browser5Target.TabIndex = 27
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(6, 42)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(41, 13)
+        Me.Label22.TabIndex = 30
+        Me.Label22.Text = "Target:"
+        '
+        'Browser5Name
+        '
+        Me.Browser5Name.Location = New System.Drawing.Point(84, 13)
+        Me.Browser5Name.Name = "Browser5Name"
+        Me.Browser5Name.Size = New System.Drawing.Size(182, 20)
+        Me.Browser5Name.TabIndex = 29
+        '
+        'btnBrowser5
+        '
+        Me.btnBrowser5.Location = New System.Drawing.Point(239, 36)
+        Me.btnBrowser5.Name = "btnBrowser5"
+        Me.btnBrowser5.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowser5.TabIndex = 28
+        Me.btnBrowser5.Text = "..."
+        Me.btnBrowser5.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Controls.Add(Me.btnSetDefault)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Size = New System.Drawing.Size(422, 76)
+        Me.TabPage6.TabIndex = 4
+        Me.TabPage6.Text = "Miscellaneous"
+        Me.TabPage6.UseVisualStyleBackColor = True
         '
         'btnSetDefault
         '
@@ -511,17 +623,145 @@ Partial Class Options
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Browser2FileDialog
+        'CheckBox1
         '
-        Me.Browser2FileDialog.FileName = "OpenFileDialog1"
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(328, 6)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(67, 17)
+        Me.CheckBox1.TabIndex = 32
+        Me.CheckBox1.Text = "Disabled"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'Browser3FileDialog
+        'ComboBox1
         '
-        Me.Browser3FileDialog.FileName = "OpenFileDialog2"
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.ComboBox1.Location = New System.Drawing.Point(275, 38)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(134, 21)
+        Me.ComboBox1.TabIndex = 33
         '
-        'Browser4FileDialog
+        'Label14
         '
-        Me.Browser4FileDialog.FileName = "OpenFileDialog3"
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(6, 16)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(75, 13)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Display Name:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(272, 16)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(39, 13)
+        Me.Label15.TabIndex = 31
+        Me.Label15.Text = "Image:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(53, 39)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(180, 20)
+        Me.TextBox1.TabIndex = 27
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(6, 42)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(41, 13)
+        Me.Label16.TabIndex = 30
+        Me.Label16.Text = "Target:"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(84, 13)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(182, 20)
+        Me.TextBox2.TabIndex = 29
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(239, 36)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(27, 23)
+        Me.Button1.TabIndex = 28
+        Me.Button1.Text = "..."
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(328, 6)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(67, 17)
+        Me.CheckBox2.TabIndex = 32
+        Me.CheckBox2.Text = "Disabled"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.ComboBox2.Location = New System.Drawing.Point(275, 38)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(134, 21)
+        Me.ComboBox2.TabIndex = 33
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(6, 16)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(75, 13)
+        Me.Label17.TabIndex = 26
+        Me.Label17.Text = "Display Name:"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(272, 16)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(39, 13)
+        Me.Label18.TabIndex = 31
+        Me.Label18.Text = "Image:"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(53, 39)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(180, 20)
+        Me.TextBox3.TabIndex = 27
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(6, 42)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(41, 13)
+        Me.Label19.TabIndex = 30
+        Me.Label19.Text = "Target:"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(84, 13)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(182, 20)
+        Me.TextBox4.TabIndex = 29
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(239, 36)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(27, 23)
+        Me.Button2.TabIndex = 28
+        Me.Button2.Text = "..."
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Options
         '
@@ -550,6 +790,8 @@ Partial Class Options
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
+        Me.TabPage6.ResumeLayout(False)
+        Me.TabPage6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -602,5 +844,31 @@ Partial Class Options
     Friend WithEvents Browser3FileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Browser4FileDialog As System.Windows.Forms.OpenFileDialog
     Friend WithEvents btnSetDefault As System.Windows.Forms.Button
+    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents Browser5Disable As System.Windows.Forms.CheckBox
+    Friend WithEvents Browser5Image As System.Windows.Forms.ComboBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents Browser5Target As System.Windows.Forms.TextBox
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents Browser5Name As System.Windows.Forms.TextBox
+    Friend WithEvents btnBrowser5 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Browser5FileDialog As System.Windows.Forms.OpenFileDialog
 End Class

@@ -81,6 +81,14 @@ Public Class frmMain
         Me.Text = "Choose a Browser"
     End Sub
 
+    Private Sub btnApp5_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseHover, btnApp5.MouseEnter
+        Me.Text = "Open in " & My.Settings.Browser5Name
+    End Sub
+
+    Private Sub btnApp5_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseLeave
+        Me.Text = "Choose a Browser"
+    End Sub
+
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -96,7 +104,7 @@ Public Class frmMain
         Dim result As Integer = DwmExtendFrameIntoClientArea(hwnd, margins)
 
         'Initialize browser buttons
-        If My.Settings.Browser1Disable And My.Settings.Browser2Disable And My.Settings.Browser3Disable And My.Settings.Browser4Disable Then
+        If My.Settings.Browser1Disable And My.Settings.Browser2Disable And My.Settings.Browser3Disable And My.Settings.Browser4Disable And My.Settings.Browser5Disable Then
             lblEmpty.Visible = True
         End If
 
@@ -158,6 +166,21 @@ Public Class frmMain
                     btnApp4.Image = My.Resources.Opera
                 Case "Safari"
                     btnApp4.Image = My.Resources.Safari
+            End Select
+        End If
+        If My.Settings.Browser5Disable = False Then
+            btnApp5.Visible = True
+            Select Case My.Settings.Browser5Image
+                Case "Firefox"
+                    btnApp5.Image = My.Resources.Firefox
+                Case "Internet Explorer"
+                    btnApp5.Image = My.Resources.InternetExplorer
+                Case "Google Chrome"
+                    btnApp5.Image = My.Resources.GoogleChrome
+                Case "Opera"
+                    btnApp5.Image = My.Resources.Opera
+                Case "Safari"
+                    btnApp5.Image = My.Resources.Safari
             End Select
         End If
 
@@ -237,6 +260,15 @@ Public Class frmMain
         Me.Close()
     End Sub
 
+    Private Sub btnApp5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.Click
+        If strURL <> "" Then
+            System.Diagnostics.Process.Start(My.Settings.Browser5Target, """" & strURL & """")
+        Else
+            System.Diagnostics.Process.Start(My.Settings.Browser5Target)
+        End If
+        Me.Close()
+    End Sub
+
 
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Q Then
@@ -253,9 +285,9 @@ Public Class frmMain
             btnApp3_Click(sender, e)
         ElseIf e.KeyCode = Keys.D4 And My.Settings.Browser4Disable = False Then
             btnApp4_Click(sender, e)
+        ElseIf e.KeyCode = Keys.D5 And My.Settings.Browser5Disable = False Then
+            btnApp5_Click(sender, e)
         End If
     End Sub
-
-
 End Class
 

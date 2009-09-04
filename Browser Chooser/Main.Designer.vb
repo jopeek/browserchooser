@@ -31,12 +31,14 @@ Partial Class frmMain
         Me.btnApp3 = New System.Windows.Forms.PictureBox
         Me.btnApp4 = New System.Windows.Forms.PictureBox
         Me.lblEmpty = New System.Windows.Forms.Label
+        Me.btnApp5 = New System.Windows.Forms.PictureBox
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnApp5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnInfo
@@ -62,7 +64,7 @@ Partial Class frmMain
         'btnOptions
         '
         Me.btnOptions.Image = Global.Browser_Chooser.My.Resources.Resources._128
-        Me.btnOptions.Location = New System.Drawing.Point(397, 12)
+        Me.btnOptions.Location = New System.Drawing.Point(478, 12)
         Me.btnOptions.Name = "btnOptions"
         Me.btnOptions.Size = New System.Drawing.Size(16, 16)
         Me.btnOptions.TabIndex = 5
@@ -119,7 +121,7 @@ Partial Class frmMain
         Me.lblEmpty.BackColor = System.Drawing.Color.Transparent
         Me.lblEmpty.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmpty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblEmpty.Location = New System.Drawing.Point(20, 29)
+        Me.lblEmpty.Location = New System.Drawing.Point(60, 29)
         Me.lblEmpty.Name = "lblEmpty"
         Me.lblEmpty.Size = New System.Drawing.Size(392, 23)
         Me.lblEmpty.TabIndex = 10
@@ -127,14 +129,26 @@ Partial Class frmMain
         Me.lblEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblEmpty.Visible = False
         '
+        'btnApp5
+        '
+        Me.btnApp5.Image = Global.Browser_Chooser.My.Resources.Resources.InternetExplorer
+        Me.btnApp5.Location = New System.Drawing.Point(380, 1)
+        Me.btnApp5.Name = "btnApp5"
+        Me.btnApp5.Size = New System.Drawing.Size(75, 80)
+        Me.btnApp5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp5.TabIndex = 11
+        Me.btnApp5.TabStop = False
+        Me.btnApp5.Visible = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(425, 80)
+        Me.ClientSize = New System.Drawing.Size(500, 80)
         Me.Controls.Add(Me.lblEmpty)
+        Me.Controls.Add(Me.btnApp5)
         Me.Controls.Add(Me.btnApp4)
         Me.Controls.Add(Me.btnApp3)
         Me.Controls.Add(Me.btnApp2)
@@ -158,6 +172,7 @@ Partial Class frmMain
         CType(Me.btnApp2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnApp5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -169,5 +184,6 @@ Partial Class frmMain
     Friend WithEvents btnApp3 As System.Windows.Forms.PictureBox
     Friend WithEvents btnApp4 As System.Windows.Forms.PictureBox
     Friend WithEvents lblEmpty As System.Windows.Forms.Label
+    Friend WithEvents btnApp5 As System.Windows.Forms.PictureBox
 
 End Class
