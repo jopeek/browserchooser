@@ -50,8 +50,6 @@ E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.exe
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.xml
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.pdb
-E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\bin\Release\Browser Chooser.exe.manifest
-E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\bin\Release\Browser Chooser.application
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\bin\Release\Browser Chooser.exe
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\bin\Release\Browser Chooser.pdb
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\bin\Release\Browser Chooser.xml
@@ -61,8 +59,6 @@ E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser_Chooser.Resources.resources
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser_Chooser.Options.resources
 E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.vbproj.GenerateResource.Cache
-E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.exe.manifest
-E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser Chooser.application
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\bin\Release\Browser Chooser.exe.config
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\obj\Release\Browser Chooser.exe
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\obj\Release\Browser Chooser.xml
@@ -80,3 +76,4 @@ C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Choo
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\obj\Release\Browser Chooser.vbproj.GenerateResource.Cache
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\obj\Release\Browser Chooser.exe.manifest
 C:\Users\Danny\Documents\Visual Studio 2008\Projects\BrowserChooser\Browser Chooser\obj\Release\Browser Chooser.application
+E:\temp\Rally 2 Backup\Documents\VB.Net Projects\Browser Chooser\Browser Chooser\obj\Release\Browser_Chooser.Download.resources

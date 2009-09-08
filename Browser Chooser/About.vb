@@ -23,11 +23,11 @@
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-        System.Diagnostics.Process.Start("http://www.janolepeek.com")
+        Process.Start("http://www.janolepeek.com")
     End Sub
 
     Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        System.Diagnostics.Process.Start("http://creativecommons.org/licenses/by-nd/2.5/ca/")
+        Process.Start("http://creativecommons.org/licenses/by-nd/2.5/ca/")
     End Sub
 
     Private Sub PictureBox1_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -39,6 +39,6 @@
     End Sub
 
     Private Sub LinkLabel1_LinkClicked_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        System.Diagnostics.Process.Start("http://browserchoose.codeplex.com")
+        Process.Start("http://browserchoose.codeplex.com")
     End Sub
 End Class

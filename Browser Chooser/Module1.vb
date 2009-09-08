@@ -6,6 +6,7 @@
 
     Friend IsDefaultBrowser As Boolean = False
     Friend showURL As Boolean = False
+    Friend AutoUpdateCheck As Boolean = False
 
     Friend Browser1 As Boolean = False
     Friend Browser2 As Boolean = False
@@ -31,4 +32,7 @@
     Friend Browser4Image As String = ""
     Friend Browser5Image As String = ""
 
+    
+
 End Module
+

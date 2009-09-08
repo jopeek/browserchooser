@@ -1,5 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.IO
+Imports System.Diagnostics
+Imports System.Net
 
 
 Public Class frmMain
@@ -17,6 +19,7 @@ Public Class frmMain
     End Function
 
     Private strURL As String = ""
+    Private strParameters As String = ""
 
 
     Private Sub btnInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.Click
@@ -33,7 +36,7 @@ Public Class frmMain
         If showURL = True And strURL <> "" Then
             Me.Text = "Open in " & Browser1Name & " - " & strURL
         Else
-            Me.Text = "Open in " & Browser1Name
+            Me.Text = "Open " & Browser1Name
         End If
     End Sub
 
@@ -45,7 +48,7 @@ Public Class frmMain
         If showURL = True And strURL <> "" Then
             Me.Text = "Open in " & Browser2Name & " - " & strURL
         Else
-            Me.Text = "Open in " & Browser2Name
+            Me.Text = "Open " & Browser2Name
         End If
     End Sub
 
@@ -57,7 +60,7 @@ Public Class frmMain
         If showURL = True And strURL <> "" Then
             Me.Text = "Open in " & Browser3Name & " - " & strURL
         Else
-            Me.Text = "Open in " & Browser3Name
+            Me.Text = "Open " & Browser3Name
         End If
     End Sub
 
@@ -69,7 +72,7 @@ Public Class frmMain
         If showURL = True And strURL <> "" Then
             Me.Text = "Open in " & Browser4Name & " - " & strURL
         Else
-            Me.Text = "Open in " & Browser4Name
+            Me.Text = "Open " & Browser4Name
         End If
     End Sub
 
@@ -81,7 +84,7 @@ Public Class frmMain
         If showURL = True And strURL <> "" Then
             Me.Text = "Open in " & Browser5Name & " - " & strURL
         Else
-            Me.Text = "Open in " & Browser5Name
+            Me.Text = "Open " & Browser5Name
         End If
     End Sub
 
@@ -99,6 +102,17 @@ Public Class frmMain
     End Function
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        If My.Application.CommandLineArgs.Count > 0 Then
+            If My.Application.CommandLineArgs(0) = "gooptions" Then
+                'MsgBox(Options.SetDefaultBrowserPath())
+                'Application.Exit()
+                readConfig()
+                Options.ShowDialog()
+                Application.Exit()
+            End If
+        End If
+
 
         On Error Resume Next
         Dim margins As MARGINS = New MARGINS
@@ -119,10 +133,38 @@ Public Class frmMain
         Next i
     End Sub
 
-    Public Sub InitializeMain()
-        'Check for configuration file
-        Dim ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")
-        If ConfigFile.Exists Then
+    Public Sub CheckforUpdate(ByVal strMode As String)
+
+        Try
+
+            Dim client As WebClient = New WebClient()
+
+            Dim strWebVersion As String = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
+
+            If strWebVersion <> My.Application.Info.Version.ToString Then
+
+                If MsgBox("A new version of Browser Checker is available. Would you like to download it now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                    Download.ShowDialog()
+
+                End If
+            Else
+                If strMode = "verbose" Then
+                    MsgBox("You are running the current version of Browser Chooser!", MsgBoxStyle.Information)
+                End If
+            End If
+
+        Catch ex As Exception
+            If strMode = "verbose" Then
+                MsgBox("There was an error checking for the latest version." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+            End If
+        End Try
+        
+    End Sub
+
+    Public Sub readConfig()
+        Try
+
             Using sr As StreamReader = New StreamReader(ConfigFile.ToString)
                 Dim sLine As String = sr.ReadLine
 
@@ -133,7 +175,8 @@ Public Class frmMain
                             IsDefaultBrowser = sLine.Substring(15, sLine.Length - 15)
                         Case "ShowURL"
                             showURL = sLine.Substring(8, sLine.Length - 8)
-
+                        Case "AutoUpdateCheck"
+                            Module1.AutoUpdateCheck = sLine.Substring(16, sLine.Length - 16)
                         Case "Browser1Name"
                             Browser1Name = sLine.Substring(13, sLine.Length - 13)
                         Case "Browser2Name"
@@ -173,6 +216,17 @@ Public Class frmMain
                 sr.Close()
             End Using
 
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Public Sub InitializeMain()
+        'Check for configuration file
+        Dim ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")
+        If ConfigFile.Exists Then
+            readConfig()
+
             If Browser1Image <> "" And Browser1Name <> "" And Browser1Target <> "" Then Browser1 = True Else Browser1 = False
             If Browser2Image <> "" And Browser2Name <> "" And Browser2Target <> "" Then Browser2 = True Else Browser2 = False
             If Browser3Image <> "" And Browser3Name <> "" And Browser3Target <> "" Then Browser3 = True Else Browser3 = False
@@ -182,7 +236,18 @@ Public Class frmMain
         Else
 
             'Force open Options screen
-            Options.ShowDialog()
+            'Options.ShowDialog()
+
+            MsgBox("No ocnfiguration file found! Now launching the Options screen to configure Browser Chooser.", MsgBoxStyle.Exclamation)
+            openOptions()
+
+        End If
+
+        'Check for Update?
+
+        If AutoUpdateCheck = True Then
+
+            CheckforUpdate("")
 
         End If
 
@@ -310,7 +375,19 @@ Public Class frmMain
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click
-        Options.ShowDialog()
+        'Options.ShowDialog()
+        openOptions()
+
+    End Sub
+
+    Private Sub openOptions()
+        Dim myProcess As New Process
+        myProcess.StartInfo.UseShellExecute = True
+        myProcess.StartInfo.Verb = "runas"
+        myProcess.StartInfo.FileName = Application.ExecutablePath
+        myProcess.StartInfo.Arguments = "gooptions"
+        myProcess.Start()
+        System.Environment.Exit(-1)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -319,48 +396,93 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.Click
-        If strURL <> "" Then
-            System.Diagnostics.Process.Start(Browser1Target, """" & strURL & """")
+        If Browser1Target.Contains(".exe ") Then
+            strParameters = Browser1Target.Substring(InStr(Browser1Target, ".exe") + 4, Browser1Target.Length - (InStr(Browser1Target, ".exe") + 4)) & " "
+            If strURL <> "" Then
+                Process.Start(Browser1Target.Substring(0, InStr(Browser1Target, ".exe") + 4), strParameters & """" & strURL & """")
+            Else
+                Process.Start(Browser1Target.Substring(0, InStr(Browser1Target, ".exe") + 4), strParameters)
+            End If
         Else
-            System.Diagnostics.Process.Start(Browser1Target)
+            If strURL <> "" Then
+                Process.Start(Browser1Target, """" & strURL & """")
+            Else
+                Process.Start(Browser1Target)
+            End If
         End If
-
         Me.Close()
     End Sub
 
     Private Sub btnApp2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.Click
-        If strURL <> "" Then
-            System.Diagnostics.Process.Start(Browser2Target, """" & strURL & """")
+        If Browser2Target.Contains(".exe ") Then
+            strParameters = Browser2Target.Substring(InStr(Browser2Target, ".exe") + 4, Browser2Target.Length - (InStr(Browser2Target, ".exe") + 4)) & " "
+            If strURL <> "" Then
+                Process.Start(Browser2Target.Substring(0, InStr(Browser2Target, ".exe") + 4), strParameters & """" & strURL & """")
+            Else
+                Process.Start(Browser2Target.Substring(0, InStr(Browser2Target, ".exe") + 4), strParameters)
+            End If
         Else
-            System.Diagnostics.Process.Start(Browser2Target)
+            If strURL <> "" Then
+                Process.Start(Browser2Target, """" & strURL & """")
+            Else
+                Process.Start(Browser2Target)
+            End If
         End If
         Me.Close()
     End Sub
 
     Private Sub btnApp3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.Click
-        If strURL <> "" Then
-            System.Diagnostics.Process.Start(Browser3Target, """" & strURL & """")
+        If Browser3Target.Contains(".exe ") Then
+            strParameters = Browser2Target.Substring(InStr(Browser3Target, ".exe") + 4, Browser3Target.Length - (InStr(Browser3Target, ".exe") + 4)) & " "
+            If strURL <> "" Then
+                Process.Start(Browser3Target.Substring(0, InStr(Browser3Target, ".exe") + 4), strParameters & """" & strURL & """")
+            Else
+                Process.Start(Browser3Target.Substring(0, InStr(Browser3Target, ".exe") + 4), strParameters)
+            End If
         Else
-            System.Diagnostics.Process.Start(Browser3Target)
+            If strURL <> "" Then
+                Process.Start(Browser3Target, """" & strURL & """")
+            Else
+                Process.Start(Browser3Target)
+            End If
         End If
         Me.Close()
     End Sub
 
     Private Sub btnApp4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.Click
-        If strURL <> "" Then
-            System.Diagnostics.Process.Start(Browser4Target, """" & strURL & """")
+        If Browser4Target.Contains(".exe ") Then
+            strParameters = Browser4Target.Substring(InStr(Browser4Target, ".exe") + 4, Browser4Target.Length - (InStr(Browser4Target, ".exe") + 4)) & " "
+            If strURL <> "" Then
+                Process.Start(Browser4Target.Substring(0, InStr(Browser4Target, ".exe") + 4), strParameters & """" & strURL & """")
+            Else
+                Process.Start(Browser4Target.Substring(0, InStr(Browser4Target, ".exe") + 4), strParameters)
+            End If
         Else
-            System.Diagnostics.Process.Start(Browser4Target)
+            If strURL <> "" Then
+                Process.Start(Browser4Target, """" & strURL & """")
+            Else
+                Process.Start(Browser4Target)
+            End If
         End If
         Me.Close()
     End Sub
 
     Private Sub btnApp5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.Click
-        If strURL <> "" Then
-            System.Diagnostics.Process.Start(Browser5Target, """" & strURL & """")
+        If Browser1Target.Contains(".exe ") Then
+            strParameters = Browser5Target.Substring(InStr(Browser5Target, ".exe") + 4, Browser5Target.Length - (InStr(Browser5Target, ".exe") + 4)) & " "
+            If strURL <> "" Then
+                Process.Start(Browser5Target.Substring(0, InStr(Browser5Target, ".exe") + 4), strParameters & """" & strURL & """")
+            Else
+                Process.Start(Browser5Target.Substring(0, InStr(Browser5Target, ".exe") + 4), strParameters)
+            End If
         Else
-            System.Diagnostics.Process.Start(Browser5Target)
+            If strURL <> "" Then
+                Process.Start(Browser5Target, """" & strURL & """")
+            Else
+                Process.Start(Browser5Target)
+            End If
         End If
+
         Me.Close()
     End Sub
 
@@ -372,17 +494,21 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.D1 And Browser1 = True Then
+        Dim firstChar As String = e.KeyData.ToString()
+
+        If (e.KeyCode = Keys.D1 Or Browser1Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And Browser1 = True Then
             btnApp1_Click(sender, e)
-        ElseIf e.KeyCode = Keys.D2 And Browser2 = True Then
+        ElseIf (e.KeyCode = Keys.D2 Or Browser2Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And Browser2 = True Then
             btnApp2_Click(sender, e)
-        ElseIf e.KeyCode = Keys.D3 And Browser3 = True Then
+        ElseIf (e.KeyCode = Keys.D3 Or Browser3Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And Browser3 = True Then
             btnApp3_Click(sender, e)
-        ElseIf e.KeyCode = Keys.D4 And Browser4 = True Then
+        ElseIf (e.KeyCode = Keys.D4 Or Browser4Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And Browser4 = True Then
             btnApp4_Click(sender, e)
-        ElseIf e.KeyCode = Keys.D5 And Browser5 = True Then
+        ElseIf (e.KeyCode = Keys.D5 Or Browser5Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And Browser5 = True Then
             btnApp5_Click(sender, e)
         End If
     End Sub
+
+    
 End Class
 
