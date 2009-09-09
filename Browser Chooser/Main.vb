@@ -41,7 +41,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseLeave
-        Me.Text = DefaultMessage
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Private Sub btnApp2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseHover, btnApp2.MouseEnter
@@ -53,7 +57,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseLeave
-        Me.Text = DefaultMessage
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Private Sub btnApp3_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseHover, btnApp3.MouseEnter
@@ -65,7 +73,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp3_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseLeave
-        Me.Text = DefaultMessage
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Private Sub btnApp4_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseHover, btnApp4.MouseEnter
@@ -77,7 +89,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp4_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseLeave
-        Me.Text = DefaultMessage
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Private Sub btnApp5_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseHover, btnApp5.MouseEnter
@@ -89,7 +105,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnApp5_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseLeave
-        Me.Text = DefaultMessage
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Public Function GetRowValue(ByVal sLine As String) As String
@@ -127,10 +147,8 @@ Public Class frmMain
 
         InitializeMain()
 
-        'Load url from parameter
-        For i = 0 To My.Application.CommandLineArgs.Count - 1
-            strURL = My.Application.CommandLineArgs.Item(i).ToString
-        Next i
+        
+
     End Sub
 
     Public Sub CheckforUpdate(ByVal strMode As String)
@@ -348,6 +366,32 @@ Public Class frmMain
         End If
 
         btnOptions.Location = New Point(Me.Width - 33, 12)
+
+        'Load url from parameter
+        For i = 0 To My.Application.CommandLineArgs.Count - 1
+            strURL = My.Application.CommandLineArgs.Item(i).ToString
+        Next i
+
+        If showURL = True And strURL <> "" Then
+            Me.Text = DefaultMessage & " - " & strURL
+        Else
+            Me.Text = DefaultMessage
+        End If
+
+        'Set up Tooltips
+        If showURL = True And strURL <> "" Then
+            btn1TT.SetToolTip(btnApp1, "Open " & strURL & " in " & Browser1Name & "." & vbCrLf & "Hotkeys: (1) or (" & Browser1Name.Substring(0, 1) & ").")
+            btn2TT.SetToolTip(btnApp2, "Open " & strURL & " in " & Browser2Name & "." & vbCrLf & "Hotkeys: (2) or (" & Browser2Name.Substring(0, 1) & ").")
+            btn3TT.SetToolTip(btnApp3, "Open " & strURL & " in " & Browser3Name & "." & vbCrLf & "Hotkeys: (3) or (" & Browser3Name.Substring(0, 1) & ").")
+            btn4TT.SetToolTip(btnApp4, "Open " & strURL & " in " & Browser4Name & "." & vbCrLf & "Hotkeys: (4) or (" & Browser4Name.Substring(0, 1) & ").")
+            btn5TT.SetToolTip(btnApp5, "Open " & strURL & " in " & Browser5Name & "." & vbCrLf & "Hotkeys: (5) or (" & Browser5Name.Substring(0, 1) & ").")
+        Else
+            btn1TT.SetToolTip(btnApp1, "Open " & Browser1Name & "." & vbCrLf & "Hotkeys: (1) or (" & Browser1Name.Substring(0, 1) & ").")
+            btn2TT.SetToolTip(btnApp2, "Open " & Browser2Name & "." & vbCrLf & "Hotkeys: (2) or (" & Browser2Name.Substring(0, 1) & ").")
+            btn3TT.SetToolTip(btnApp3, "Open " & Browser3Name & "." & vbCrLf & "Hotkeys: (3) or (" & Browser3Name.Substring(0, 1) & ").")
+            btn4TT.SetToolTip(btnApp4, "Open " & Browser4Name & "." & vbCrLf & "Hotkeys: (4) or (" & Browser4Name.Substring(0, 1) & ").")
+            btn5TT.SetToolTip(btnApp5, "Open " & Browser5Name & "." & vbCrLf & "Hotkeys: (5) or (" & Browser5Name.Substring(0, 1) & ").")
+        End If
     End Sub
 
     Private Sub btnInfo_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseEnter, btnInfo.MouseHover

@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.btnInfo = New System.Windows.Forms.PictureBox
         Me.btnApp1 = New System.Windows.Forms.PictureBox
@@ -32,6 +33,11 @@ Partial Class frmMain
         Me.btnApp4 = New System.Windows.Forms.PictureBox
         Me.lblEmpty = New System.Windows.Forms.Label
         Me.btnApp5 = New System.Windows.Forms.PictureBox
+        Me.btn1TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btn2TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btn3TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btn4TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btn5TT = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOptions, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -185,5 +191,10 @@ Partial Class frmMain
     Friend WithEvents btnApp4 As System.Windows.Forms.PictureBox
     Friend WithEvents lblEmpty As System.Windows.Forms.Label
     Friend WithEvents btnApp5 As System.Windows.Forms.PictureBox
+    Friend WithEvents btn1TT As System.Windows.Forms.ToolTip
+    Friend WithEvents btn2TT As System.Windows.Forms.ToolTip
+    Friend WithEvents btn3TT As System.Windows.Forms.ToolTip
+    Friend WithEvents btn4TT As System.Windows.Forms.ToolTip
+    Friend WithEvents btn5TT As System.Windows.Forms.ToolTip
 
 End Class
