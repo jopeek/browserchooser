@@ -10,7 +10,13 @@ Public Class Options
 
         InstalledBrowsers = New List(Of Browser)
         InstalledBrowsers.Add(New Browser("Custom", ""))
+
         Dim programFiles As String = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
+
+        If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
+            programFiles = Environment.GetEnvironmentVariable("ProgramFiles(x86)")
+        End If
+
         Dim appData As String = Directory.GetParent(My.Computer.FileSystem.SpecialDirectories.Temp).FullName
 
         ' Add Firefox
@@ -185,11 +191,11 @@ Public Class Options
 
         'Select the correct items in the Browser dropdown
         Try
-            Browser1.SelectedIndex = Browser1.FindString(Module1.Browser1Image)
-            Browser2.SelectedIndex = Browser2.FindString(Module1.Browser2Image)
-            Browser3.SelectedIndex = Browser3.FindString(Module1.Browser3Image)
-            Browser4.SelectedIndex = Browser4.FindString(Module1.Browser4Image)
-            Browser5.SelectedIndex = Browser5.FindString(Module1.Browser5Image)
+            SelectBrowser(Module1.Browser1Target, Module1.Browser1Image, Browser1)
+            SelectBrowser(Module1.Browser2Target, Module1.Browser2Image, Browser2)
+            SelectBrowser(Module1.Browser3Target, Module1.Browser3Image, Browser3)
+            SelectBrowser(Module1.Browser4Target, Module1.Browser4Image, Browser4)
+            SelectBrowser(Module1.Browser5Target, Module1.Browser5Image, Browser5)
         Catch ex As Exception
 
         End Try
@@ -205,6 +211,32 @@ Public Class Options
             End If
         End If
     End Sub
+
+    Private Sub SelectBrowser(ByVal BrowserPath As String, ByVal BrowserName As String, ByVal currentComboBox As ComboBox)
+        Dim path As String = BrowserPath
+        Dim comparer As New BrowserPredicate(path)
+        Dim browser As Browser = InstalledBrowsers.Find(AddressOf comparer.ComparePaths)
+        If browser IsNot Nothing Then
+            currentComboBox.SelectedIndex = currentComboBox.FindString(BrowserName)
+        End If
+    End Sub
+
+    Private Class BrowserPredicate
+        Private _path As String
+        Private _name As String
+
+        Public Sub New(ByVal path As String)
+            _path = path
+        End Sub
+
+        Public Function ComparePaths(ByVal obj As Browser) As Boolean
+            Return (_path = obj.Path)
+        End Function
+
+        Public Function CompareNames(ByVal obj As Browser) As Boolean
+            Return (_path = obj.Name)
+        End Function
+    End Class
 
     Private Sub Browser1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1.SelectedIndexChanged, Browser2.SelectedIndexChanged, Browser3.SelectedIndexChanged, Browser4.SelectedIndexChanged, Browser5.SelectedIndexChanged
         Dim SelectedComboBox As ComboBox = sender
@@ -319,7 +351,7 @@ Public Class Options
 
     End Function
 
-   
+
     Private Sub Browser1Target_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1Target.TextChanged
         If Browser1Target.Text <> "" Then Panel2.Enabled = True Else Panel2.Enabled = False
     End Sub

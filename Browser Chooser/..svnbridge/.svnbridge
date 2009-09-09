@@ -2,4 +2,7 @@
 Browser Chooser.sln
 Browser Chooser.suo
 obj
+</Value></Property><Property><Name>svn:ignore</Name><Value>bin
+obj
+Browser Chooser.suo
 </Value></Property></Properties></ItemProperties>
