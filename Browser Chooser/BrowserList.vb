@@ -57,7 +57,7 @@ Public Class BrowserList
     End Function
 
     Public Function GetBrowserByUrl(ByVal url As String) As Integer
-        Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.Contains(w)))
+        Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.ToUpper().Contains(w.Trim().ToUpper())))
         If (b Is Nothing) Then
             Return 0
         Else
