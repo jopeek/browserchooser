@@ -311,7 +311,9 @@ Public Class frmMain
 
             Dim client As WebClient = New WebClient()
 
+            'Switch for Portable
             Dim strWebVersion As String = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
+            'Dim strWebVersion As String = client.DownloadString("http://www.janolepeek.com/bcport.txt") '
 
             If strWebVersion <> My.Application.Info.Version.ToString Then
 
