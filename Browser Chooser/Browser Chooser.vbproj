@@ -7,11 +7,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3341F249-CACD-4E69-B4FC-B5F393359382}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Browser_Chooser.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Browser_Chooser</RootNamespace>
     <AssemblyName>Browser Chooser</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
@@ -98,6 +98,8 @@
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Browser.vb" />
+    <Compile Include="BrowserList.vb" />
+    <Compile Include="ConfigSetup.vb" />
     <Compile Include="download.Designer.vb">
       <DependentUpon>download.vb</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Browser Chooser")> 
 <Assembly: AssemblyDescription("Small app that let's you choose what browser to open a url in. Visit my website for more information.")> 
 <Assembly: AssemblyCompany("Jan Ole Peek")> 
-<Assembly: AssemblyProduct("Browser Chooser Beta 1")> 
+<Assembly: AssemblyProduct("Browser Chooser")> 
 <Assembly: AssemblyCopyright("Copyright ©  2009")> 
 <Assembly: AssemblyTrademark("")> 
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.*")> 
+<Assembly: AssemblyVersion("1.0.4.*")> 
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 

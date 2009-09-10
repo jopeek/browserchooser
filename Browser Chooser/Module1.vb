@@ -1,38 +1,83 @@
-﻿Module Module1
+﻿Imports System.IO
+
+Module Module1
 
     Friend DefaultMessage As String = "Choose a Browser"
+    Friend strUrl As String
+
+    Friend BrowserConfig As New BrowserList
 
     Friend ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")
+    Friend Const BrowserChooserConfigFileName As String = "BrowserChooserConfig.xml"
+	Friend AutoUpdateCheck As Boolean = False
 
-    Friend IsDefaultBrowser As Boolean = False
-    Friend showURL As Boolean = False
-    Friend AutoUpdateCheck As Boolean = False
+    Public Sub Main()
+        Application.EnableVisualStyles()
+        If (ConfigFile.Exists) Then
+            Dim importConfig As ConfigSetup = New ConfigSetup
+            BrowserConfig = importConfig.readConfig()
+        Else
+            'Switch to make portable
+            'BrowserConfig = BrowserList.Load(Application.StartupPath)
+            BrowserConfig = BrowserList.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\")
+        End If
 
-    Friend Browser1 As Boolean = False
-    Friend Browser2 As Boolean = False
-    Friend Browser3 As Boolean = False
-    Friend Browser4 As Boolean = False
-    Friend Browser5 As Boolean = False
+        Dim cmdLineOption As String = ""
+        If (My.Application.CommandLineArgs.Count > 0) Then
+            cmdLineOption = My.Application.CommandLineArgs.Item(0)
+            If (cmdLineOption = "gooptions") Then
+                Application.Run(Options)
+            Else
+                strUrl = cmdLineOption
+                Dim browserNumber As Integer = BrowserConfig.GetBrowserByUrl(strUrl)
+                If (Not browserNumber = 0) Then
+                    LaunchBrowser(browserNumber)
+                Else
+                    Application.Run(frmMain)
+                End If
+            End If
+        Else
+            Application.Run(frmMain)
+        End If
+    End Sub
 
-    Friend Browser1Name As String = ""
-    Friend Browser2Name As String = ""
-    Friend Browser3Name As String = ""
-    Friend Browser4Name As String = ""
-    Friend Browser5Name As String = ""
+    Private Sub openOptions()
+        Dim myProcess As New Process
+        myProcess.StartInfo.UseShellExecute = True
+        myProcess.StartInfo.Verb = "runas"
+        myProcess.StartInfo.FileName = Application.ExecutablePath
+        myProcess.StartInfo.Arguments = "gooptions"
+        myProcess.Start()
+        System.Environment.Exit(-1)
+    End Sub
 
-    Friend Browser1Target As String = ""
-    Friend Browser2Target As String = ""
-    Friend Browser3Target As String = ""
-    Friend Browser4Target As String = ""
-    Friend Browser5Target As String = ""
 
-    Friend Browser1Image As String = ""
-    Friend Browser2Image As String = ""
-    Friend Browser3Image As String = ""
-    Friend Browser4Image As String = ""
-    Friend Browser5Image As String = ""
+    Function LaunchBrowser(ByVal browserNumber As Integer) As Boolean
+        Dim target As String = BrowserConfig.GetBrowser(browserNumber).Target
+        Dim strParameters As String = ""
+        'check to see if the file exists
+        If (File.Exists(target)) Or target.Contains(".exe ") Then
+            If target.Contains(".exe ") Then
+                strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
+                If strUrl <> "" Then
+                    Process.Start(target.Substring(0, InStr(target, ".exe") + 4), strParameters & """" & strUrl & """")
+                Else
+                    Process.Start(target.Substring(0, InStr(target, ".exe") + 4), strParameters)
+                End If
+            Else
+                If strUrl <> "" Then
+                    Process.Start(target, """" & strUrl & """")
+                Else
+                    Process.Start(target)
+                End If
+            End If
+            Return True
+        End If
+        'file doesn't exist so return false
+        Return False
+    End Function
 
-    
+
 
 End Module
 

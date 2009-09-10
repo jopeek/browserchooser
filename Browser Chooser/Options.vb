@@ -1,15 +1,15 @@
 ﻿Imports Microsoft.Win32
 Imports System.IO
 
-
-
 Public Class Options
+
     Public InstalledBrowsers As List(Of Browser)
 
     Private Sub LoadBrowsers()
 
         InstalledBrowsers = New List(Of Browser)
-        InstalledBrowsers.Add(New Browser("Custom", ""))
+
+        InstalledBrowsers.Add(New Browser With {.Name = "Custom", .Target = ""})
 
         Dim programFiles As String = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
 
@@ -21,32 +21,37 @@ Public Class Options
 
         ' Add Firefox
         Dim firefox As String = Path.Combine(programFiles, "Mozilla Firefox\firefox.exe")
+        Dim firefoxOn64bit As String = "C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
+
         If File.Exists(firefox) Then
-            InstalledBrowsers.Add(New Browser("Firefox", firefox))
+            InstalledBrowsers.Add(New Browser With {.Name = "Firefox", .Target = firefox})
+            'also check for 64 bit version
+        ElseIf File.Exists(firefoxOn64bit) Then
+            InstalledBrowsers.Add(New Browser With {.Name = "Firefox", .Target = firefoxOn64bit})
         End If
 
         ' Add Google Chrome
         Dim chrome As String = Path.Combine(appData, "Google\Chrome\Application\chrome.exe")
         If File.Exists(chrome) Then
-            InstalledBrowsers.Add(New Browser("Google Chrome", chrome))
+            InstalledBrowsers.Add(New Browser With {.Name = "Google Chrome", .Target = chrome})
         End If
 
         ' Add Internet Explorer
         Dim internetExplorer As String = Path.Combine(programFiles, "Internet Explorer\iexplore.exe")
         If File.Exists(internetExplorer) Then
-            InstalledBrowsers.Add(New Browser("Internet Explorer", internetExplorer))
+            InstalledBrowsers.Add(New Browser With {.Name = "Internet Explorer", .Target = internetExplorer})
         End If
 
         ' Add Opera
         Dim opera As String = Path.Combine(programFiles, "Opera\opera.exe")
         If File.Exists(opera) Then
-            InstalledBrowsers.Add(New Browser("Opera", opera))
+            InstalledBrowsers.Add(New Browser With {.Name = "Opera", .Target = opera})
         End If
 
         ' Add Safari
         Dim safari As String = Path.Combine(programFiles, "Safari\Safari.exe")
         If File.Exists(safari) Then
-            InstalledBrowsers.Add(New Browser("Safari", safari))
+            InstalledBrowsers.Add(New Browser With {.Name = "Safari", .Target = safari})
         End If
 
     End Sub
@@ -83,61 +88,53 @@ Public Class Options
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         'Save settings from textboxes
+        'Offer to make default browser if not already
+
+        'reset the in memory list of browsers object
+        BrowserConfig.Browsers.Clear()
+
+        If Not BrowserConfig.DefaultBrowser Then
+
+            Dim Answer As MsgBoxResult = MsgBox("Browser Chooser is not currently set as your default browser. Would you like to make it so now?" & vbCrLf & "(Without being the default browser, Browser Chooser's usefullness rapidly declines...)", MsgBoxStyle.YesNo)
+
+            If Answer = MsgBoxResult.Yes Then
+                BrowserConfig.DefaultBrowser = True
+                SetDefaultBrowserPath()
+            Else
+                BrowserConfig.DefaultBrowser = False
+            End If
+
+        End If
+
+        BrowserConfig.ShowUrl = cbURL.Checked
+        BrowserConfig.AutoUpdateCheck = cbAutoCheck.Checked
+
+        If (Not String.IsNullOrEmpty(Browser1Name.Text)) Then
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser1Name.Text, .Target = Browser1Target.Text, .Image = Browser1Image.Text, .BrowserNumber = 1, .IsActive = True, .Urls = Browser.StringToUrls(Browser1Urls.Text)})
+        End If
+
+        If (Not String.IsNullOrEmpty(Browser2Name.Text)) Then
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser2Name.Text, .Target = Browser2Target.Text, .Image = Browser2Image.Text, .BrowserNumber = 2, .IsActive = True, .Urls = Browser.StringToUrls(Browser2Urls.Text)})
+        End If
+
+        If (Not String.IsNullOrEmpty(Browser3Name.Text)) Then
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser3Name.Text, .Target = Browser3Target.Text, .Image = Browser3Image.Text, .BrowserNumber = 3, .IsActive = True, .Urls = Browser.StringToUrls(Browser3Urls.Text)})
+        End If
+
+        If (Not String.IsNullOrEmpty(Browser4Name.Text)) Then
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser4Name.Text, .Target = Browser4Target.Text, .Image = Browser4Image.Text, .BrowserNumber = 4, .IsActive = True, .Urls = Browser.StringToUrls(Browser4Urls.Text)})
+        End If
+
+        If (Not String.IsNullOrEmpty(Browser5Name.Text)) Then
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser5Name.Text, .Target = Browser5Target.Text, .Image = Browser5Image.Text, .BrowserNumber = 5, .IsActive = True, .Urls = Browser.StringToUrls(Browser5Urls.Text)})
+        End If
+
         Try
-            'Offer to make default browser if not already
-            If IsDefaultBrowser = False Then
-
-                Dim Answer As MsgBoxResult = MsgBox("Browser Chooser is not currently set as your default browser. Would you like to make it so now?" & vbCrLf & "(Without being the default browser, Browser Chooser's usefullness rapidly declines...)", MsgBoxStyle.YesNo)
-
-                If Answer = MsgBoxResult.Yes Then
-                    IsDefaultBrowser = True
-                    SetDefaultBrowserPath()
-                Else
-                    IsDefaultBrowser = False
-                End If
-
-            End If
-
-            'Remove existing config.ini
-            If ConfigFile.Exists Then
-                ConfigFile.Delete()
-            End If
-
-            'Write settings to config.ini
-            Dim sw As StreamWriter = New StreamWriter(ConfigFile.ToString)
-
-            sw.WriteLine("DefaultBrowser=" & IsDefaultBrowser)
-            sw.WriteLine("ShowURL=" & cbURL.Checked)
-            Module1.showURL = cbURL.Checked
-            sw.WriteLine("AutoUpdateCheck=" & cbAutoCheck.Checked)
-            Module1.AutoUpdateCheck = cbAutoCheck.Checked
-
-            sw.WriteLine("Browser1Name=" & Browser1Name.Text)
-            sw.WriteLine("Browser1Target=" & Browser1Target.Text)
-            sw.WriteLine("Browser1Image=" & Browser1Image.Text)
-
-            sw.WriteLine("Browser2Name=" & Browser2Name.Text)
-            sw.WriteLine("Browser2Target=" & Browser2Target.Text)
-            sw.WriteLine("Browser2Image=" & Browser2Image.Text)
-
-            sw.WriteLine("Browser3Name=" & Browser3Name.Text)
-            sw.WriteLine("Browser3Target=" & Browser3Target.Text)
-            sw.WriteLine("Browser3Image=" & Browser3Image.Text)
-
-            sw.WriteLine("Browser4Name=" & Browser4Name.Text)
-            sw.WriteLine("Browser4Target=" & Browser4Target.Text)
-            sw.WriteLine("Browser4Image=" & Browser4Image.Text)
-
-            sw.WriteLine("Browser5Name=" & Browser5Name.Text)
-            sw.WriteLine("Browser5Target=" & Browser5Target.Text)
-            sw.WriteLine("Browser5Image=" & Browser5Image.Text)
-
-            sw.Close()
-
+            'Switch to make portable version
+            'BrowserConfig.Save(Application.StartupPath)
+            BrowserConfig.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser")
         Catch ex As Exception
-
             MsgBox("There was an error saving to the configuration file." & vbCrLf & ex.Message, MsgBoxStyle.Critical)
-
         End Try
 
         'Me.Close()
@@ -146,6 +143,7 @@ Public Class Options
         'frmMain.InitializeMain()
 
         'MsgBox("Please restart the application for the settings to take effect.")
+
     End Sub
 
 
@@ -154,60 +152,69 @@ Public Class Options
         'Autodetect all present browsers
         LoadBrowsers()
 
+
         Browser1.DataSource = InstalledBrowsers.ToList()
         Browser1.DisplayMember = "Name"
-        Browser1.ValueMember = "Path"
+        Browser1.ValueMember = "Target"
         Browser2.DataSource = InstalledBrowsers.ToList()
         Browser2.DisplayMember = "Name"
-        Browser2.ValueMember = "Path"
+        Browser2.ValueMember = "Target"
         Browser3.DataSource = InstalledBrowsers.ToList()
         Browser3.DisplayMember = "Name"
-        Browser3.ValueMember = "Path"
+        Browser3.ValueMember = "Target"
         Browser4.DataSource = InstalledBrowsers.ToList()
         Browser4.DisplayMember = "Name"
-        Browser4.ValueMember = "Path"
+        Browser4.ValueMember = "Target"
         Browser5.DataSource = InstalledBrowsers.ToList()
         Browser5.DisplayMember = "Name"
-        Browser5.ValueMember = "Path"
+        Browser5.ValueMember = "Target"
 
         'Load settings into textboxes
-        Browser1Name.Text = Module1.Browser1Name
-        Browser2Name.Text = Module1.Browser2Name
-        Browser3Name.Text = Module1.Browser3Name
-        Browser4Name.Text = Module1.Browser4Name
-        Browser5Name.Text = Module1.Browser5Name
+        Browser1Name.Text = BrowserConfig.GetBrowser(1).Name
+        Browser2Name.Text = BrowserConfig.GetBrowser(2).Name
+        Browser3Name.Text = BrowserConfig.GetBrowser(3).Name
+        Browser4Name.Text = BrowserConfig.GetBrowser(4).Name
+        Browser5Name.Text = BrowserConfig.GetBrowser(5).Name
 
-        Browser1Target.Text = Module1.Browser1Target
-        Browser2Target.Text = Module1.Browser2Target
-        Browser3Target.Text = Module1.Browser3Target
-        Browser4Target.Text = Module1.Browser4Target
-        Browser5Target.Text = Module1.Browser5Target
+        Browser1Target.Text = BrowserConfig.GetBrowser(1).Target
+        Browser2Target.Text = BrowserConfig.GetBrowser(2).Target
+        Browser3Target.Text = BrowserConfig.GetBrowser(3).Target
+        Browser4Target.Text = BrowserConfig.GetBrowser(4).Target
+        Browser5Target.Text = BrowserConfig.GetBrowser(5).Target
 
-        Browser1Image.SelectedItem = Module1.Browser1Image
-        Browser2Image.SelectedItem = Module1.Browser2Image
-        Browser3Image.SelectedItem = Module1.Browser3Image
-        Browser4Image.SelectedItem = Module1.Browser4Image
-        Browser5Image.SelectedItem = Module1.Browser5Image
+        Browser1Image.SelectedItem = BrowserConfig.GetBrowser(1).Image
+        Browser2Image.SelectedItem = BrowserConfig.GetBrowser(2).Image
+        Browser3Image.SelectedItem = BrowserConfig.GetBrowser(3).Image
+        Browser4Image.SelectedItem = BrowserConfig.GetBrowser(4).Image
+        Browser5Image.SelectedItem = BrowserConfig.GetBrowser(5).Image
+
+        Browser1Urls.Text = BrowserConfig.GetBrowser(1).UrlsToString
+        Browser2Urls.Text = BrowserConfig.GetBrowser(2).UrlsToString
+        Browser3Urls.Text = BrowserConfig.GetBrowser(3).UrlsToString
+        Browser4Urls.Text = BrowserConfig.GetBrowser(4).UrlsToString
+        Browser5Urls.Text = BrowserConfig.GetBrowser(5).UrlsToString
 
         'Select the correct items in the Browser dropdown
         Try
-            SelectBrowser(Module1.Browser1Target, Module1.Browser1Image, Browser1)
-            SelectBrowser(Module1.Browser2Target, Module1.Browser2Image, Browser2)
-            SelectBrowser(Module1.Browser3Target, Module1.Browser3Image, Browser3)
-            SelectBrowser(Module1.Browser4Target, Module1.Browser4Image, Browser4)
-            SelectBrowser(Module1.Browser5Target, Module1.Browser5Image, Browser5)
+            SelectBrowser(BrowserConfig.GetBrowser(1).Target, BrowserConfig.GetBrowser(1).Image, Browser1)
+            SelectBrowser(BrowserConfig.GetBrowser(2).Target, BrowserConfig.GetBrowser(2).Image, Browser2)
+            SelectBrowser(BrowserConfig.GetBrowser(3).Target, BrowserConfig.GetBrowser(3).Image, Browser3)
+            SelectBrowser(BrowserConfig.GetBrowser(4).Target, BrowserConfig.GetBrowser(4).Image, Browser4)
+            SelectBrowser(BrowserConfig.GetBrowser(5).Target, BrowserConfig.GetBrowser(5).Image, Browser5)
         Catch ex As Exception
 
         End Try
 
-        cbURL.Checked = Module1.showURL
-        cbAutoCheck.Checked = Module1.AutoUpdateCheck
+        cbURL.Checked = BrowserConfig.ShowUrl
+        cbAutoCheck.Checked = BrowserConfig.AutoUpdateCheck
 
-        Dim ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")
-        If Not ConfigFile.Exists Then
+        'Switch for portable version
+        'Dim ConfigFile As String = Path.Combine(Application.StartupPath, BrowserChooserConfigFileName)
+        Dim ConfigFile As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser", BrowserChooserConfigFileName)
+        If Not File.Exists(ConfigFile) Then
             If MsgBox("Would you like to automatically check for updates?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 cbAutoCheck.Checked = True
-                Module1.AutoUpdateCheck = True
+                BrowserConfig.AutoUpdateCheck = True
             End If
         End If
     End Sub
@@ -230,7 +237,7 @@ Public Class Options
         End Sub
 
         Public Function ComparePaths(ByVal obj As Browser) As Boolean
-            Return (_path = obj.Path)
+            Return (_path = obj.Target)
         End Function
 
         Public Function CompareNames(ByVal obj As Browser) As Boolean
@@ -248,23 +255,23 @@ Public Class Options
             Select Case SelectedComboBox.Name
                 Case "Browser1"
                     Browser1Name.Text = SelectedBrowser.Name
-                    Browser1Target.Text = SelectedBrowser.Path
+                    Browser1Target.Text = SelectedBrowser.Target
                     Browser1Image.SelectedIndex = Browser1Image.FindString(SelectedBrowser.Name)
                 Case "Browser2"
                     Browser2Name.Text = SelectedBrowser.Name
-                    Browser2Target.Text = SelectedBrowser.Path
+                    Browser2Target.Text = SelectedBrowser.Target
                     Browser2Image.SelectedIndex = Browser2Image.FindString(SelectedBrowser.Name)
                 Case "Browser3"
                     Browser3Name.Text = SelectedBrowser.Name
-                    Browser3Target.Text = SelectedBrowser.Path
+                    Browser3Target.Text = SelectedBrowser.Target
                     Browser3Image.SelectedIndex = Browser3Image.FindString(SelectedBrowser.Name)
                 Case "Browser4"
                     Browser4Name.Text = SelectedBrowser.Name
-                    Browser4Target.Text = SelectedBrowser.Path
+                    Browser4Target.Text = SelectedBrowser.Target
                     Browser4Image.SelectedIndex = Browser4Image.FindString(SelectedBrowser.Name)
                 Case "Browser5"
                     Browser5Name.Text = SelectedBrowser.Name
-                    Browser5Target.Text = SelectedBrowser.Path
+                    Browser5Target.Text = SelectedBrowser.Target
                     Browser5Image.SelectedIndex = Browser5Image.FindString(SelectedBrowser.Name)
                 Case Else
 
@@ -273,20 +280,15 @@ Public Class Options
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        'If ConfigFile.Exists Then
-        '    Me.Close()
-        'Else
-        Process.Start(Application.ExecutablePath)
-        System.Environment.Exit(-1)
-
-        'End If
+        If File.Exists(Module1.BrowserChooserConfigFileName) OrElse Module1.ConfigFile.Exists Then
+            Me.Close()
+        Else
+            Application.Exit()
+        End If
     End Sub
 
     Private Sub btnSetDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetDefault.Click
-
-        MsgBox(SetDefaultBrowserPath())
-
-
+        MsgBox(SetDefaultBrowserPath)
     End Sub
 
     Public Function SetDefaultBrowserPath() As String
@@ -335,17 +337,12 @@ Public Class Options
                 MsgBox("An error may have occured registering the file extensions. You may want to check in the 'Default Programs' option in your start menu to confirm this worked." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
             End Try
 
-
-
-
-
-
         Catch ex As Exception
+            BrowserConfig.DefaultBrowser = False
             Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
-            IsDefaultBrowser = False
         End Try
 
-        IsDefaultBrowser = True
+        BrowserConfig.DefaultBrowser = True
 
         Return "Default browser has been set to Browser Chooser."
 
@@ -368,10 +365,19 @@ Public Class Options
         If Browser4Target.Text <> "" Then Panel5.Enabled = True Else Panel5.Enabled = False
     End Sub
 
+
     Private Sub btnUpdateCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateCheck.Click
-
         frmMain.CheckforUpdate("verbose")
+    End Sub
 
+    Private Sub btnHelp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHelp.Click
+        Try
+            Process.Start(Application.StartupPath & "\Browser Chooser Help.chm")
+        Catch ex As Exception
+            MsgBox("Help file not found!" & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+        End Try
 
     End Sub
+
+ 
 End Class
