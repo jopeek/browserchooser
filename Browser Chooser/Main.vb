@@ -325,7 +325,8 @@ Public Class frmMain
                 strWebVersion = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
             End If
 
-            If strWebVersion <> My.Application.Info.Version.ToString Then
+            Dim version As System.Version = New System.Version(strWebVersion)
+            If version.CompareTo(My.Application.Info.Version) > -1 Then
 
                 If MsgBox("A new version of Browser Checker is available. Would you like to download it now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
