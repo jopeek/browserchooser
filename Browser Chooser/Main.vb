@@ -140,8 +140,14 @@ Public Class frmMain
     Public Sub InitializeMain()
         If (BrowserConfig Is Nothing OrElse BrowserConfig.Browsers.Count = 0) Then
             'Force open Options screen
-            'Options.ShowDialog()
+#If DEBUG Then
+            ' this switch allows us to debug Options without having to attach to process due to UAC
+            Options.ShowDialog()
+#Else
             openOptions()
+#End If
+
+
         Else
 
             If (BrowserConfig.GetBrowser(1).IsActive) Then
@@ -311,9 +317,13 @@ Public Class frmMain
 
             Dim client As WebClient = New WebClient()
 
+            Dim strWebVersion As String
             'Switch for Portable
-            Dim strWebVersion As String = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
-            'Dim strWebVersion As String = client.DownloadString("http://www.janolepeek.com/bcport.txt") '
+            If (PortableMode) Then
+                strWebVersion = client.DownloadString("http://www.janolepeek.com/bcport.txt")
+            Else
+                strWebVersion = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
+            End If
 
             If strWebVersion <> My.Application.Info.Version.ToString Then
 

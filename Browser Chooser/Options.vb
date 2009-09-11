@@ -13,7 +13,8 @@ Public Class Options
 
         Dim programFiles As String = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
 
-        If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
+        ' If we are running on a 64 bit system, replace the programFiles string with a path to the x86
+        If Is64Bit Then
             programFiles = Environment.GetEnvironmentVariable("ProgramFiles(x86)")
         End If
 
@@ -21,13 +22,9 @@ Public Class Options
 
         ' Add Firefox
         Dim firefox As String = Path.Combine(programFiles, "Mozilla Firefox\firefox.exe")
-        Dim firefoxOn64bit As String = "C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
 
         If File.Exists(firefox) Then
             InstalledBrowsers.Add(New Browser With {.Name = "Firefox", .Target = firefox})
-            'also check for 64 bit version
-        ElseIf File.Exists(firefoxOn64bit) Then
-            InstalledBrowsers.Add(New Browser With {.Name = "Firefox", .Target = firefoxOn64bit})
         End If
 
         ' Add Google Chrome
@@ -131,8 +128,11 @@ Public Class Options
 
         Try
             'Switch to make portable version
-            'BrowserConfig.Save(Application.StartupPath)
-            BrowserConfig.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser")
+            If (PortableMode) Then
+                BrowserConfig.Save(Application.StartupPath)
+            Else
+                BrowserConfig.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser")
+            End If
         Catch ex As Exception
             MsgBox("There was an error saving to the configuration file." & vbCrLf & ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -209,8 +209,13 @@ Public Class Options
         cbAutoCheck.Checked = BrowserConfig.AutoUpdateCheck
 
         'Switch for portable version
-        'Dim ConfigFile As String = Path.Combine(Application.StartupPath, BrowserChooserConfigFileName)
-        Dim ConfigFile As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser", BrowserChooserConfigFileName)
+        Dim ConfigFile As String
+        If (PortableMode) Then
+            ConfigFile = Path.Combine(Application.StartupPath, BrowserChooserConfigFileName)
+        Else
+            ConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser", BrowserChooserConfigFileName)
+        End If
+
         If Not File.Exists(ConfigFile) Then
             If MsgBox("Would you like to automatically check for updates?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 cbAutoCheck.Checked = True

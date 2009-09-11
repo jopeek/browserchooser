@@ -1,7 +1,8 @@
 ﻿Imports System.IO
 
 Module Module1
-
+    Friend Is64Bit As Boolean = False
+    Friend PortableMode = False
     Friend DefaultMessage As String = "Choose a Browser"
     Friend strUrl As String
 
@@ -13,13 +14,26 @@ Module Module1
 
     Public Sub Main()
         Application.EnableVisualStyles()
+
+        If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
+            Is64Bit = True
+        End If
+
+        If (File.Exists(Path.Combine(Application.StartupPath, BrowserChooserConfigFileName))) Then
+            PortableMode = True
+        End If
+
         If (ConfigFile.Exists) Then
             Dim importConfig As ConfigSetup = New ConfigSetup
             BrowserConfig = importConfig.readConfig()
+            PortableMode = True
         Else
             'Switch to make portable
-            'BrowserConfig = BrowserList.Load(Application.StartupPath)
-            BrowserConfig = BrowserList.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\")
+            If (PortableMode) Then
+                BrowserConfig = BrowserList.Load(Application.StartupPath)
+            Else
+                BrowserConfig = BrowserList.Load(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser\")
+            End If
         End If
 
         Dim cmdLineOption As String = ""
@@ -54,15 +68,35 @@ Module Module1
 
     Function LaunchBrowser(ByVal browserNumber As Integer) As Boolean
         Dim target As String = BrowserConfig.GetBrowser(browserNumber).Target
+
+        ' it's possible that in portable mode you have a path to an x86 folder and are running on a 32 bit system
+        ' so the strBrowser will point to an invalid browser
+        If Is64Bit Then
+            Dim programFiles As String = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
+
+            If (target.StartsWith(programFiles)) Then
+                If (target.StartsWith(Environment.GetEnvironmentVariable("ProgramFiles(x86)")) = False) Then
+                    target = target.Replace(programFiles, Environment.GetEnvironmentVariable("ProgramFiles(x86)"))
+                End If
+            End If
+        Else
+            If (target.Contains("x86")) Then
+                target = target.Replace(" (x86)", "")
+            End If
+        End If
+
         Dim strParameters As String = ""
+        Dim strBrowser As String
         'check to see if the file exists
         If (File.Exists(target)) Or target.Contains(".exe ") Then
             If target.Contains(".exe ") Then
+                strBrowser = target.Substring(0, InStr(target, ".exe") + 4)
                 strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
+
                 If strUrl <> "" Then
-                    Process.Start(target.Substring(0, InStr(target, ".exe") + 4), strParameters & """" & strUrl & """")
+                    Process.Start(strBrowser, strParameters & """" & strUrl & """")
                 Else
-                    Process.Start(target.Substring(0, InStr(target, ".exe") + 4), strParameters)
+                    Process.Start(strBrowser, strParameters)
                 End If
             Else
                 If strUrl <> "" Then
@@ -76,8 +110,6 @@ Module Module1
         'file doesn't exist so return false
         Return False
     End Function
-
-
 
 End Module
 
