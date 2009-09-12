@@ -126,6 +126,10 @@ Public Class Options
             BrowserConfig.Browsers.Add(New Browser With {.Name = Browser5Name.Text, .Target = Browser5Target.Text, .Image = Browser5Image.Text, .BrowserNumber = 5, .IsActive = True, .Urls = Browser.StringToUrls(Browser5Urls.Text)})
         End If
 
+        If cbPortable.Checked Then
+            PortableMode = True
+        End If
+
         Try
             'Switch to make portable version
             If (PortableMode) Then
@@ -211,6 +215,7 @@ Public Class Options
         'Switch for portable version
         Dim ConfigFile As String
         If (PortableMode) Then
+            cbPortable.Checked = True
             ConfigFile = Path.Combine(Application.StartupPath, BrowserChooserConfigFileName)
         Else
             ConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser", BrowserChooserConfigFileName)

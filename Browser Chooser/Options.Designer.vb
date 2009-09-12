@@ -122,6 +122,7 @@ Partial Class Options
         Me.Button2 = New System.Windows.Forms.Button
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.btnHelp = New System.Windows.Forms.Button
+        Me.cbPortable = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -810,6 +811,7 @@ Partial Class Options
         '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.cbPortable)
         Me.Panel6.Controls.Add(Me.btnUpdateCheck)
         Me.Panel6.Controls.Add(Me.cbAutoCheck)
         Me.Panel6.Controls.Add(Me.cbURL)
@@ -842,7 +844,7 @@ Partial Class Options
         'cbURL
         '
         Me.cbURL.AutoSize = True
-        Me.cbURL.Location = New System.Drawing.Point(329, 7)
+        Me.cbURL.Location = New System.Drawing.Point(3, 73)
         Me.cbURL.Name = "cbURL"
         Me.cbURL.Size = New System.Drawing.Size(84, 17)
         Me.cbURL.TabIndex = 11
@@ -1030,6 +1032,16 @@ Partial Class Options
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
+        'cbPortable
+        '
+        Me.cbPortable.AutoSize = True
+        Me.cbPortable.Location = New System.Drawing.Point(93, 73)
+        Me.cbPortable.Name = "cbPortable"
+        Me.cbPortable.Size = New System.Drawing.Size(94, 17)
+        Me.cbPortable.TabIndex = 14
+        Me.cbPortable.Text = "Portable mode"
+        Me.cbPortable.UseVisualStyleBackColor = True
+        '
         'Options
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1170,4 +1182,5 @@ Partial Class Options
     Friend WithEvents Browser5Urls As System.Windows.Forms.TextBox
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents btnHelp As System.Windows.Forms.Button
+    Friend WithEvents cbPortable As System.Windows.Forms.CheckBox
 End Class
