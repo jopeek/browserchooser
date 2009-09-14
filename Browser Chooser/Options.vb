@@ -130,16 +130,7 @@ Public Class Options
             PortableMode = True
         End If
 
-        Try
-            'Switch to make portable version
-            If (PortableMode) Then
-                BrowserConfig.Save(Application.StartupPath)
-            Else
-                BrowserConfig.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser")
-            End If
-        Catch ex As Exception
-            MsgBox("There was an error saving to the configuration file." & vbCrLf & ex.Message, MsgBoxStyle.Critical)
-        End Try
+        SaveConfig()
 
         'Me.Close()
         Process.Start(Application.ExecutablePath)
@@ -150,6 +141,18 @@ Public Class Options
 
     End Sub
 
+    Public Sub SaveConfig()
+        Try
+            'Switch to make portable version
+            If (PortableMode) Then
+                BrowserConfig.Save(Application.StartupPath)
+            Else
+                BrowserConfig.Save(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\BrowserChooser")
+            End If
+        Catch ex As Exception
+            MsgBox("There was an error saving to the configuration file." & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
 
     Private Sub Options_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -389,5 +392,5 @@ Public Class Options
 
     End Sub
 
- 
+
 End Class

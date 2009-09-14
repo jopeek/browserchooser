@@ -193,14 +193,17 @@ Public Class frmMain
         End If
 
         If BrowserConfig.AutoUpdateCheck = True Then
-            CheckforUpdate("")
+            Dim ts As TimeSpan = New TimeSpan(DateTime.Now.Ticks - BrowserConfig.LastUpdateCheck.Ticks)
+            If (ts.Days >= DaysBetweenUpdateCheck) Then
+                CheckforUpdate("")
+            End If
         End If
 
         btnOptions.Location = New Point(Me.Width - 33, 12)
 
         'Load url from parameter
         For i = 0 To My.Application.CommandLineArgs.Count - 1
-            strURL = My.Application.CommandLineArgs.Item(i).ToString
+            strUrl = My.Application.CommandLineArgs.Item(i).ToString
         Next i
 
         If BrowserConfig.ShowUrl = True And strUrl <> "" Then
@@ -314,7 +317,6 @@ Public Class frmMain
     Public Sub CheckforUpdate(ByVal strMode As String)
 
         Try
-
             Dim client As WebClient = New WebClient()
 
             Dim strWebVersion As String
@@ -339,6 +341,8 @@ Public Class frmMain
                 End If
             End If
 
+            BrowserConfig.LastUpdateCheck = DateTime.Now
+            Options.SaveConfig()
         Catch ex As Exception
             If strMode = "verbose" Then
                 MsgBox("There was an error checking for the latest version." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Critical)

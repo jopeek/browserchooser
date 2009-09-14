@@ -24,7 +24,6 @@ Public Class BrowserList
         End Set
     End Property
 
-
     Private _autoUpdateCheck As Boolean
     Public Property AutoUpdateCheck() As Boolean
         Get
@@ -32,6 +31,16 @@ Public Class BrowserList
         End Get
         Set(ByVal value As Boolean)
             _autoUpdateCheck = value
+        End Set
+    End Property
+
+    Private _lastUpdateCheck As DateTime
+    Public Property LastUpdateCheck() As DateTime
+        Get
+            Return _lastUpdateCheck
+        End Get
+        Set(ByVal value As DateTime)
+            _lastUpdateCheck = value
         End Set
     End Property
 

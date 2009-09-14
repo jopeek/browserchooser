@@ -5,12 +5,12 @@ Module Module1
     Friend PortableMode = False
     Friend DefaultMessage As String = "Choose a Browser"
     Friend strUrl As String
-
     Friend BrowserConfig As New BrowserList
 
     Friend ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")
     Friend Const BrowserChooserConfigFileName As String = "BrowserChooserConfig.xml"
-	Friend AutoUpdateCheck As Boolean = False
+    Friend Const DaysBetweenUpdateCheck As Integer = 3
+    Friend AutoUpdateCheck As Boolean = False
 
     Public Sub Main()
         Application.EnableVisualStyles()
