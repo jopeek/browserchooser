@@ -212,6 +212,15 @@ Public Class frmMain
             Me.Text = DefaultMessage
         End If
 
+        'If no URL is passed in, don't display context menu
+        If (String.IsNullOrEmpty(strUrl)) Then
+            btnApp1.ContextMenuStrip = Nothing
+            btnApp2.ContextMenuStrip = Nothing
+            btnApp3.ContextMenuStrip = Nothing
+            btnApp4.ContextMenuStrip = Nothing
+            btnApp5.ContextMenuStrip = Nothing
+        End If
+
         'Set up Tooltips
         If BrowserConfig.ShowUrl = True And strUrl <> "" Then
             btn1TT.SetToolTip(btnApp1, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(1).Name & "." & vbCrLf & "Hotkeys: (1) or (" & BrowserConfig.GetBrowser(1).Name.Substring(0, 1) & ").")
@@ -276,24 +285,34 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnApp1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.Click
-        LaunchBrowserAndClose(1)
+    Private Sub btnApp1_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp1.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(1)
+        End If
     End Sub
 
-    Private Sub btnApp2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.Click
-        LaunchBrowserAndClose(2)
+    Private Sub btnApp2_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp2.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(2)
+        End If
     End Sub
 
-    Private Sub btnApp3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.Click
-        LaunchBrowserAndClose(3)
+    Private Sub btnApp3_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp3.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(3)
+        End If
     End Sub
 
-    Private Sub btnApp4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.Click
-        LaunchBrowserAndClose(4)
+    Private Sub btnApp4_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp4.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(4)
+        End If
     End Sub
 
-    Private Sub btnApp5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.Click
-        LaunchBrowserAndClose(5)
+    Private Sub btnApp5_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp5.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(5)
+        End If
     End Sub
 
 
@@ -302,15 +321,15 @@ Public Class frmMain
         Dim firstChar As String = e.KeyData.ToString()
 
         If (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(1).IsActive = True Then
-            btnApp1_Click(sender, e)
+            LaunchBrowserAndClose(1)
         ElseIf (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(2).IsActive = True Then
-            btnApp2_Click(sender, e)
+            LaunchBrowserAndClose(2)
         ElseIf (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(3).IsActive = True Then
-            btnApp3_Click(sender, e)
+            LaunchBrowserAndClose(3)
         ElseIf (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(4).IsActive = True Then
-            btnApp4_Click(sender, e)
+            LaunchBrowserAndClose(4)
         ElseIf (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(5).IsActive = True Then
-            btnApp5_Click(sender, e)
+            LaunchBrowserAndClose(5)
         End If
     End Sub
 
@@ -349,6 +368,54 @@ Public Class frmMain
             End If
         End Try
 
+    End Sub
+
+    Private Sub AddUrlToAutoOpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AddUrlToAutoOpenToolStripMenuItem.Click
+        If (Not String.IsNullOrEmpty(strUrl)) Then
+            'create a new URI object in order to parse out the server portion
+            'given a url like: http://www.google.com/test/browser.aspx?a=3&c=6, uri.Host should equal www.google.com
+            Dim uri As UriBuilder = Nothing
+            Try
+                uri = New UriBuilder(strUrl)
+            Catch ex As Exception
+                MsgBox(String.Format("Error reading {0} as a valid URL.{1}{2}", strUrl, vbCrLf, ex.Message, MsgBoxStyle.Critical))
+            End Try
+
+            'get the browser button/picture box that triggered the context menu
+            Dim cms As ContextMenuStrip = Nothing
+            Dim browserButton As PictureBox = Nothing
+            Try
+                cms = DirectCast(sender, ToolStripMenuItem).Owner
+                browserButton = DirectCast(cms.SourceControl, PictureBox)
+            Catch ex As Exception
+                MsgBox(String.Format("Unexpected Context Menu Error!{0}{1}", vbCrLf, ex.Message, MsgBoxStyle.Critical))
+            End Try
+
+            If (uri IsNot Nothing AndAlso browserButton IsNot Nothing) Then
+                Select Case browserButton.Name
+                    Case "btnApp1"
+                        BrowserConfig.GetBrowser(1).Urls.Add(uri.Host)
+                    Case "btnApp2"
+                        BrowserConfig.GetBrowser(2).Urls.Add(uri.Host)
+                    Case "btnApp3"
+                        BrowserConfig.GetBrowser(3).Urls.Add(uri.Host)
+                    Case "btnApp4"
+                        BrowserConfig.GetBrowser(4).Urls.Add(uri.Host)
+                    Case "btnApp5"
+                        BrowserConfig.GetBrowser(5).Urls.Add(uri.Host)
+                    Case Else
+                        MsgBox(String.Format("Browser Not Configured For Auto Add Url.{0}Name={1}", vbCrLf, browserButton.Name, MsgBoxStyle.Information))
+                End Select
+
+                'save additions to the url list
+                Options.SaveConfig()
+
+                'not sure if this UAC approach is needed here but added it for consistency
+                Process.Start(Application.ExecutablePath, strUrl)
+                System.Environment.Exit(-1)
+
+            End If
+        End If
     End Sub
 End Class
 

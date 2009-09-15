@@ -26,6 +26,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.btnInfo = New System.Windows.Forms.PictureBox
         Me.btnApp1 = New System.Windows.Forms.PictureBox
+        Me.browserButtonContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddUrlToAutoOpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.btnOptions = New System.Windows.Forms.PictureBox
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnApp2 = New System.Windows.Forms.PictureBox
@@ -40,6 +42,7 @@ Partial Class frmMain
         Me.btn5TT = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.browserButtonContextMenu.SuspendLayout()
         CType(Me.btnOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,6 +61,7 @@ Partial Class frmMain
         '
         'btnApp1
         '
+        Me.btnApp1.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp1.Image = Global.Browser_Chooser.My.Resources.Resources.Firefox
         Me.btnApp1.Location = New System.Drawing.Point(56, 1)
         Me.btnApp1.Name = "btnApp1"
@@ -66,6 +70,18 @@ Partial Class frmMain
         Me.btnApp1.TabIndex = 2
         Me.btnApp1.TabStop = False
         Me.btnApp1.Visible = False
+        '
+        'browserButtonContextMenu
+        '
+        Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem})
+        Me.browserButtonContextMenu.Name = "btn1ContextMenu"
+        Me.browserButtonContextMenu.Size = New System.Drawing.Size(193, 48)
+        '
+        'AddUrlToAutoOpenToolStripMenuItem
+        '
+        Me.AddUrlToAutoOpenToolStripMenuItem.Name = "AddUrlToAutoOpenToolStripMenuItem"
+        Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AddUrlToAutoOpenToolStripMenuItem.Text = "Add Url To Auto Open List"
         '
         'btnOptions
         '
@@ -91,6 +107,7 @@ Partial Class frmMain
         '
         'btnApp2
         '
+        Me.btnApp2.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp2.Image = Global.Browser_Chooser.My.Resources.Resources.InternetExplorer
         Me.btnApp2.Location = New System.Drawing.Point(137, 1)
         Me.btnApp2.Name = "btnApp2"
@@ -102,6 +119,7 @@ Partial Class frmMain
         '
         'btnApp3
         '
+        Me.btnApp3.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp3.Image = Global.Browser_Chooser.My.Resources.Resources.GoogleChrome
         Me.btnApp3.Location = New System.Drawing.Point(218, 1)
         Me.btnApp3.Name = "btnApp3"
@@ -113,6 +131,7 @@ Partial Class frmMain
         '
         'btnApp4
         '
+        Me.btnApp4.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp4.Image = Global.Browser_Chooser.My.Resources.Resources.Safari
         Me.btnApp4.Location = New System.Drawing.Point(299, 1)
         Me.btnApp4.Name = "btnApp4"
@@ -137,6 +156,7 @@ Partial Class frmMain
         '
         'btnApp5
         '
+        Me.btnApp5.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp5.Image = Global.Browser_Chooser.My.Resources.Resources.InternetExplorer
         Me.btnApp5.Location = New System.Drawing.Point(380, 1)
         Me.btnApp5.Name = "btnApp5"
@@ -174,6 +194,7 @@ Partial Class frmMain
         Me.TopMost = True
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.browserButtonContextMenu.ResumeLayout(False)
         CType(Me.btnOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -196,5 +217,7 @@ Partial Class frmMain
     Friend WithEvents btn3TT As System.Windows.Forms.ToolTip
     Friend WithEvents btn4TT As System.Windows.Forms.ToolTip
     Friend WithEvents btn5TT As System.Windows.Forms.ToolTip
+    Friend WithEvents browserButtonContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents AddUrlToAutoOpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
