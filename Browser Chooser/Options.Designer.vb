@@ -37,12 +37,18 @@ Partial Class Options
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.TabPage1 = New System.Windows.Forms.TabPage
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.btnBrowseCustomImage1 = New System.Windows.Forms.Button
+        Me.Browser1ImagePath = New System.Windows.Forms.TextBox
+        Me.Label33 = New System.Windows.Forms.Label
         Me.Browser1Urls = New System.Windows.Forms.TextBox
         Me.Label28 = New System.Windows.Forms.Label
         Me.Browser1 = New System.Windows.Forms.ComboBox
         Me.Label23 = New System.Windows.Forms.Label
         Me.TabPage2 = New System.Windows.Forms.TabPage
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.btnBrowseCustomImage2 = New System.Windows.Forms.Button
+        Me.Browser2ImagePath = New System.Windows.Forms.TextBox
+        Me.Label34 = New System.Windows.Forms.Label
         Me.Browser2Urls = New System.Windows.Forms.TextBox
         Me.Label29 = New System.Windows.Forms.Label
         Me.Browser2 = New System.Windows.Forms.ComboBox
@@ -56,6 +62,9 @@ Partial Class Options
         Me.Browser2Target = New System.Windows.Forms.TextBox
         Me.TabPage3 = New System.Windows.Forms.TabPage
         Me.Panel3 = New System.Windows.Forms.Panel
+        Me.btnBrowseCustomImage3 = New System.Windows.Forms.Button
+        Me.Browser3ImagePath = New System.Windows.Forms.TextBox
+        Me.Label35 = New System.Windows.Forms.Label
         Me.Browser3Urls = New System.Windows.Forms.TextBox
         Me.Label30 = New System.Windows.Forms.Label
         Me.Browser3 = New System.Windows.Forms.ComboBox
@@ -69,6 +78,9 @@ Partial Class Options
         Me.Label10 = New System.Windows.Forms.Label
         Me.TabPage4 = New System.Windows.Forms.TabPage
         Me.Panel4 = New System.Windows.Forms.Panel
+        Me.btnBrowseCustomImage4 = New System.Windows.Forms.Button
+        Me.Browser4ImagePath = New System.Windows.Forms.TextBox
+        Me.Label36 = New System.Windows.Forms.Label
         Me.Browser4Urls = New System.Windows.Forms.TextBox
         Me.Label31 = New System.Windows.Forms.Label
         Me.Browser4 = New System.Windows.Forms.ComboBox
@@ -82,6 +94,9 @@ Partial Class Options
         Me.Label13 = New System.Windows.Forms.Label
         Me.TabPage5 = New System.Windows.Forms.TabPage
         Me.Panel5 = New System.Windows.Forms.Panel
+        Me.btnBrowseCustomImage5 = New System.Windows.Forms.Button
+        Me.Browser5ImagePath = New System.Windows.Forms.TextBox
+        Me.Label37 = New System.Windows.Forms.Label
         Me.Browser5Urls = New System.Windows.Forms.TextBox
         Me.Label32 = New System.Windows.Forms.Label
         Me.Browser5 = New System.Windows.Forms.ComboBox
@@ -95,6 +110,7 @@ Partial Class Options
         Me.Label22 = New System.Windows.Forms.Label
         Me.TabPage6 = New System.Windows.Forms.TabPage
         Me.Panel6 = New System.Windows.Forms.Panel
+        Me.cbPortable = New System.Windows.Forms.CheckBox
         Me.btnUpdateCheck = New System.Windows.Forms.Button
         Me.cbAutoCheck = New System.Windows.Forms.CheckBox
         Me.cbURL = New System.Windows.Forms.CheckBox
@@ -122,7 +138,6 @@ Partial Class Options
         Me.Button2 = New System.Windows.Forms.Button
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.btnHelp = New System.Windows.Forms.Button
-        Me.cbPortable = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -163,14 +178,14 @@ Partial Class Options
         Me.Browser1Target.Location = New System.Drawing.Point(50, 53)
         Me.Browser1Target.Name = "Browser1Target"
         Me.Browser1Target.Size = New System.Drawing.Size(180, 20)
-        Me.Browser1Target.TabIndex = 3
+        Me.Browser1Target.TabIndex = 2
         '
         'btnBrowser1
         '
         Me.btnBrowser1.Location = New System.Drawing.Point(236, 50)
         Me.btnBrowser1.Name = "btnBrowser1"
         Me.btnBrowser1.Size = New System.Drawing.Size(27, 23)
-        Me.btnBrowser1.TabIndex = 4
+        Me.btnBrowser1.TabIndex = 3
         Me.btnBrowser1.Text = "..."
         Me.btnBrowser1.UseVisualStyleBackColor = True
         '
@@ -178,10 +193,10 @@ Partial Class Options
         '
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnSave.Location = New System.Drawing.Point(362, 190)
+        Me.btnSave.Location = New System.Drawing.Point(362, 217)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 21
+        Me.btnSave.TabIndex = 0
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -190,7 +205,7 @@ Partial Class Options
         Me.Browser1Name.Location = New System.Drawing.Point(81, 27)
         Me.Browser1Name.Name = "Browser1Name"
         Me.Browser1Name.Size = New System.Drawing.Size(182, 20)
-        Me.Browser1Name.TabIndex = 2
+        Me.Browser1Name.TabIndex = 1
         '
         'Label3
         '
@@ -214,11 +229,11 @@ Partial Class Options
         '
         Me.Browser1Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser1Image.FormattingEnabled = True
-        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser1Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser1Image.Name = "Browser1Image"
         Me.Browser1Image.Size = New System.Drawing.Size(134, 21)
-        Me.Browser1Image.TabIndex = 5
+        Me.Browser1Image.TabIndex = 4
         '
         'TabControl1
         '
@@ -231,8 +246,8 @@ Partial Class Options
         Me.TabControl1.Location = New System.Drawing.Point(173, 42)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(430, 142)
-        Me.TabControl1.TabIndex = 8
+        Me.TabControl1.Size = New System.Drawing.Size(430, 172)
+        Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
@@ -240,13 +255,16 @@ Partial Class Options
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage1.Size = New System.Drawing.Size(422, 146)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Browser 1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnBrowseCustomImage1)
+        Me.Panel1.Controls.Add(Me.Browser1ImagePath)
+        Me.Panel1.Controls.Add(Me.Label33)
         Me.Panel1.Controls.Add(Me.Browser1Urls)
         Me.Panel1.Controls.Add(Me.Label28)
         Me.Panel1.Controls.Add(Me.Browser1)
@@ -261,20 +279,45 @@ Partial Class Options
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(416, 110)
+        Me.Panel1.Size = New System.Drawing.Size(416, 140)
         Me.Panel1.TabIndex = 23
+        '
+        'btnBrowseCustomImage1
+        '
+        Me.btnBrowseCustomImage1.Location = New System.Drawing.Point(379, 78)
+        Me.btnBrowseCustomImage1.Name = "btnBrowseCustomImage1"
+        Me.btnBrowseCustomImage1.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowseCustomImage1.TabIndex = 6
+        Me.btnBrowseCustomImage1.Text = "..."
+        Me.btnBrowseCustomImage1.UseVisualStyleBackColor = True
+        '
+        'Browser1ImagePath
+        '
+        Me.Browser1ImagePath.Location = New System.Drawing.Point(85, 81)
+        Me.Browser1ImagePath.Name = "Browser1ImagePath"
+        Me.Browser1ImagePath.Size = New System.Drawing.Size(288, 20)
+        Me.Browser1ImagePath.TabIndex = 5
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(3, 84)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(77, 13)
+        Me.Label33.TabIndex = 12
+        Me.Label33.Text = "Custom Image:"
         '
         'Browser1Urls
         '
-        Me.Browser1Urls.Location = New System.Drawing.Point(50, 80)
+        Me.Browser1Urls.Location = New System.Drawing.Point(50, 110)
         Me.Browser1Urls.Name = "Browser1Urls"
         Me.Browser1Urls.Size = New System.Drawing.Size(356, 20)
-        Me.Browser1Urls.TabIndex = 6
+        Me.Browser1Urls.TabIndex = 7
         '
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(3, 83)
+        Me.Label28.Location = New System.Drawing.Point(3, 113)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(28, 13)
         Me.Label28.TabIndex = 11
@@ -287,7 +330,7 @@ Partial Class Options
         Me.Browser1.Location = New System.Drawing.Point(57, 3)
         Me.Browser1.Name = "Browser1"
         Me.Browser1.Size = New System.Drawing.Size(349, 21)
-        Me.Browser1.TabIndex = 1
+        Me.Browser1.TabIndex = 0
         '
         'Label23
         '
@@ -304,13 +347,16 @@ Partial Class Options
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage2.Size = New System.Drawing.Size(422, 146)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Browser 2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.btnBrowseCustomImage2)
+        Me.Panel2.Controls.Add(Me.Browser2ImagePath)
+        Me.Panel2.Controls.Add(Me.Label34)
         Me.Panel2.Controls.Add(Me.Browser2Urls)
         Me.Panel2.Controls.Add(Me.Label29)
         Me.Panel2.Controls.Add(Me.Browser2)
@@ -326,20 +372,45 @@ Partial Class Options
         Me.Panel2.Enabled = False
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(416, 110)
+        Me.Panel2.Size = New System.Drawing.Size(416, 140)
         Me.Panel2.TabIndex = 16
+        '
+        'btnBrowseCustomImage2
+        '
+        Me.btnBrowseCustomImage2.Location = New System.Drawing.Point(379, 78)
+        Me.btnBrowseCustomImage2.Name = "btnBrowseCustomImage2"
+        Me.btnBrowseCustomImage2.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowseCustomImage2.TabIndex = 6
+        Me.btnBrowseCustomImage2.Text = "..."
+        Me.btnBrowseCustomImage2.UseVisualStyleBackColor = True
+        '
+        'Browser2ImagePath
+        '
+        Me.Browser2ImagePath.Location = New System.Drawing.Point(85, 81)
+        Me.Browser2ImagePath.Name = "Browser2ImagePath"
+        Me.Browser2ImagePath.Size = New System.Drawing.Size(288, 20)
+        Me.Browser2ImagePath.TabIndex = 5
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(3, 84)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(77, 13)
+        Me.Label34.TabIndex = 19
+        Me.Label34.Text = "Custom Image:"
         '
         'Browser2Urls
         '
-        Me.Browser2Urls.Location = New System.Drawing.Point(50, 80)
+        Me.Browser2Urls.Location = New System.Drawing.Point(50, 110)
         Me.Browser2Urls.Name = "Browser2Urls"
         Me.Browser2Urls.Size = New System.Drawing.Size(356, 20)
-        Me.Browser2Urls.TabIndex = 12
+        Me.Browser2Urls.TabIndex = 7
         '
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(3, 83)
+        Me.Label29.Location = New System.Drawing.Point(3, 113)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(28, 13)
         Me.Label29.TabIndex = 18
@@ -352,7 +423,7 @@ Partial Class Options
         Me.Browser2.Location = New System.Drawing.Point(57, 3)
         Me.Browser2.Name = "Browser2"
         Me.Browser2.Size = New System.Drawing.Size(349, 21)
-        Me.Browser2.TabIndex = 7
+        Me.Browser2.TabIndex = 0
         '
         'Label24
         '
@@ -367,11 +438,11 @@ Partial Class Options
         '
         Me.Browser2Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser2Image.FormattingEnabled = True
-        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser2Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser2Image.Name = "Browser2Image"
         Me.Browser2Image.Size = New System.Drawing.Size(134, 21)
-        Me.Browser2Image.TabIndex = 11
+        Me.Browser2Image.TabIndex = 4
         '
         'Label7
         '
@@ -396,7 +467,7 @@ Partial Class Options
         Me.btnBrowser2.Location = New System.Drawing.Point(236, 50)
         Me.btnBrowser2.Name = "btnBrowser2"
         Me.btnBrowser2.Size = New System.Drawing.Size(27, 23)
-        Me.btnBrowser2.TabIndex = 10
+        Me.btnBrowser2.TabIndex = 3
         Me.btnBrowser2.Text = "..."
         Me.btnBrowser2.UseVisualStyleBackColor = True
         '
@@ -414,14 +485,14 @@ Partial Class Options
         Me.Browser2Name.Location = New System.Drawing.Point(81, 27)
         Me.Browser2Name.Name = "Browser2Name"
         Me.Browser2Name.Size = New System.Drawing.Size(182, 20)
-        Me.Browser2Name.TabIndex = 8
+        Me.Browser2Name.TabIndex = 1
         '
         'Browser2Target
         '
         Me.Browser2Target.Location = New System.Drawing.Point(50, 53)
         Me.Browser2Target.Name = "Browser2Target"
         Me.Browser2Target.Size = New System.Drawing.Size(180, 20)
-        Me.Browser2Target.TabIndex = 9
+        Me.Browser2Target.TabIndex = 2
         '
         'TabPage3
         '
@@ -429,13 +500,16 @@ Partial Class Options
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage3.Size = New System.Drawing.Size(422, 146)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Browser 3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.btnBrowseCustomImage3)
+        Me.Panel3.Controls.Add(Me.Browser3ImagePath)
+        Me.Panel3.Controls.Add(Me.Label35)
         Me.Panel3.Controls.Add(Me.Browser3Urls)
         Me.Panel3.Controls.Add(Me.Label30)
         Me.Panel3.Controls.Add(Me.Browser3)
@@ -451,20 +525,45 @@ Partial Class Options
         Me.Panel3.Enabled = False
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(416, 110)
+        Me.Panel3.Size = New System.Drawing.Size(416, 140)
         Me.Panel3.TabIndex = 23
+        '
+        'btnBrowseCustomImage3
+        '
+        Me.btnBrowseCustomImage3.Location = New System.Drawing.Point(379, 78)
+        Me.btnBrowseCustomImage3.Name = "btnBrowseCustomImage3"
+        Me.btnBrowseCustomImage3.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowseCustomImage3.TabIndex = 6
+        Me.btnBrowseCustomImage3.Text = "..."
+        Me.btnBrowseCustomImage3.UseVisualStyleBackColor = True
+        '
+        'Browser3ImagePath
+        '
+        Me.Browser3ImagePath.Location = New System.Drawing.Point(85, 81)
+        Me.Browser3ImagePath.Name = "Browser3ImagePath"
+        Me.Browser3ImagePath.Size = New System.Drawing.Size(288, 20)
+        Me.Browser3ImagePath.TabIndex = 5
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(3, 84)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(77, 13)
+        Me.Label35.TabIndex = 27
+        Me.Label35.Text = "Custom Image:"
         '
         'Browser3Urls
         '
-        Me.Browser3Urls.Location = New System.Drawing.Point(50, 80)
+        Me.Browser3Urls.Location = New System.Drawing.Point(50, 110)
         Me.Browser3Urls.Name = "Browser3Urls"
         Me.Browser3Urls.Size = New System.Drawing.Size(356, 20)
-        Me.Browser3Urls.TabIndex = 18
+        Me.Browser3Urls.TabIndex = 7
         '
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(3, 83)
+        Me.Label30.Location = New System.Drawing.Point(3, 113)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(28, 13)
         Me.Label30.TabIndex = 26
@@ -477,7 +576,7 @@ Partial Class Options
         Me.Browser3.Location = New System.Drawing.Point(57, 3)
         Me.Browser3.Name = "Browser3"
         Me.Browser3.Size = New System.Drawing.Size(349, 21)
-        Me.Browser3.TabIndex = 13
+        Me.Browser3.TabIndex = 0
         '
         'Label25
         '
@@ -492,11 +591,11 @@ Partial Class Options
         '
         Me.Browser3Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser3Image.FormattingEnabled = True
-        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser3Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser3Image.Name = "Browser3Image"
         Me.Browser3Image.Size = New System.Drawing.Size(134, 21)
-        Me.Browser3Image.TabIndex = 17
+        Me.Browser3Image.TabIndex = 4
         '
         'Label8
         '
@@ -512,7 +611,7 @@ Partial Class Options
         Me.btnBrowser3.Location = New System.Drawing.Point(236, 50)
         Me.btnBrowser3.Name = "btnBrowser3"
         Me.btnBrowser3.Size = New System.Drawing.Size(27, 23)
-        Me.btnBrowser3.TabIndex = 16
+        Me.btnBrowser3.TabIndex = 3
         Me.btnBrowser3.Text = "..."
         Me.btnBrowser3.UseVisualStyleBackColor = True
         '
@@ -530,14 +629,14 @@ Partial Class Options
         Me.Browser3Name.Location = New System.Drawing.Point(81, 27)
         Me.Browser3Name.Name = "Browser3Name"
         Me.Browser3Name.Size = New System.Drawing.Size(182, 20)
-        Me.Browser3Name.TabIndex = 14
+        Me.Browser3Name.TabIndex = 1
         '
         'Browser3Target
         '
         Me.Browser3Target.Location = New System.Drawing.Point(50, 53)
         Me.Browser3Target.Name = "Browser3Target"
         Me.Browser3Target.Size = New System.Drawing.Size(180, 20)
-        Me.Browser3Target.TabIndex = 15
+        Me.Browser3Target.TabIndex = 2
         '
         'Label10
         '
@@ -554,13 +653,16 @@ Partial Class Options
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage4.Size = New System.Drawing.Size(422, 146)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Browser 4"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.btnBrowseCustomImage4)
+        Me.Panel4.Controls.Add(Me.Browser4ImagePath)
+        Me.Panel4.Controls.Add(Me.Label36)
         Me.Panel4.Controls.Add(Me.Browser4Urls)
         Me.Panel4.Controls.Add(Me.Label31)
         Me.Panel4.Controls.Add(Me.Browser4)
@@ -576,20 +678,45 @@ Partial Class Options
         Me.Panel4.Enabled = False
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(416, 110)
+        Me.Panel4.Size = New System.Drawing.Size(416, 140)
         Me.Panel4.TabIndex = 23
+        '
+        'btnBrowseCustomImage4
+        '
+        Me.btnBrowseCustomImage4.Location = New System.Drawing.Point(379, 78)
+        Me.btnBrowseCustomImage4.Name = "btnBrowseCustomImage4"
+        Me.btnBrowseCustomImage4.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowseCustomImage4.TabIndex = 6
+        Me.btnBrowseCustomImage4.Text = "..."
+        Me.btnBrowseCustomImage4.UseVisualStyleBackColor = True
+        '
+        'Browser4ImagePath
+        '
+        Me.Browser4ImagePath.Location = New System.Drawing.Point(85, 81)
+        Me.Browser4ImagePath.Name = "Browser4ImagePath"
+        Me.Browser4ImagePath.Size = New System.Drawing.Size(288, 20)
+        Me.Browser4ImagePath.TabIndex = 5
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(3, 84)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(77, 13)
+        Me.Label36.TabIndex = 35
+        Me.Label36.Text = "Custom Image:"
         '
         'Browser4Urls
         '
-        Me.Browser4Urls.Location = New System.Drawing.Point(50, 80)
+        Me.Browser4Urls.Location = New System.Drawing.Point(50, 110)
         Me.Browser4Urls.Name = "Browser4Urls"
         Me.Browser4Urls.Size = New System.Drawing.Size(356, 20)
-        Me.Browser4Urls.TabIndex = 24
+        Me.Browser4Urls.TabIndex = 7
         '
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(3, 83)
+        Me.Label31.Location = New System.Drawing.Point(3, 113)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(28, 13)
         Me.Label31.TabIndex = 34
@@ -602,7 +729,7 @@ Partial Class Options
         Me.Browser4.Location = New System.Drawing.Point(57, 3)
         Me.Browser4.Name = "Browser4"
         Me.Browser4.Size = New System.Drawing.Size(349, 21)
-        Me.Browser4.TabIndex = 19
+        Me.Browser4.TabIndex = 0
         '
         'Label26
         '
@@ -617,11 +744,11 @@ Partial Class Options
         '
         Me.Browser4Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser4Image.FormattingEnabled = True
-        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser4Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser4Image.Name = "Browser4Image"
         Me.Browser4Image.Size = New System.Drawing.Size(134, 21)
-        Me.Browser4Image.TabIndex = 23
+        Me.Browser4Image.TabIndex = 4
         '
         'Label11
         '
@@ -637,7 +764,7 @@ Partial Class Options
         Me.btnBrowser4.Location = New System.Drawing.Point(236, 50)
         Me.btnBrowser4.Name = "btnBrowser4"
         Me.btnBrowser4.Size = New System.Drawing.Size(27, 23)
-        Me.btnBrowser4.TabIndex = 22
+        Me.btnBrowser4.TabIndex = 3
         Me.btnBrowser4.Text = "..."
         Me.btnBrowser4.UseVisualStyleBackColor = True
         '
@@ -655,14 +782,14 @@ Partial Class Options
         Me.Browser4Name.Location = New System.Drawing.Point(81, 27)
         Me.Browser4Name.Name = "Browser4Name"
         Me.Browser4Name.Size = New System.Drawing.Size(182, 20)
-        Me.Browser4Name.TabIndex = 20
+        Me.Browser4Name.TabIndex = 1
         '
         'Browser4Target
         '
         Me.Browser4Target.Location = New System.Drawing.Point(50, 53)
         Me.Browser4Target.Name = "Browser4Target"
         Me.Browser4Target.Size = New System.Drawing.Size(180, 20)
-        Me.Browser4Target.TabIndex = 21
+        Me.Browser4Target.TabIndex = 2
         '
         'Label13
         '
@@ -679,13 +806,16 @@ Partial Class Options
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage5.Size = New System.Drawing.Size(422, 146)
         Me.TabPage5.TabIndex = 6
         Me.TabPage5.Text = "Browser 5"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btnBrowseCustomImage5)
+        Me.Panel5.Controls.Add(Me.Browser5ImagePath)
+        Me.Panel5.Controls.Add(Me.Label37)
         Me.Panel5.Controls.Add(Me.Browser5Urls)
         Me.Panel5.Controls.Add(Me.Label32)
         Me.Panel5.Controls.Add(Me.Browser5)
@@ -701,20 +831,45 @@ Partial Class Options
         Me.Panel5.Enabled = False
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(416, 110)
+        Me.Panel5.Size = New System.Drawing.Size(416, 140)
         Me.Panel5.TabIndex = 23
+        '
+        'btnBrowseCustomImage5
+        '
+        Me.btnBrowseCustomImage5.Location = New System.Drawing.Point(379, 78)
+        Me.btnBrowseCustomImage5.Name = "btnBrowseCustomImage5"
+        Me.btnBrowseCustomImage5.Size = New System.Drawing.Size(27, 23)
+        Me.btnBrowseCustomImage5.TabIndex = 6
+        Me.btnBrowseCustomImage5.Text = "..."
+        Me.btnBrowseCustomImage5.UseVisualStyleBackColor = True
+        '
+        'Browser5ImagePath
+        '
+        Me.Browser5ImagePath.Location = New System.Drawing.Point(85, 81)
+        Me.Browser5ImagePath.Name = "Browser5ImagePath"
+        Me.Browser5ImagePath.Size = New System.Drawing.Size(288, 20)
+        Me.Browser5ImagePath.TabIndex = 5
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(3, 84)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(77, 13)
+        Me.Label37.TabIndex = 38
+        Me.Label37.Text = "Custom Image:"
         '
         'Browser5Urls
         '
-        Me.Browser5Urls.Location = New System.Drawing.Point(50, 80)
+        Me.Browser5Urls.Location = New System.Drawing.Point(50, 110)
         Me.Browser5Urls.Name = "Browser5Urls"
         Me.Browser5Urls.Size = New System.Drawing.Size(356, 20)
-        Me.Browser5Urls.TabIndex = 30
+        Me.Browser5Urls.TabIndex = 7
         '
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(3, 83)
+        Me.Label32.Location = New System.Drawing.Point(3, 113)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(28, 13)
         Me.Label32.TabIndex = 36
@@ -727,7 +882,7 @@ Partial Class Options
         Me.Browser5.Location = New System.Drawing.Point(57, 3)
         Me.Browser5.Name = "Browser5"
         Me.Browser5.Size = New System.Drawing.Size(349, 21)
-        Me.Browser5.TabIndex = 25
+        Me.Browser5.TabIndex = 0
         '
         'Label27
         '
@@ -742,11 +897,11 @@ Partial Class Options
         '
         Me.Browser5Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser5Image.FormattingEnabled = True
-        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser5Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser5Image.Name = "Browser5Image"
         Me.Browser5Image.Size = New System.Drawing.Size(134, 21)
-        Me.Browser5Image.TabIndex = 29
+        Me.Browser5Image.TabIndex = 4
         '
         'Label20
         '
@@ -762,7 +917,7 @@ Partial Class Options
         Me.btnBrowser5.Location = New System.Drawing.Point(236, 50)
         Me.btnBrowser5.Name = "btnBrowser5"
         Me.btnBrowser5.Size = New System.Drawing.Size(27, 23)
-        Me.btnBrowser5.TabIndex = 28
+        Me.btnBrowser5.TabIndex = 3
         Me.btnBrowser5.Text = "..."
         Me.btnBrowser5.UseVisualStyleBackColor = True
         '
@@ -780,14 +935,14 @@ Partial Class Options
         Me.Browser5Name.Location = New System.Drawing.Point(81, 27)
         Me.Browser5Name.Name = "Browser5Name"
         Me.Browser5Name.Size = New System.Drawing.Size(182, 20)
-        Me.Browser5Name.TabIndex = 26
+        Me.Browser5Name.TabIndex = 1
         '
         'Browser5Target
         '
         Me.Browser5Target.Location = New System.Drawing.Point(50, 53)
         Me.Browser5Target.Name = "Browser5Target"
         Me.Browser5Target.Size = New System.Drawing.Size(180, 20)
-        Me.Browser5Target.TabIndex = 27
+        Me.Browser5Target.TabIndex = 2
         '
         'Label22
         '
@@ -804,7 +959,7 @@ Partial Class Options
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(422, 116)
+        Me.TabPage6.Size = New System.Drawing.Size(422, 146)
         Me.TabPage6.TabIndex = 4
         Me.TabPage6.Text = "Miscellaneous"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -819,15 +974,25 @@ Partial Class Options
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(3, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(416, 110)
+        Me.Panel6.Size = New System.Drawing.Size(416, 140)
         Me.Panel6.TabIndex = 23
+        '
+        'cbPortable
+        '
+        Me.cbPortable.AutoSize = True
+        Me.cbPortable.Location = New System.Drawing.Point(93, 73)
+        Me.cbPortable.Name = "cbPortable"
+        Me.cbPortable.Size = New System.Drawing.Size(94, 17)
+        Me.cbPortable.TabIndex = 4
+        Me.cbPortable.Text = "Portable mode"
+        Me.cbPortable.UseVisualStyleBackColor = True
         '
         'btnUpdateCheck
         '
         Me.btnUpdateCheck.Location = New System.Drawing.Point(189, 44)
         Me.btnUpdateCheck.Name = "btnUpdateCheck"
         Me.btnUpdateCheck.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdateCheck.TabIndex = 13
+        Me.btnUpdateCheck.TabIndex = 2
         Me.btnUpdateCheck.Text = "Check Now"
         Me.btnUpdateCheck.UseVisualStyleBackColor = True
         '
@@ -837,7 +1002,7 @@ Partial Class Options
         Me.cbAutoCheck.Location = New System.Drawing.Point(3, 48)
         Me.cbAutoCheck.Name = "cbAutoCheck"
         Me.cbAutoCheck.Size = New System.Drawing.Size(180, 17)
-        Me.cbAutoCheck.TabIndex = 12
+        Me.cbAutoCheck.TabIndex = 1
         Me.cbAutoCheck.Text = "Automatically Check for Updates"
         Me.cbAutoCheck.UseVisualStyleBackColor = True
         '
@@ -847,7 +1012,7 @@ Partial Class Options
         Me.cbURL.Location = New System.Drawing.Point(3, 73)
         Me.cbURL.Name = "cbURL"
         Me.cbURL.Size = New System.Drawing.Size(84, 17)
-        Me.cbURL.TabIndex = 11
+        Me.cbURL.TabIndex = 3
         Me.cbURL.Text = "Show URL?"
         Me.cbURL.UseVisualStyleBackColor = True
         '
@@ -858,7 +1023,7 @@ Partial Class Options
         Me.btnSetDefault.Location = New System.Drawing.Point(3, 3)
         Me.btnSetDefault.Name = "btnSetDefault"
         Me.btnSetDefault.Size = New System.Drawing.Size(253, 23)
-        Me.btnSetDefault.TabIndex = 10
+        Me.btnSetDefault.TabIndex = 0
         Me.btnSetDefault.Text = "Activate Browser Chooser (Make Default Browser)"
         Me.btnSetDefault.UseVisualStyleBackColor = True
         '
@@ -876,10 +1041,10 @@ Partial Class Options
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(524, 190)
+        Me.btnCancel.Location = New System.Drawing.Point(524, 217)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 22
+        Me.btnCancel.TabIndex = 2
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -1025,29 +1190,20 @@ Partial Class Options
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(443, 190)
+        Me.btnHelp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnHelp.Location = New System.Drawing.Point(443, 217)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 23
+        Me.btnHelp.TabIndex = 1
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
-        '
-        'cbPortable
-        '
-        Me.cbPortable.AutoSize = True
-        Me.cbPortable.Location = New System.Drawing.Point(93, 73)
-        Me.cbPortable.Name = "cbPortable"
-        Me.cbPortable.Size = New System.Drawing.Size(94, 17)
-        Me.cbPortable.TabIndex = 14
-        Me.cbPortable.Text = "Portable mode"
-        Me.cbPortable.UseVisualStyleBackColor = True
         '
         'Options
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(615, 219)
+        Me.ClientSize = New System.Drawing.Size(615, 246)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.TabControl1)
@@ -1183,4 +1339,19 @@ Partial Class Options
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents btnHelp As System.Windows.Forms.Button
     Friend WithEvents cbPortable As System.Windows.Forms.CheckBox
+    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowseCustomImage1 As System.Windows.Forms.Button
+    Friend WithEvents Browser1ImagePath As System.Windows.Forms.TextBox
+    Friend WithEvents btnBrowseCustomImage2 As System.Windows.Forms.Button
+    Friend WithEvents Browser2ImagePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowseCustomImage3 As System.Windows.Forms.Button
+    Friend WithEvents Browser3ImagePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label35 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowseCustomImage4 As System.Windows.Forms.Button
+    Friend WithEvents Browser4ImagePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowseCustomImage5 As System.Windows.Forms.Button
+    Friend WithEvents Browser5ImagePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label37 As System.Windows.Forms.Label
 End Class

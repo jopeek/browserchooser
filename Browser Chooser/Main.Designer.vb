@@ -66,7 +66,7 @@ Partial Class frmMain
         Me.btnApp1.Location = New System.Drawing.Point(56, 1)
         Me.btnApp1.Name = "btnApp1"
         Me.btnApp1.Size = New System.Drawing.Size(75, 80)
-        Me.btnApp1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.btnApp1.TabIndex = 2
         Me.btnApp1.TabStop = False
         Me.btnApp1.Visible = False
@@ -75,12 +75,12 @@ Partial Class frmMain
         '
         Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem})
         Me.browserButtonContextMenu.Name = "btn1ContextMenu"
-        Me.browserButtonContextMenu.Size = New System.Drawing.Size(193, 48)
+        Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 26)
         '
         'AddUrlToAutoOpenToolStripMenuItem
         '
         Me.AddUrlToAutoOpenToolStripMenuItem.Name = "AddUrlToAutoOpenToolStripMenuItem"
-        Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.AddUrlToAutoOpenToolStripMenuItem.Text = "Add Url To Auto Open List"
         '
         'btnOptions
@@ -112,7 +112,7 @@ Partial Class frmMain
         Me.btnApp2.Location = New System.Drawing.Point(137, 1)
         Me.btnApp2.Name = "btnApp2"
         Me.btnApp2.Size = New System.Drawing.Size(75, 80)
-        Me.btnApp2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.btnApp2.TabIndex = 7
         Me.btnApp2.TabStop = False
         Me.btnApp2.Visible = False
@@ -124,7 +124,7 @@ Partial Class frmMain
         Me.btnApp3.Location = New System.Drawing.Point(218, 1)
         Me.btnApp3.Name = "btnApp3"
         Me.btnApp3.Size = New System.Drawing.Size(75, 80)
-        Me.btnApp3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.btnApp3.TabIndex = 8
         Me.btnApp3.TabStop = False
         Me.btnApp3.Visible = False
@@ -136,7 +136,7 @@ Partial Class frmMain
         Me.btnApp4.Location = New System.Drawing.Point(299, 1)
         Me.btnApp4.Name = "btnApp4"
         Me.btnApp4.Size = New System.Drawing.Size(75, 80)
-        Me.btnApp4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.btnApp4.TabIndex = 9
         Me.btnApp4.TabStop = False
         Me.btnApp4.Visible = False
@@ -161,7 +161,7 @@ Partial Class frmMain
         Me.btnApp5.Location = New System.Drawing.Point(380, 1)
         Me.btnApp5.Name = "btnApp5"
         Me.btnApp5.Size = New System.Drawing.Size(75, 80)
-        Me.btnApp5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.btnApp5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.btnApp5.TabIndex = 11
         Me.btnApp5.TabStop = False
         Me.btnApp5.Visible = False

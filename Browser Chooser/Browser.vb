@@ -40,6 +40,18 @@
         End Set
     End Property
 
+
+    Private _customImagePath As String
+    Public Property CustomImagePath() As String
+        Get
+            Return _customImagePath
+        End Get
+        Set(ByVal value As String)
+            _customImagePath = value
+        End Set
+    End Property
+
+
     Private _urls As List(Of String) = New List(Of String)
     Public Property Urls() As List(Of String)
         Get

@@ -56,31 +56,47 @@ Public Class Options
     Private Sub btnBrowse1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser1.Click
         Browser1FileDialog.Filter = "Application | *.exe"
         Browser1FileDialog.ShowDialog()
-        Browser1Target.Text = Browser1FileDialog.FileName.ToString
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(Browser1FileDialog.FileName)) Then
+            Browser1Target.Text = Browser1FileDialog.FileName.ToString
+        End If
+        Browser1FileDialog.Reset()
     End Sub
 
     Private Sub btnBrowse2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser2.Click
         Browser2FileDialog.Filter = "Application | *.exe"
         Browser2FileDialog.ShowDialog()
-        Browser2Target.Text = Browser2FileDialog.FileName.ToString
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(Browser2FileDialog.FileName)) Then
+            Browser2Target.Text = Browser2FileDialog.FileName.ToString
+        End If
     End Sub
 
     Private Sub btnBrowse3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser3.Click
         Browser3FileDialog.Filter = "Application | *.exe"
         Browser3FileDialog.ShowDialog()
-        Browser3Target.Text = Browser3FileDialog.FileName.ToString
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(Browser3FileDialog.FileName)) Then
+            Browser3Target.Text = Browser3FileDialog.FileName.ToString
+        End If
     End Sub
 
     Private Sub btnBrowse4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser4.Click
         Browser4FileDialog.Filter = "Application | *.exe"
         Browser4FileDialog.ShowDialog()
-        Browser4Target.Text = Browser4FileDialog.FileName.ToString
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(Browser4FileDialog.FileName)) Then
+            Browser4Target.Text = Browser4FileDialog.FileName.ToString
+        End If
     End Sub
 
     Private Sub btnBrowse5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowser5.Click
         Browser5FileDialog.Filter = "Application | *.exe"
         Browser5FileDialog.ShowDialog()
-        Browser5Target.Text = Browser5FileDialog.FileName.ToString
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(Browser5FileDialog.FileName)) Then
+            Browser5Target.Text = Browser5FileDialog.FileName.ToString
+        End If
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -107,23 +123,23 @@ Public Class Options
         BrowserConfig.AutoUpdateCheck = cbAutoCheck.Checked
 
         If (Not String.IsNullOrEmpty(Browser1Name.Text)) Then
-            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser1Name.Text, .Target = Browser1Target.Text, .Image = Browser1Image.Text, .BrowserNumber = 1, .IsActive = True, .Urls = Browser.StringToUrls(Browser1Urls.Text)})
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser1Name.Text, .Target = Browser1Target.Text, .Image = Browser1Image.Text, .BrowserNumber = 1, .IsActive = True, .Urls = Browser.StringToUrls(Browser1Urls.Text), .CustomImagePath = Browser1ImagePath.Text})
         End If
 
         If (Not String.IsNullOrEmpty(Browser2Name.Text)) Then
-            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser2Name.Text, .Target = Browser2Target.Text, .Image = Browser2Image.Text, .BrowserNumber = 2, .IsActive = True, .Urls = Browser.StringToUrls(Browser2Urls.Text)})
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser2Name.Text, .Target = Browser2Target.Text, .Image = Browser2Image.Text, .BrowserNumber = 2, .IsActive = True, .Urls = Browser.StringToUrls(Browser2Urls.Text), .CustomImagePath = Browser2ImagePath.Text})
         End If
 
         If (Not String.IsNullOrEmpty(Browser3Name.Text)) Then
-            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser3Name.Text, .Target = Browser3Target.Text, .Image = Browser3Image.Text, .BrowserNumber = 3, .IsActive = True, .Urls = Browser.StringToUrls(Browser3Urls.Text)})
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser3Name.Text, .Target = Browser3Target.Text, .Image = Browser3Image.Text, .BrowserNumber = 3, .IsActive = True, .Urls = Browser.StringToUrls(Browser3Urls.Text), .CustomImagePath = Browser3ImagePath.Text})
         End If
 
         If (Not String.IsNullOrEmpty(Browser4Name.Text)) Then
-            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser4Name.Text, .Target = Browser4Target.Text, .Image = Browser4Image.Text, .BrowserNumber = 4, .IsActive = True, .Urls = Browser.StringToUrls(Browser4Urls.Text)})
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser4Name.Text, .Target = Browser4Target.Text, .Image = Browser4Image.Text, .BrowserNumber = 4, .IsActive = True, .Urls = Browser.StringToUrls(Browser4Urls.Text), .CustomImagePath = Browser4ImagePath.Text})
         End If
 
         If (Not String.IsNullOrEmpty(Browser5Name.Text)) Then
-            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser5Name.Text, .Target = Browser5Target.Text, .Image = Browser5Image.Text, .BrowserNumber = 5, .IsActive = True, .Urls = Browser.StringToUrls(Browser5Urls.Text)})
+            BrowserConfig.Browsers.Add(New Browser With {.Name = Browser5Name.Text, .Target = Browser5Target.Text, .Image = Browser5Image.Text, .BrowserNumber = 5, .IsActive = True, .Urls = Browser.StringToUrls(Browser5Urls.Text), .CustomImagePath = Browser5ImagePath.Text})
         End If
 
         If cbPortable.Checked Then
@@ -200,6 +216,12 @@ Public Class Options
         Browser3Urls.Text = BrowserConfig.GetBrowser(3).UrlsToString
         Browser4Urls.Text = BrowserConfig.GetBrowser(4).UrlsToString
         Browser5Urls.Text = BrowserConfig.GetBrowser(5).UrlsToString
+
+        Browser1ImagePath.Text = BrowserConfig.GetBrowser(1).CustomImagePath
+        Browser2ImagePath.Text = BrowserConfig.GetBrowser(2).CustomImagePath
+        Browser3ImagePath.Text = BrowserConfig.GetBrowser(3).CustomImagePath
+        Browser4ImagePath.Text = BrowserConfig.GetBrowser(4).CustomImagePath
+        Browser5ImagePath.Text = BrowserConfig.GetBrowser(5).CustomImagePath
 
         'Select the correct items in the Browser dropdown
         Try
@@ -392,5 +414,61 @@ Public Class Options
 
     End Sub
 
+    Private Sub BrowseCustomImageClick(ByRef fileDialog As OpenFileDialog, ByRef filePathTextBox As TextBox, ByRef imageComboBox As ComboBox)
+        'try to open the file dialog to the image's path (even if the image doesn't exist)
+        'otherwise open to the application startup path
+        If (Not String.IsNullOrEmpty(filePathTextBox.Text)) Then
+            Dim cImage As FileInfo = New FileInfo(Path.Combine(Application.StartupPath, filePathTextBox.Text))
+            If (cImage.Directory.Exists) Then
+                fileDialog.InitialDirectory = cImage.DirectoryName
+                If (cImage.Exists) Then
+                    fileDialog.FileName = cImage.FullName
+                End If
+            Else
+                fileDialog.InitialDirectory = Application.StartupPath
+            End If
+        Else
+            fileDialog.InitialDirectory = Application.StartupPath
+        End If
 
+        fileDialog.Filter = "Image (png, ico)|*.png;*.ico"
+        fileDialog.ShowDialog()
+        'if a file is not picked, don't clear the options textbox
+        If (Not String.IsNullOrEmpty(fileDialog.FileName)) Then
+            imageComboBox.SelectedItem = "Custom"
+            If (fileDialog.FileName.StartsWith(Application.StartupPath)) Then
+                'remove application path to support relative paths / particularly for portable mode 
+                filePathTextBox.Text = fileDialog.FileName.Substring(Application.StartupPath.Length + 1)
+            Else
+                filePathTextBox.Text = fileDialog.FileName
+            End If
+        End If
+        fileDialog.Reset()
+    End Sub
+
+    Private Sub btnBrowseCustomImage1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomImage1.Click
+        BrowseCustomImageClick(Browser1FileDialog, Browser1ImagePath, Browser1Image)
+    End Sub
+
+    Private Sub btnBrowseCustomImage2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomImage2.Click
+        BrowseCustomImageClick(Browser2FileDialog, Browser2ImagePath, Browser2Image)
+    End Sub
+
+    Private Sub btnBrowseCustomImage3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomImage3.Click
+        BrowseCustomImageClick(Browser3FileDialog, Browser3ImagePath, Browser3Image)
+    End Sub
+
+    Private Sub btnBrowseCustomImage4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomImage4.Click
+        BrowseCustomImageClick(Browser4FileDialog, Browser4ImagePath, Browser4Image)
+    End Sub
+
+    Private Sub btnBrowseCustomImage5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomImage5.Click
+        BrowseCustomImageClick(Browser5FileDialog, Browser5ImagePath, Browser5Image)
+    End Sub
+
+    Private Sub Browser1Image_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1Image.SelectedIndexChanged
+        If Browser1Image.SelectedItem <> "Custom" Then
+            Browser1ImagePath.Text = ""
+        End If
+    End Sub
 End Class

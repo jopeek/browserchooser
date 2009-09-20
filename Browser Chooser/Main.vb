@@ -119,8 +119,8 @@ Public Class frmMain
         InitializeMain()
     End Sub
 
-    Private Function SetImage(ByVal ImageKey As String) As Image
-        Select Case ImageKey
+    Private Function SetImage(ByRef BrowserChoice As Browser) As Image
+        Select Case BrowserChoice.Image
             Case "Firefox"
                 SetImage = My.Resources.Firefox
             Case "Internet Explorer"
@@ -132,7 +132,33 @@ Public Class frmMain
             Case "Safari"
                 SetImage = My.Resources.Safari
             Case Else
-                SetImage = My.Resources.Firefox
+                If (Not String.IsNullOrEmpty(BrowserChoice.CustomImagePath)) Then
+                    'handles absolute or relative paths, 
+                    'Path.Combine(path1, path2): If path2 contains an absolute path, this method returns path2
+                    Dim cImage As FileInfo = New FileInfo(Path.Combine(Application.StartupPath, BrowserChoice.CustomImagePath))
+                    If (cImage.Exists) Then
+                        Try
+                            Select Case cImage.Extension.ToUpper
+                                Case ".PNG"
+                                    SetImage = Bitmap.FromFile(cImage.FullName)
+                                Case ".ICO"
+                                    SetImage = New Icon(cImage.FullName, New Size(75, 80)).ToBitmap()
+                                Case Else
+                                    'unexpected file format - set icon to error
+                                    SetImage = My.Resources._53
+                            End Select
+                        Catch ex As Exception
+                            'file specified not a valid image format - set icon to error
+                            SetImage = My.Resources._53
+                        End Try
+                    Else
+                        'file doesn't exist - set icon to error
+                        SetImage = My.Resources._53
+                    End If
+                Else
+                    'custom option chosen but no file specified - set icon to error
+                    SetImage = My.Resources._53
+                End If
         End Select
     End Function
 
@@ -153,7 +179,7 @@ Public Class frmMain
             If (BrowserConfig.GetBrowser(1).IsActive) Then
                 Me.Width = (1 * 81) + 112
                 btnApp1.Visible = True
-                btnApp1.Image = SetImage(BrowserConfig.GetBrowser(1).Image)
+                btnApp1.Image = SetImage(BrowserConfig.GetBrowser(1))
             Else
                 btnApp1.Visible = False
             End If
@@ -161,7 +187,7 @@ Public Class frmMain
             If (BrowserConfig.GetBrowser(2).IsActive) Then
                 Me.Width = (2 * 81) + 112
                 btnApp2.Visible = True
-                btnApp2.Image = SetImage(BrowserConfig.GetBrowser(2).Image)
+                btnApp2.Image = SetImage(BrowserConfig.GetBrowser(2))
             Else
                 btnApp2.Visible = False
             End If
@@ -169,7 +195,7 @@ Public Class frmMain
             If (BrowserConfig.GetBrowser(3).IsActive) Then
                 Me.Width = (3 * 81) + 112
                 btnApp3.Visible = True
-                btnApp3.Image = SetImage(BrowserConfig.GetBrowser(3).Image)
+                btnApp3.Image = SetImage(BrowserConfig.GetBrowser(3))
             Else
                 btnApp3.Visible = False
             End If
@@ -177,7 +203,7 @@ Public Class frmMain
             If (BrowserConfig.GetBrowser(4).IsActive) Then
                 Me.Width = (4 * 81) + 112
                 btnApp4.Visible = True
-                btnApp4.Image = SetImage(BrowserConfig.GetBrowser(4).Image)
+                btnApp4.Image = SetImage(BrowserConfig.GetBrowser(4))
             Else
                 btnApp4.Visible = False
             End If
@@ -185,7 +211,7 @@ Public Class frmMain
             If (BrowserConfig.GetBrowser(5).IsActive) Then
                 Me.Width = (5 * 81) + 112
                 btnApp5.Visible = True
-                btnApp5.Image = SetImage(BrowserConfig.GetBrowser(5).Image)
+                btnApp5.Image = SetImage(BrowserConfig.GetBrowser(5))
             Else
                 btnApp5.Visible = False
             End If
