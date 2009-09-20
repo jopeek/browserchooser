@@ -320,15 +320,15 @@ Public Class frmMain
     Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         Dim firstChar As String = e.KeyData.ToString()
 
-        If (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(1).IsActive = True Then
+        If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(1)
-        ElseIf (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(2).IsActive = True Then
+        ElseIf BrowserConfig.GetBrowser(2).IsActive = True AndAlso (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(2)
-        ElseIf (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(3).IsActive = True Then
+        ElseIf BrowserConfig.GetBrowser(3).IsActive = True AndAlso (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(3)
-        ElseIf (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(4).IsActive = True Then
+        ElseIf BrowserConfig.GetBrowser(4).IsActive = True AndAlso (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(4)
-        ElseIf (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) And BrowserConfig.GetBrowser(5).IsActive = True Then
+        ElseIf BrowserConfig.GetBrowser(5).IsActive = True AndAlso (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(5)
         End If
     End Sub
