@@ -256,7 +256,7 @@ Partial Class Options
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(422, 146)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Browser 1"
@@ -348,7 +348,7 @@ Partial Class Options
         Me.TabPage2.Controls.Add(Me.Panel2)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(422, 146)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Browser 2"
@@ -501,7 +501,7 @@ Partial Class Options
         Me.TabPage3.Controls.Add(Me.Panel3)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(422, 146)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Browser 3"
@@ -654,7 +654,7 @@ Partial Class Options
         Me.TabPage4.Controls.Add(Me.Panel4)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage4.Size = New System.Drawing.Size(422, 146)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Browser 4"
@@ -807,7 +807,7 @@ Partial Class Options
         Me.TabPage5.Controls.Add(Me.Panel5)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage5.Size = New System.Drawing.Size(422, 146)
         Me.TabPage5.TabIndex = 6
         Me.TabPage5.Text = "Browser 5"
@@ -960,7 +960,7 @@ Partial Class Options
         Me.TabPage6.Controls.Add(Me.Panel6)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage6.Size = New System.Drawing.Size(422, 146)
         Me.TabPage6.TabIndex = 4
         Me.TabPage6.Text = "Miscellaneous"
@@ -985,7 +985,7 @@ Partial Class Options
         '
         Me.cbIntranet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIntranet.FormattingEnabled = True
-        Me.cbIntranet.Location = New System.Drawing.Point(116, 28)
+        Me.cbIntranet.Location = New System.Drawing.Point(128, 28)
         Me.cbIntranet.Name = "cbIntranet"
         Me.cbIntranet.Size = New System.Drawing.Size(141, 21)
         Me.cbIntranet.TabIndex = 17
@@ -1011,7 +1011,7 @@ Partial Class Options
         '
         'btnUpdateCheck
         '
-        Me.btnUpdateCheck.Location = New System.Drawing.Point(182, 51)
+        Me.btnUpdateCheck.Location = New System.Drawing.Point(194, 51)
         Me.btnUpdateCheck.Name = "btnUpdateCheck"
         Me.btnUpdateCheck.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdateCheck.TabIndex = 2
