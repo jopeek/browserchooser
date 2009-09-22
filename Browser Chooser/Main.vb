@@ -44,9 +44,8 @@ Public Class frmMain
                     Dim exePath As String = Browser.Target
                     If Browser.Target.Contains(".exe ") Then
                         exePath = Browser.Target.Substring(0, InStr(Browser.Target, ".exe") + 4)
-                        exePath = NormalizeTarget(exePath)
                     End If
-                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(Browser.Target), "Open " + Browser.Name) With {.IconReference = New IconReference(exePath, 0)})
+                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(Browser.Target), "Open " + Browser.Name) With {.IconReference = New IconReference(NormalizeTarget(exePath), 0)})
                 End If
             Next
 
