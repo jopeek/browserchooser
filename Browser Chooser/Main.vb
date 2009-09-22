@@ -41,11 +41,18 @@ Public Class frmMain
 
             For Each Browser In BrowserConfig.Browsers
                 If Browser.IsActive Then
-                    Dim exePath As String = Browser.Target
-                    If Browser.Target.Contains(".exe ") Then
-                        exePath = Browser.Target.Substring(0, InStr(Browser.Target, ".exe") + 4)
+                    Dim target As String = NormalizeTarget(Browser.Target)
+
+                    Dim strBrowser As String = target
+                    Dim strParameters As String = ""
+
+                    If target.Contains(".exe ") Then
+                        strBrowser = target.Substring(0, InStr(target, ".exe") + 4)
+                        strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
+
                     End If
-                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(Browser.Target), "Open " + Browser.Name) With {.IconReference = New IconReference(NormalizeTarget(exePath), 0)})
+
+                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(strBrowser), "Open " + Browser.Name) With {.IconReference = New IconReference(NormalizeTarget(strBrowser), 0), .Arguments = strParameters})
                 End If
             Next
 
