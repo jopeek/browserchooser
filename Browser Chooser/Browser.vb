@@ -90,6 +90,10 @@
         End Set
     End Property
 
+    Public Overrides Function ToString() As String
+        Return _name
+    End Function
+
     Function CompareTo(ByVal other As Browser) As Integer Implements IComparable(Of Browser).CompareTo
         Return BrowserNumber.CompareTo(other.BrowserNumber)
     End Function

@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports System.Reflection
+Imports Microsoft.WindowsAPICodePack.Taskbar
 
 Module Module1
     Friend Is64Bit As Boolean = False
@@ -12,13 +14,38 @@ Module Module1
     Friend Const DaysBetweenUpdateCheck As Integer = 3
     Friend AutoUpdateCheck As Boolean = False
 
+    Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As [Assembly]
+        Dim parentAssembly As Assembly = Assembly.GetExecutingAssembly()
+
+        Dim name = args.Name.Substring(0, args.Name.IndexOf(","c)) & ".dll"
+
+        If name = "Microsoft.WindowsAPICodePack.dll" Or name = "Microsoft.WindowsAPICodePack.Shell.dll" Then
+            Dim resourceName = parentAssembly.GetManifestResourceNames().First(Function(s) s.EndsWith(name))
+
+            Using stream As Stream = parentAssembly.GetManifestResourceStream(resourceName)
+                Dim block As Byte() = New Byte(stream.Length - 1) {}
+                stream.Read(block, 0, block.Length)
+                Return Assembly.Load(block)
+            End Using
+        End If
+
+        Return GetType(Module1).Assembly
+    End Function
+
+
     Public Sub Main()
+        ' load the WindowsAPICodePack DLLs from the embedded resource allowing us to keep one tidy .exe and no dlls.
+        Dim currentDomain As AppDomain = AppDomain.CurrentDomain
+        AddHandler currentDomain.AssemblyResolve, AddressOf MyResolveEventHandler
+
         Application.EnableVisualStyles()
 
+        ' set the 64bit flag if we are runnong on a 64 bit OS
         If IntPtr.Size = 8 Or Not String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")) Then
             Is64Bit = True
         End If
 
+        ' set the portable mode flag if we detect a local config file
         If (File.Exists(Path.Combine(Application.StartupPath, BrowserChooserConfigFileName))) Then
             PortableMode = True
         End If
@@ -43,7 +70,9 @@ Module Module1
                 Application.Run(Options)
             Else
                 strUrl = cmdLineOption
+
                 Dim browserNumber As Integer = BrowserConfig.GetBrowserByUrl(strUrl)
+
                 If (Not browserNumber = 0) Then
                     LaunchBrowser(browserNumber)
                 Else
@@ -64,11 +93,7 @@ Module Module1
         myProcess.Start()
         System.Environment.Exit(-1)
     End Sub
-
-
-    Function LaunchBrowser(ByVal browserNumber As Integer) As Boolean
-        Dim target As String = BrowserConfig.GetBrowser(browserNumber).Target
-
+    Function NormalizeTarget(ByVal target As String) As String
         ' it's possible that in portable mode you have a path to an x86 folder and are running on a 32 bit system
         ' so the strBrowser will point to an invalid browser
         If Is64Bit Then
@@ -84,6 +109,12 @@ Module Module1
                 target = target.Replace(" (x86)", "")
             End If
         End If
+
+        Return target
+    End Function
+
+    Function LaunchBrowser(ByVal browserNumber As Integer) As Boolean
+        Dim target As String = NormalizeTarget(BrowserConfig.GetBrowser(browserNumber).Target)
 
         Dim strParameters As String = ""
         Dim strBrowser As String
@@ -111,5 +142,14 @@ Module Module1
         Return False
     End Function
 
-End Module
+    Function IsIntranetUrl(ByVal url As String) As Boolean
+        Dim targetUri As Uri = New Uri(url)
+        Dim domain As String = targetUri.Authority
 
+        If domain.Contains(".") Then
+            Return False
+        End If
+
+        Return True
+    End Function
+End Module

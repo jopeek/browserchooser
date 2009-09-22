@@ -1,10 +1,12 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.IO
 Imports System.Net
-
+Imports Microsoft.WindowsAPICodePack.Taskbar
+Imports Microsoft.WindowsAPICodePack.Shell
 
 Public Class frmMain
-
+    Private browserButtons As List(Of PictureBox)
+    Private browserTooltips As List(Of ToolTip)
     <StructLayout(LayoutKind.Sequential)> _
     Public Structure MARGINS
         Public cxLeftWidth As Integer
@@ -16,92 +18,6 @@ Public Class frmMain
     <DllImport("dwmapi.dll")> _
     Public Shared Function DwmExtendFrameIntoClientArea(ByVal hWnd As IntPtr, ByRef pMarinset As MARGINS) As Integer
     End Function
-
-    Private Sub LaunchBrowserInfo(ByVal browserNumber As Integer)
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name & " - " & strUrl
-        Else
-            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name
-        End If
-    End Sub
-
-    Private Sub LaunchBrowserAndClose(ByVal browserNumber As Integer)
-        If (Not LaunchBrowser(browserNumber)) Then
-            MsgBox("The target browser does not exist in the target location.", MsgBoxStyle.Critical)
-        Else
-            Me.Close()
-        End If
-    End Sub
-
-
-    Private Sub btnInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.Click
-        About.ShowDialog()
-    End Sub
-
-    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Close()
-
-    End Sub
-
-    Private Sub btnApp1_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseHover, btnApp1.MouseEnter
-        LaunchBrowserInfo(1)
-    End Sub
-
-    Private Sub btnApp1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
-        Else
-            Me.Text = DefaultMessage
-        End If
-    End Sub
-
-    Private Sub btnApp2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseHover, btnApp2.MouseEnter
-        LaunchBrowserInfo(2)
-    End Sub
-
-    Private Sub btnApp2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp2.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
-        Else
-            Me.Text = DefaultMessage
-        End If
-    End Sub
-
-    Private Sub btnApp3_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseHover, btnApp3.MouseEnter
-        LaunchBrowserInfo(3)
-    End Sub
-
-    Private Sub btnApp3_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp3.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
-        Else
-            Me.Text = DefaultMessage
-        End If
-    End Sub
-
-    Private Sub btnApp4_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseHover, btnApp4.MouseEnter
-        LaunchBrowserInfo(4)
-    End Sub
-
-    Private Sub btnApp4_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp4.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
-        Else
-            Me.Text = DefaultMessage
-        End If
-    End Sub
-
-    Private Sub btnApp5_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseHover, btnApp5.MouseEnter
-        LaunchBrowserInfo(5)
-    End Sub
-
-    Private Sub btnApp5_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp5.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
-        Else
-            Me.Text = DefaultMessage
-        End If
-    End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -117,6 +33,42 @@ Public Class frmMain
         Dim result As Integer = DwmExtendFrameIntoClientArea(hwnd, margins)
 
         InitializeMain()
+
+        ' create the jump lists
+        If TaskbarManager.IsPlatformSupported Then
+
+            Dim jumpList As JumpList = jumpList.CreateJumpList()
+
+            For Each Browser In BrowserConfig.Browsers
+                If Browser.IsActive Then
+                    Dim exePath As String = Browser.Target
+                    If Browser.Target.Contains(".exe ") Then
+                        exePath = Browser.Target.Substring(0, InStr(Browser.Target, ".exe") + 4)
+                        exePath = NormalizeTarget(exePath)
+                    End If
+                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(Browser.Target), "Open " + Browser.Name) With {.IconReference = New IconReference(exePath, 0)})
+                End If
+            Next
+
+            ' Add our user tasks
+            jumpList.Refresh()
+        End If
+    End Sub
+
+    Private Sub LaunchBrowserInfo(ByVal browserNumber As Integer)
+        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name & " - " & strUrl
+        Else
+            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name
+        End If
+    End Sub
+
+    Private Sub LaunchBrowserAndClose(ByVal browserNumber As Integer)
+        If (Not LaunchBrowser(browserNumber)) Then
+            MsgBox("The target browser does not exist in the target location.", MsgBoxStyle.Critical)
+        Else
+            Me.Close()
+        End If
     End Sub
 
     Private Function SetImage(ByRef BrowserChoice As Browser) As Image
@@ -164,6 +116,22 @@ Public Class frmMain
 
 
     Public Sub InitializeMain()
+        browserButtons = New List(Of PictureBox)
+        browserButtons.Add(Nothing)
+        browserButtons.Add(btnApp1)
+        browserButtons.Add(btnApp2)
+        browserButtons.Add(btnApp3)
+        browserButtons.Add(btnApp4)
+        browserButtons.Add(btnApp5)
+
+        browserTooltips = New List(Of ToolTip)
+        browserTooltips.Add(Nothing)
+        browserTooltips.Add(btn1TT)
+        browserTooltips.Add(btn2TT)
+        browserTooltips.Add(btn3TT)
+        browserTooltips.Add(btn4TT)
+        browserTooltips.Add(btn5TT)
+
         If (BrowserConfig Is Nothing OrElse BrowserConfig.Browsers.Count = 0) Then
             'Force open Options screen
 #If DEBUG Then
@@ -173,49 +141,16 @@ Public Class frmMain
             openOptions()
 #End If
 
-
         Else
-
-            If (BrowserConfig.GetBrowser(1).IsActive) Then
-                Me.Width = (1 * 81) + 112
-                btnApp1.Visible = True
-                btnApp1.Image = SetImage(BrowserConfig.GetBrowser(1))
-            Else
-                btnApp1.Visible = False
-            End If
-
-            If (BrowserConfig.GetBrowser(2).IsActive) Then
-                Me.Width = (2 * 81) + 112
-                btnApp2.Visible = True
-                btnApp2.Image = SetImage(BrowserConfig.GetBrowser(2))
-            Else
-                btnApp2.Visible = False
-            End If
-
-            If (BrowserConfig.GetBrowser(3).IsActive) Then
-                Me.Width = (3 * 81) + 112
-                btnApp3.Visible = True
-                btnApp3.Image = SetImage(BrowserConfig.GetBrowser(3))
-            Else
-                btnApp3.Visible = False
-            End If
-
-            If (BrowserConfig.GetBrowser(4).IsActive) Then
-                Me.Width = (4 * 81) + 112
-                btnApp4.Visible = True
-                btnApp4.Image = SetImage(BrowserConfig.GetBrowser(4))
-            Else
-                btnApp4.Visible = False
-            End If
-
-            If (BrowserConfig.GetBrowser(5).IsActive) Then
-                Me.Width = (5 * 81) + 112
-                btnApp5.Visible = True
-                btnApp5.Image = SetImage(BrowserConfig.GetBrowser(5))
-            Else
-                btnApp5.Visible = False
-            End If
-
+            For index As Integer = 1 To 5
+                If (BrowserConfig.GetBrowser(index).IsActive) Then
+                    Me.Width = (index * 81) + 112
+                    browserButtons(index).Visible = True
+                    browserButtons(index).Image = SetImage(BrowserConfig.GetBrowser(index))
+                Else
+                    browserButtons(index).Visible = False
+                End If
+            Next
         End If
 
         If BrowserConfig.AutoUpdateCheck = True Then
@@ -240,27 +175,25 @@ Public Class frmMain
 
         'If no URL is passed in, don't display context menu
         If (String.IsNullOrEmpty(strUrl)) Then
-            btnApp1.ContextMenuStrip = Nothing
-            btnApp2.ContextMenuStrip = Nothing
-            btnApp3.ContextMenuStrip = Nothing
-            btnApp4.ContextMenuStrip = Nothing
-            btnApp5.ContextMenuStrip = Nothing
+
+            For index As Integer = 1 To 5
+                browserButtons(index).ContextMenuStrip = Nothing
+            Next
         End If
 
         'Set up Tooltips
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            btn1TT.SetToolTip(btnApp1, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(1).Name & "." & vbCrLf & "Hotkeys: (1) or (" & BrowserConfig.GetBrowser(1).Name.Substring(0, 1) & ").")
-            btn2TT.SetToolTip(btnApp2, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(2).Name & "." & vbCrLf & "Hotkeys: (2) or (" & BrowserConfig.GetBrowser(2).Name.Substring(0, 1) & ").")
-            btn3TT.SetToolTip(btnApp3, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(3).Name & "." & vbCrLf & "Hotkeys: (3) or (" & BrowserConfig.GetBrowser(3).Name.Substring(0, 1) & ").")
-            btn4TT.SetToolTip(btnApp4, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(4).Name & "." & vbCrLf & "Hotkeys: (4) or (" & BrowserConfig.GetBrowser(4).Name.Substring(0, 1) & ").")
-            btn5TT.SetToolTip(btnApp5, "Open " & strUrl & " in " & BrowserConfig.GetBrowser(5).Name & "." & vbCrLf & "Hotkeys: (5) or (" & BrowserConfig.GetBrowser(5).Name.Substring(0, 1) & ").")
-        Else
-            btn1TT.SetToolTip(btnApp1, "Open " & BrowserConfig.GetBrowser(1).Name & "." & vbCrLf & "Hotkeys: (1) or (" & BrowserConfig.GetBrowser(1).Name.Substring(0, 1) & ").")
-            btn2TT.SetToolTip(btnApp2, "Open " & BrowserConfig.GetBrowser(2).Name & "." & vbCrLf & "Hotkeys: (2) or (" & BrowserConfig.GetBrowser(2).Name.Substring(0, 1) & ").")
-            btn3TT.SetToolTip(btnApp3, "Open " & BrowserConfig.GetBrowser(3).Name & "." & vbCrLf & "Hotkeys: (3) or (" & BrowserConfig.GetBrowser(3).Name.Substring(0, 1) & ").")
-            btn4TT.SetToolTip(btnApp4, "Open " & BrowserConfig.GetBrowser(4).Name & "." & vbCrLf & "Hotkeys: (4) or (" & BrowserConfig.GetBrowser(4).Name.Substring(0, 1) & ").")
-            btn5TT.SetToolTip(btnApp5, "Open " & BrowserConfig.GetBrowser(5).Name & "." & vbCrLf & "Hotkeys: (5) or (" & BrowserConfig.GetBrowser(5).Name.Substring(0, 1) & ").")
-        End If
+        For index As Integer = 1 To 5
+            If BrowserConfig.GetBrowser(index).IsActive Then
+                Dim strToolTip As String
+
+                If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+                    strToolTip = String.Format("Open {0} in {1}.{2}Hotkeys: ({3}) or ({4}).", strUrl, BrowserConfig.GetBrowser(index).Name, vbCrLf, index, BrowserConfig.GetBrowser(index).Name.Substring(0, 1))
+                Else
+                    strToolTip = String.Format("Open {0}.{1}Hotkeys: ({2}) or ({3}).", BrowserConfig.GetBrowser(index).Name, vbCrLf, index, BrowserConfig.GetBrowser(index).Name.Substring(0, 1))
+                End If
+                browserTooltips(index).SetToolTip(browserButtons(index), strToolTip)
+            End If
+        Next
     End Sub
 
     Private Sub btnInfo_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseEnter, btnInfo.MouseHover
@@ -305,62 +238,7 @@ Public Class frmMain
         System.Environment.Exit(-1)
     End Sub
 
-
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
-
-    End Sub
-
-    Private Sub btnApp1_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp1.MouseClick
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            LaunchBrowserAndClose(1)
-        End If
-    End Sub
-
-    Private Sub btnApp2_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp2.MouseClick
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            LaunchBrowserAndClose(2)
-        End If
-    End Sub
-
-    Private Sub btnApp3_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp3.MouseClick
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            LaunchBrowserAndClose(3)
-        End If
-    End Sub
-
-    Private Sub btnApp4_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp4.MouseClick
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            LaunchBrowserAndClose(4)
-        End If
-    End Sub
-
-    Private Sub btnApp5_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp5.MouseClick
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
-            LaunchBrowserAndClose(5)
-        End If
-    End Sub
-
-
-
-    Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-        Dim firstChar As String = e.KeyData.ToString()
-
-        If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(1)
-        ElseIf BrowserConfig.GetBrowser(2).IsActive = True AndAlso (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(2)
-        ElseIf BrowserConfig.GetBrowser(3).IsActive = True AndAlso (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(3)
-        ElseIf BrowserConfig.GetBrowser(4).IsActive = True AndAlso (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(4)
-        ElseIf BrowserConfig.GetBrowser(5).IsActive = True AndAlso (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(5)
-        End If
-    End Sub
-
     Public Sub CheckforUpdate(ByVal strMode As String)
-
         Try
             Dim client As WebClient = New WebClient()
 
@@ -443,5 +321,53 @@ Public Class frmMain
             End If
         End If
     End Sub
-End Class
 
+    Private Sub btnInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.Click
+        About.ShowDialog()
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Me.Close()
+    End Sub
+
+    Private Sub btnApp_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseHover, btnApp1.MouseEnter, btnApp2.MouseHover, btnApp2.MouseEnter, btnApp3.MouseHover, btnApp3.MouseEnter, btnApp4.MouseHover, btnApp4.MouseEnter, btnApp5.MouseHover, btnApp5.MouseEnter
+        Dim browserIndex As Integer = browserButtons.IndexOf(sender)
+        LaunchBrowserInfo(browserIndex)
+    End Sub
+
+    Private Sub btnApp_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseLeave, btnApp2.MouseLeave, btnApp3.MouseLeave, btnApp4.MouseLeave, btnApp5.MouseLeave
+        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+            Me.Text = DefaultMessage & " - " & strUrl
+        Else
+            Me.Text = DefaultMessage
+        End If
+    End Sub
+
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnApp_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp1.MouseClick, btnApp2.MouseClick, btnApp3.MouseClick, btnApp4.MouseClick, btnApp5.MouseClick
+        Dim browserIndex As Integer = browserButtons.IndexOf(sender)
+
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(browserIndex)
+        End If
+    End Sub
+
+    Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+        Dim firstChar As String = e.KeyData.ToString()
+
+        If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
+            LaunchBrowserAndClose(1)
+        ElseIf BrowserConfig.GetBrowser(2).IsActive = True AndAlso (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
+            LaunchBrowserAndClose(2)
+        ElseIf BrowserConfig.GetBrowser(3).IsActive = True AndAlso (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
+            LaunchBrowserAndClose(3)
+        ElseIf BrowserConfig.GetBrowser(4).IsActive = True AndAlso (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
+            LaunchBrowserAndClose(4)
+        ElseIf BrowserConfig.GetBrowser(5).IsActive = True AndAlso (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
+            LaunchBrowserAndClose(5)
+        End If
+    End Sub
+End Class

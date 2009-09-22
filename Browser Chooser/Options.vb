@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Win32
 Imports System.IO
+Imports Microsoft.WindowsAPICodePack
 
 Public Class Options
 
@@ -122,6 +123,12 @@ Public Class Options
         BrowserConfig.ShowUrl = cbURL.Checked
         BrowserConfig.AutoUpdateCheck = cbAutoCheck.Checked
 
+        If cbIntranet.SelectedIndex = 0 Then
+            BrowserConfig.IntranetBrowser = Nothing
+        ElseIf cbIntranet.SelectedItem IsNot Nothing Then
+            BrowserConfig.IntranetBrowser = cbIntranet.SelectedItem
+        End If
+
         If (Not String.IsNullOrEmpty(Browser1Name.Text)) Then
             BrowserConfig.Browsers.Add(New Browser With {.Name = Browser1Name.Text, .Target = Browser1Target.Text, .Image = Browser1Image.Text, .BrowserNumber = 1, .IsActive = True, .Urls = Browser.StringToUrls(Browser1Urls.Text), .CustomImagePath = Browser1ImagePath.Text})
         End If
@@ -236,6 +243,22 @@ Public Class Options
 
         cbURL.Checked = BrowserConfig.ShowUrl
         cbAutoCheck.Checked = BrowserConfig.AutoUpdateCheck
+
+        Dim target As String = ""
+        If (BrowserConfig.IntranetBrowser IsNot Nothing) Then
+            target = BrowserConfig.IntranetBrowser.Target
+        End If
+
+        cbIntranet.Items.Add("None")
+        cbIntranet.SelectedIndex = 0
+        For Each Browser In BrowserConfig.Browsers
+            If (Browser.IsActive) Then
+                cbIntranet.Items.Add(Browser)
+                If (target = Browser.Target) Then
+                    cbIntranet.SelectedItem = Browser
+                End If
+            End If
+        Next
 
         'Switch for portable version
         Dim ConfigFile As String
@@ -470,5 +493,13 @@ Public Class Options
         If Browser1Image.SelectedItem <> "Custom" Then
             Browser1ImagePath.Text = ""
         End If
+    End Sub
+
+    Public Sub New()
+        ' This call is required by the Windows Form Designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
     End Sub
 End Class

@@ -44,6 +44,16 @@ Public Class BrowserList
         End Set
     End Property
 
+    Private _intranetBrowser As Browser
+    Public Property IntranetBrowser() As Browser
+        Get
+            Return _intranetBrowser
+        End Get
+        Set(ByVal value As Browser)
+            _intranetBrowser = value
+        End Set
+    End Property
+
     Private _browsers As List(Of Browser) = New List(Of Browser)
     Public Property Browsers() As List(Of Browser)
         Get
@@ -66,6 +76,12 @@ Public Class BrowserList
     End Function
 
     Public Function GetBrowserByUrl(ByVal url As String) As Integer
+        If BrowserConfig.IntranetBrowser IsNot Nothing Then
+            If IsIntranetUrl(url) Then
+                Return BrowserConfig.IntranetBrowser.BrowserNumber
+            End If
+        End If
+
         Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.ToUpper().Contains(w.Trim().ToUpper())))
         If (b Is Nothing) Then
             Return 0

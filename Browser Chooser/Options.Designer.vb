@@ -110,6 +110,8 @@ Partial Class Options
         Me.Label22 = New System.Windows.Forms.Label
         Me.TabPage6 = New System.Windows.Forms.TabPage
         Me.Panel6 = New System.Windows.Forms.Panel
+        Me.cbIntranet = New System.Windows.Forms.ComboBox
+        Me.Label38 = New System.Windows.Forms.Label
         Me.cbPortable = New System.Windows.Forms.CheckBox
         Me.btnUpdateCheck = New System.Windows.Forms.Button
         Me.cbAutoCheck = New System.Windows.Forms.CheckBox
@@ -254,7 +256,7 @@ Partial Class Options
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage1.Size = New System.Drawing.Size(422, 146)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Browser 1"
@@ -346,7 +348,7 @@ Partial Class Options
         Me.TabPage2.Controls.Add(Me.Panel2)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage2.Size = New System.Drawing.Size(422, 146)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Browser 2"
@@ -499,7 +501,7 @@ Partial Class Options
         Me.TabPage3.Controls.Add(Me.Panel3)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage3.Size = New System.Drawing.Size(422, 146)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Browser 3"
@@ -652,7 +654,7 @@ Partial Class Options
         Me.TabPage4.Controls.Add(Me.Panel4)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage4.Size = New System.Drawing.Size(422, 146)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Browser 4"
@@ -805,7 +807,7 @@ Partial Class Options
         Me.TabPage5.Controls.Add(Me.Panel5)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage5.Size = New System.Drawing.Size(422, 146)
         Me.TabPage5.TabIndex = 6
         Me.TabPage5.Text = "Browser 5"
@@ -958,7 +960,7 @@ Partial Class Options
         Me.TabPage6.Controls.Add(Me.Panel6)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage6.Size = New System.Drawing.Size(422, 146)
         Me.TabPage6.TabIndex = 4
         Me.TabPage6.Text = "Miscellaneous"
@@ -966,6 +968,8 @@ Partial Class Options
         '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.cbIntranet)
+        Me.Panel6.Controls.Add(Me.Label38)
         Me.Panel6.Controls.Add(Me.cbPortable)
         Me.Panel6.Controls.Add(Me.btnUpdateCheck)
         Me.Panel6.Controls.Add(Me.cbAutoCheck)
@@ -977,10 +981,28 @@ Partial Class Options
         Me.Panel6.Size = New System.Drawing.Size(416, 140)
         Me.Panel6.TabIndex = 23
         '
+        'cbIntranet
+        '
+        Me.cbIntranet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbIntranet.FormattingEnabled = True
+        Me.cbIntranet.Location = New System.Drawing.Point(116, 28)
+        Me.cbIntranet.Name = "cbIntranet"
+        Me.cbIntranet.Size = New System.Drawing.Size(141, 21)
+        Me.cbIntranet.TabIndex = 17
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(3, 31)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(107, 13)
+        Me.Label38.TabIndex = 18
+        Me.Label38.Text = "Open Intranet Urls in:"
+        '
         'cbPortable
         '
         Me.cbPortable.AutoSize = True
-        Me.cbPortable.Location = New System.Drawing.Point(93, 73)
+        Me.cbPortable.Location = New System.Drawing.Point(92, 80)
         Me.cbPortable.Name = "cbPortable"
         Me.cbPortable.Size = New System.Drawing.Size(94, 17)
         Me.cbPortable.TabIndex = 4
@@ -989,7 +1011,7 @@ Partial Class Options
         '
         'btnUpdateCheck
         '
-        Me.btnUpdateCheck.Location = New System.Drawing.Point(189, 44)
+        Me.btnUpdateCheck.Location = New System.Drawing.Point(182, 51)
         Me.btnUpdateCheck.Name = "btnUpdateCheck"
         Me.btnUpdateCheck.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdateCheck.TabIndex = 2
@@ -999,7 +1021,7 @@ Partial Class Options
         'cbAutoCheck
         '
         Me.cbAutoCheck.AutoSize = True
-        Me.cbAutoCheck.Location = New System.Drawing.Point(3, 48)
+        Me.cbAutoCheck.Location = New System.Drawing.Point(6, 55)
         Me.cbAutoCheck.Name = "cbAutoCheck"
         Me.cbAutoCheck.Size = New System.Drawing.Size(180, 17)
         Me.cbAutoCheck.TabIndex = 1
@@ -1009,7 +1031,7 @@ Partial Class Options
         'cbURL
         '
         Me.cbURL.AutoSize = True
-        Me.cbURL.Location = New System.Drawing.Point(3, 73)
+        Me.cbURL.Location = New System.Drawing.Point(6, 80)
         Me.cbURL.Name = "cbURL"
         Me.cbURL.Size = New System.Drawing.Size(84, 17)
         Me.cbURL.TabIndex = 3
@@ -1210,6 +1232,7 @@ Partial Class Options
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Options"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1354,4 +1377,6 @@ Partial Class Options
     Friend WithEvents btnBrowseCustomImage5 As System.Windows.Forms.Button
     Friend WithEvents Browser5ImagePath As System.Windows.Forms.TextBox
     Friend WithEvents Label37 As System.Windows.Forms.Label
+    Friend WithEvents cbIntranet As System.Windows.Forms.ComboBox
+    Friend WithEvents Label38 As System.Windows.Forms.Label
 End Class
