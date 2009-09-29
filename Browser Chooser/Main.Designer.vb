@@ -52,6 +52,7 @@ Partial Class frmMain
         '
         'btnInfo
         '
+        Me.btnInfo.BackColor = System.Drawing.Color.Transparent
         Me.btnInfo.Image = Global.Browser_Chooser.My.Resources.Resources._122
         Me.btnInfo.Location = New System.Drawing.Point(12, 12)
         Me.btnInfo.Name = "btnInfo"
@@ -61,6 +62,7 @@ Partial Class frmMain
         '
         'btnApp1
         '
+        Me.btnApp1.BackColor = System.Drawing.Color.Transparent
         Me.btnApp1.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp1.Image = Global.Browser_Chooser.My.Resources.Resources.Firefox
         Me.btnApp1.Location = New System.Drawing.Point(56, 1)
@@ -85,6 +87,7 @@ Partial Class frmMain
         '
         'btnOptions
         '
+        Me.btnOptions.BackColor = System.Drawing.Color.Transparent
         Me.btnOptions.Image = Global.Browser_Chooser.My.Resources.Resources._128
         Me.btnOptions.Location = New System.Drawing.Point(478, 12)
         Me.btnOptions.Name = "btnOptions"
@@ -107,6 +110,7 @@ Partial Class frmMain
         '
         'btnApp2
         '
+        Me.btnApp2.BackColor = System.Drawing.Color.Transparent
         Me.btnApp2.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp2.Image = Global.Browser_Chooser.My.Resources.Resources.InternetExplorer
         Me.btnApp2.Location = New System.Drawing.Point(137, 1)
@@ -119,6 +123,7 @@ Partial Class frmMain
         '
         'btnApp3
         '
+        Me.btnApp3.BackColor = System.Drawing.Color.Transparent
         Me.btnApp3.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp3.Image = Global.Browser_Chooser.My.Resources.Resources.GoogleChrome
         Me.btnApp3.Location = New System.Drawing.Point(218, 1)
@@ -131,6 +136,7 @@ Partial Class frmMain
         '
         'btnApp4
         '
+        Me.btnApp4.BackColor = System.Drawing.Color.Transparent
         Me.btnApp4.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp4.Image = Global.Browser_Chooser.My.Resources.Resources.Safari
         Me.btnApp4.Location = New System.Drawing.Point(299, 1)
@@ -156,6 +162,7 @@ Partial Class frmMain
         '
         'btnApp5
         '
+        Me.btnApp5.BackColor = System.Drawing.Color.Transparent
         Me.btnApp5.ContextMenuStrip = Me.browserButtonContextMenu
         Me.btnApp5.Image = Global.Browser_Chooser.My.Resources.Resources.InternetExplorer
         Me.btnApp5.Location = New System.Drawing.Point(380, 1)

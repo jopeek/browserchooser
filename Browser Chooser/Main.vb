@@ -19,6 +19,24 @@ Public Class frmMain
     Public Shared Function DwmExtendFrameIntoClientArea(ByVal hWnd As IntPtr, ByRef pMarinset As MARGINS) As Integer
     End Function
 
+    Private Declare Function DwmIsCompositionEnabled Lib "dwmapi" _
+(ByRef pfEnabled As Long) As Long
+
+    Function IsAeroEnabled() As Boolean
+        Dim AeroState As Long
+        On Error GoTo APImissing
+        DwmIsCompositionEnabled(AeroState)
+        IsAeroEnabled = CBool(AeroState)
+APImissing:
+    End Function
+
+    Private Sub styleXP()
+        Me.ControlBox = False
+        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
+        Me.BackgroundImage = My.Resources.bg
+        Me.BackgroundImageLayout = ImageLayout.Tile
+    End Sub
+
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         On Error Resume Next
@@ -59,6 +77,11 @@ Public Class frmMain
             ' Add our user tasks
             jumpList.Refresh()
         End If
+
+        If Not IsAeroEnabled() Then
+            styleXP()
+        End If
+
     End Sub
 
     Private Sub LaunchBrowserInfo(ByVal browserNumber As Integer)
@@ -250,11 +273,11 @@ Public Class frmMain
 
             Dim strWebVersion As String
             'Switch for Portable
-            If (PortableMode) Then
-                strWebVersion = client.DownloadString("http://www.janolepeek.com/bcport.txt")
-            Else
-                strWebVersion = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
-            End If
+            'If (PortableMode) Then
+            '    strWebVersion = client.DownloadString("http://www.janolepeek.com/bcport.txt")
+            'Else
+            strWebVersion = client.DownloadString("http://www.janolepeek.com/bclatest.txt")
+            'End If
 
             Dim version As System.Version = New System.Version(strWebVersion)
             If version.CompareTo(My.Application.Info.Version) > -1 Then

@@ -350,55 +350,135 @@ Public Class Options
     End Sub
 
     Public Function SetDefaultBrowserPath() As String
-        Try
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\RegisteredApplications").SetValue("Browser Chooser", "Software\\Browser Chooser\\Capabilities", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationName", "Browser Chooser", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationIcon", Application.ExecutablePath & ",0", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationDescription", "Small app that let's you choose what browser to open a url in. Visit my website for more information. www.janolepeek.com", RegistryValueKind.String)
 
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".xhtml", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".xht", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".shtml", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".html", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".htm", "BrowserChooserHTML", RegistryValueKind.String)
-
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\StartMenu").SetValue("StartMenuInternet", "Browser Chooser.exe", RegistryValueKind.String)
-
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("https", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("http", "BrowserChooserHTML", RegistryValueKind.String)
-            Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("ftp", "BrowserChooserHTML", RegistryValueKind.String)
-
-            Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML").SetValue("", "Browser Chooser HTML", RegistryValueKind.String)
-            Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML").SetValue("URL Protocol", "", RegistryValueKind.String)
-
-            Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
-
-            Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML\shell\open\command").SetValue("", Application.ExecutablePath & " %1", RegistryValueKind.String)
-
-            Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-            Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-            Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\ftp\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+        If OS_Version() = "Windows XP" Then
 
             Try
-                Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice")
-                Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice")
-                Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice")
-                Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice")
-                Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice")
 
-                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".shtml", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".xht", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".xhtm", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".xhtml", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".htm", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes").SetValue(".html", "BrowserChooserHTML", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.shtml").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.xht").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.xhtm").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.xhtml").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.htm").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.html").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\.url").SetValue("", "BrowserChooserHTML", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\MyInternetShortcut\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\MyInternetShortcut\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\http\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\http\shell\BrowserChooserHTML\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\https\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\https\shell\BrowserChooserHTML\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\ftp\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\ftp\shell\BrowserChooserHTML\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\ftp\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\ftp\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\gopher\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\gopher\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\http\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\http\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\https\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\https\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\CHROME\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Classes\CHROME\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\BrowserChooserHTML\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\ftp\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\ftp\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\gopher\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\gopher\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\http\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\http\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\https\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\https\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\CHROME\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Classes\CHROME\shell\open\command").SetValue("", """" & Application.ExecutablePath & """ ""%1""", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Microsoft\Internet Explorer\Main").SetValue("Check_Associations", "No", RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("SOFTWARE\Microsoft\Internet Explorer\Main").SetValue("IgnoreDefCheck", "Yes", RegistryValueKind.String)
+
             Catch ex As Exception
-                MsgBox("An error may have occured registering the file extensions. You may want to check in the 'Default Programs' option in your start menu to confirm this worked." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
+                BrowserConfig.DefaultBrowser = False
+                Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
             End Try
 
-        Catch ex As Exception
-            BrowserConfig.DefaultBrowser = False
-            Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
-        End Try
+        ElseIf OS_Version() = "Windows 7" Or OS_Version() = "Windows Vista" Then
+
+            Try
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\RegisteredApplications").SetValue("Browser Chooser", "Software\\Browser Chooser\\Capabilities", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationName", "Browser Chooser", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationIcon", Application.ExecutablePath & ",0", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities").SetValue("ApplicationDescription", "Small app that let's you choose what browser to open a url in. Visit my website for more information. www.janolepeek.com", RegistryValueKind.String)
+
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".xhtml", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".xht", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".shtml", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".html", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\FileAssociations").SetValue(".htm", "BrowserChooserHTML", RegistryValueKind.String)
+
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\StartMenu").SetValue("StartMenuInternet", "Browser Chooser.exe", RegistryValueKind.String)
+
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("https", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("http", "BrowserChooserHTML", RegistryValueKind.String)
+                Registry.LocalMachine.CreateSubKey("SOFTWARE\Browser Chooser\Capabilities\URLAssociations").SetValue("ftp", "BrowserChooserHTML", RegistryValueKind.String)
+
+                Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML").SetValue("", "Browser Chooser HTML", RegistryValueKind.String)
+                Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML").SetValue("URL Protocol", "", RegistryValueKind.String)
+
+                Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML\DefaultIcon").SetValue("", Application.ExecutablePath & ",0", RegistryValueKind.String)
+
+                Registry.ClassesRoot.CreateSubKey("BrowserChooserHTML\shell\open\command").SetValue("", Application.ExecutablePath & " %1", RegistryValueKind.String)
+
+                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\ftp\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+
+                Try
+                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice")
+                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice")
+                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice")
+                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice")
+                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice")
+
+                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                Catch ex As Exception
+                    MsgBox("An error may have occured registering the file extensions. You may want to check in the 'Default Programs' option in your start menu to confirm this worked." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
+                End Try
+
+            Catch ex As Exception
+                BrowserConfig.DefaultBrowser = False
+                Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
+            End Try
+
+        Else
+
+            Return "Unable to determine what version of Windows you are running, so we can't set Browser Chooser as the default. Sorry."
+
+        End If
+
+        
 
         BrowserConfig.DefaultBrowser = True
 
@@ -502,4 +582,64 @@ Public Class Options
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
+
+    Public Function OS_Version() As String
+
+        Dim osInfo As OperatingSystem
+        Dim sAns As String
+
+        osInfo = System.Environment.OSVersion
+
+        With osInfo
+            Select Case .Platform
+                Case .Platform.Win32Windows
+                    Select Case (.Version.Minor)
+                        Case 0
+                            sAns = "Windows 95"
+                        Case 10
+                            If .Version.Revision.ToString() = "2222A" Then
+                                sAns = "Windows 98 Second Edition"
+                            Else
+                                sAns = "Windows 98"
+                            End If
+                        Case 90
+                            sAns = "Windows Me"
+                    End Select
+                Case .Platform.Win32NT
+                    Select Case (.Version.Major)
+                        Case 3
+                            sAns = "Windows NT 3.51"
+                        Case 4
+                            sAns = "Windows NT 4.0"
+                        Case 5
+                            If .Version.Minor = 0 Then
+                                sAns = "Windows 2000"
+                            ElseIf .Version.Minor = 1 Then
+                                sAns = "Windows XP"
+                            ElseIf .Version.Minor = 2 Then
+                                sAns = "Windows Server 2003"
+                            Else 'Future version maybe update
+                                'as needed
+                                sAns = "Unknown Windows Version"
+                            End If
+                        Case 6
+                            If .Version.Minor = 0 Then
+                                sAns = "Windows Vista"
+                            ElseIf .Version.Minor = 1 Then
+                                sAns = "Windows 7"
+                            Else 'Future version maybe update
+                                'as needed
+                                sAns = "Unknown Windows Version"
+                            End If
+                    End Select
+                Case Else
+                    sAns = "Unknown"
+
+            End Select
+        End With
+
+        Return sAns
+    End Function
+
+    
 End Class
