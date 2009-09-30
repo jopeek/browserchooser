@@ -282,7 +282,7 @@ APImissing:
             Dim version As System.Version = New System.Version(strWebVersion)
             If version.CompareTo(My.Application.Info.Version) > -1 Then
 
-                If MsgBox("A new version of Browser Checker is available. Would you like to download it now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                If MsgBox("A new version of Browser Chooser is available. Would you like to download it now?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
                     Download.ShowDialog()
 
