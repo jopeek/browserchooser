@@ -251,7 +251,7 @@ APImissing:
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click
 #If DEBUG Then
-        Options.ShowDialog()
+        Options.Show()
 #Else
         openOptions()
 #End If
