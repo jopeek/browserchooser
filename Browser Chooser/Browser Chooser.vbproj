@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Browser-256.ico" />
+    <None Include="Resources\bgxp.png" />
     <None Include="Resources\bg.png" />
     <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.dll" />
     <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.Shell.dll" />

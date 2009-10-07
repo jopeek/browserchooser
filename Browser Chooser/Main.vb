@@ -33,7 +33,12 @@ APImissing:
     Private Sub styleXP()
         Me.ControlBox = False
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
-        Me.BackgroundImage = My.Resources.bg
+        If Options.OS_Version = "Windows XP" Then
+            Me.BackgroundImage = My.Resources.bgxp
+        Else
+            'Vista or Win 7 with Aero off
+            Me.BackgroundImage = My.Resources.bg
+        End If
         Me.BackgroundImageLayout = ImageLayout.Tile
     End Sub
 
