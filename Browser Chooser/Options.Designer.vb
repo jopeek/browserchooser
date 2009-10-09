@@ -231,7 +231,7 @@ Partial Class Options
         '
         Me.Browser1Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser1Image.FormattingEnabled = True
-        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser1Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser1Image.Name = "Browser1Image"
         Me.Browser1Image.Size = New System.Drawing.Size(134, 21)
@@ -440,7 +440,7 @@ Partial Class Options
         '
         Me.Browser2Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser2Image.FormattingEnabled = True
-        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser2Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser2Image.Name = "Browser2Image"
         Me.Browser2Image.Size = New System.Drawing.Size(134, 21)
@@ -593,7 +593,7 @@ Partial Class Options
         '
         Me.Browser3Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser3Image.FormattingEnabled = True
-        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser3Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser3Image.Name = "Browser3Image"
         Me.Browser3Image.Size = New System.Drawing.Size(134, 21)
@@ -746,7 +746,7 @@ Partial Class Options
         '
         Me.Browser4Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser4Image.FormattingEnabled = True
-        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser4Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser4Image.Name = "Browser4Image"
         Me.Browser4Image.Size = New System.Drawing.Size(134, 21)
@@ -899,7 +899,7 @@ Partial Class Options
         '
         Me.Browser5Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser5Image.FormattingEnabled = True
-        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser5Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser5Image.Name = "Browser5Image"
         Me.Browser5Image.Size = New System.Drawing.Size(134, 21)
@@ -1051,7 +1051,7 @@ Partial Class Options
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.BrowserChooser31
+        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.BrowserChooser4
         Me.PictureBox1.Location = New System.Drawing.Point(7, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(160, 160)
@@ -1084,7 +1084,7 @@ Partial Class Options
         '
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
         Me.ComboBox1.Location = New System.Drawing.Point(275, 38)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(134, 21)
@@ -1154,7 +1154,7 @@ Partial Class Options
         '
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Firefox", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
+        Me.ComboBox2.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome"})
         Me.ComboBox2.Location = New System.Drawing.Point(275, 38)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(134, 21)

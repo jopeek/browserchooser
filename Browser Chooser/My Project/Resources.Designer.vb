@@ -130,9 +130,30 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property BrowserChooser4() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BrowserChooser4", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property BrowserChooser41() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BrowserChooser41", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Firefox() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Firefox", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Flock() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Flock", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

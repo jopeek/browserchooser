@@ -120,7 +120,7 @@ Partial Class About
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.BrowserChooser31
+        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.BrowserChooser4
         Me.PictureBox1.Location = New System.Drawing.Point(12, 9)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(110, 110)

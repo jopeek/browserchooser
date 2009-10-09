@@ -111,6 +111,8 @@ APImissing:
         Select Case BrowserChoice.Image
             Case "Firefox"
                 SetImage = My.Resources.Firefox
+            Case "Flock"
+                SetImage = My.Resources.Flock
             Case "Internet Explorer"
                 SetImage = My.Resources.InternetExplorer
             Case "Google Chrome"

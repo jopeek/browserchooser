@@ -190,6 +190,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnApp1)
         Me.Controls.Add(Me.btnInfo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False

@@ -28,6 +28,13 @@ Public Class Options
             InstalledBrowsers.Add(New Browser With {.Name = "Firefox", .Target = firefox})
         End If
 
+        ' Add Flock
+        Dim flock As String = Path.Combine(programFiles, "Flock\flock.exe")
+
+        If File.Exists(flock) Then
+            InstalledBrowsers.Add(New Browser With {.Name = "Flock", .Target = flock})
+        End If
+
         ' Add Google Chrome
         Dim chrome As String = Path.Combine(appData, "Google\Chrome\Application\chrome.exe")
         If File.Exists(chrome) Then

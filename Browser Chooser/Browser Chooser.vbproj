@@ -17,7 +17,7 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
     <OptionInfer>On</OptionInfer>
-    <ApplicationIcon>Resources\BrowserChooser3.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\BrowserChooser4.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>BA5EACA86F177BC189D29E40D1BC87435B7D22BC</ManifestCertificateThumbprint>
     <ManifestKeyFile>Browser Chooser_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
@@ -170,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Browser-256.ico" />
+    <None Include="Resources\BrowserChooser4.ico" />
+    <None Include="Resources\flock2.png" />
+    <None Include="Resources\BrowserChooser4.png" />
     <None Include="Resources\bgxp.png" />
     <None Include="Resources\bg.png" />
     <EmbeddedResource Include="Resources\Microsoft.WindowsAPICodePack.dll" />
