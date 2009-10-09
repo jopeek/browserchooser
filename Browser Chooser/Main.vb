@@ -97,11 +97,13 @@ APImissing:
         End If
     End Sub
 
-    Private Sub LaunchBrowserAndClose(ByVal browserNumber As Integer)
+    Private Sub LaunchBrowserAndClose(ByVal browserNumber As Integer, Optional ByVal bClose As Boolean = True)
         If (Not LaunchBrowser(browserNumber)) Then
             MsgBox("The target browser does not exist in the target location.", MsgBoxStyle.Critical)
         Else
-            Me.Close()
+            If bClose then
+                Me.Close()
+            End If
         End If
     End Sub
 
@@ -384,24 +386,33 @@ APImissing:
     Private Sub btnApp_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp1.MouseClick, btnApp2.MouseClick, btnApp3.MouseClick, btnApp4.MouseClick, btnApp5.MouseClick
         Dim browserIndex As Integer = browserButtons.IndexOf(sender)
 
-        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+        If (My.Computer.Keyboard.CtrlKeyDown) And (e.Button = Windows.Forms.MouseButtons.Left) Then
+            LaunchBrowserAndClose(browserIndex, False)
+        ElseIf (e.Button = Windows.Forms.MouseButtons.Left) Then
             LaunchBrowserAndClose(browserIndex)
         End If
     End Sub
 
     Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         Dim firstChar As String = e.KeyData.ToString()
+        Dim bClose As Boolean = True
+
+        If (My.Computer.Keyboard.CtrlKeyDown) Then
+            bClose = False
+        End If
 
         If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(1)
+            LaunchBrowserAndClose(1, bClose)
         ElseIf BrowserConfig.GetBrowser(2).IsActive = True AndAlso (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(2)
+            LaunchBrowserAndClose(2, bClose)
         ElseIf BrowserConfig.GetBrowser(3).IsActive = True AndAlso (e.KeyCode = Keys.D3 Or BrowserConfig.GetBrowser(3).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(3)
+            LaunchBrowserAndClose(3, bClose)
         ElseIf BrowserConfig.GetBrowser(4).IsActive = True AndAlso (e.KeyCode = Keys.D4 Or BrowserConfig.GetBrowser(4).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(4)
+            LaunchBrowserAndClose(4, bClose)
         ElseIf BrowserConfig.GetBrowser(5).IsActive = True AndAlso (e.KeyCode = Keys.D5 Or BrowserConfig.GetBrowser(5).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
-            LaunchBrowserAndClose(5)
+            LaunchBrowserAndClose(5, bClose)
         End If
     End Sub
+
+    
 End Class
