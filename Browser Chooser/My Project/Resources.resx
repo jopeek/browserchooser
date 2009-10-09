@@ -124,15 +124,6 @@
   <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\safari.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Browser_256" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Browser-256.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="browser_chooser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\browser_chooser.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="browser_chooserbg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\browser_chooserbg.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,32 +133,14 @@
   <data name="InternetExplorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InternetExplorer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Jrdn88_IconPackage_Icon_146" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Jrdn88 IconPackage Icon 146.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Jrdn88_IconPackage_Icon_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Jrdn88 IconPackage Icon 17.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_122" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\122.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\128.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\53.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BrowserChooser3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BrowserChooser3.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BrowserChooser31" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BrowserChooser3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bg.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bgxp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgxp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BrowserChooser4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BrowserChooser4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -177,5 +150,11 @@
   </data>
   <data name="Flock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flock2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bgxp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgxp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\53.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

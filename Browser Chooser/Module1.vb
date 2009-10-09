@@ -7,6 +7,7 @@ Module Module1
     Friend PortableMode = False
     Friend DefaultMessage As String = "Choose a Browser"
     Friend strUrl As String
+    Friend strShownUrl As String
     Friend BrowserConfig As New BrowserList
 
     Friend ConfigFile As New IO.FileInfo(Application.StartupPath & "\config.ini")

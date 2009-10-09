@@ -95,41 +95,6 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property Browser_256() As System.Drawing.Icon
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Browser_256", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property browser_chooser() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("browser_chooser", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property browser_chooserbg() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("browser_chooserbg", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property BrowserChooser3() As System.Drawing.Icon
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BrowserChooser3", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property BrowserChooser31() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BrowserChooser31", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
         Friend ReadOnly Property BrowserChooser4() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("BrowserChooser4", resourceCulture)
@@ -169,20 +134,6 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("InternetExplorer", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property Jrdn88_IconPackage_Icon_146() As System.Drawing.Icon
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Jrdn88_IconPackage_Icon_146", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property Jrdn88_IconPackage_Icon_17() As System.Drawing.Icon
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Jrdn88_IconPackage_Icon_17", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         

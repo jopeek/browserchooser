@@ -129,6 +129,7 @@ Public Class Options
 
         BrowserConfig.ShowUrl = cbURL.Checked
         BrowserConfig.AutoUpdateCheck = cbAutoCheck.Checked
+        BrowserConfig.RevealURL = cbRevealURL.Checked
 
         If cbIntranet.SelectedIndex = 0 Then
             BrowserConfig.IntranetBrowser = Nothing
@@ -250,6 +251,7 @@ Public Class Options
 
         cbURL.Checked = BrowserConfig.ShowUrl
         cbAutoCheck.Checked = BrowserConfig.AutoUpdateCheck
+        cbRevealURL.Checked = BrowserConfig.RevealUrl
 
         Dim target As String = ""
         If (BrowserConfig.IntranetBrowser IsNot Nothing) Then

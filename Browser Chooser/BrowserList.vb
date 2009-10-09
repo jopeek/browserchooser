@@ -24,6 +24,16 @@ Public Class BrowserList
         End Set
     End Property
 
+    Private _RevealUrl As Boolean
+    Public Property RevealUrl() As Boolean
+        Get
+            Return _RevealUrl
+        End Get
+        Set(ByVal value As Boolean)
+            _RevealUrl = value
+        End Set
+    End Property
+
     Private _autoUpdateCheck As Boolean
     Public Property AutoUpdateCheck() As Boolean
         Get

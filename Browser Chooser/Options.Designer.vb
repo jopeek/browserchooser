@@ -140,6 +140,7 @@ Partial Class Options
         Me.Button2 = New System.Windows.Forms.Button
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.btnHelp = New System.Windows.Forms.Button
+        Me.cbRevealURL = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -968,6 +969,7 @@ Partial Class Options
         '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.cbRevealURL)
         Me.Panel6.Controls.Add(Me.cbIntranet)
         Me.Panel6.Controls.Add(Me.Label38)
         Me.Panel6.Controls.Add(Me.cbPortable)
@@ -1002,7 +1004,7 @@ Partial Class Options
         'cbPortable
         '
         Me.cbPortable.AutoSize = True
-        Me.cbPortable.Location = New System.Drawing.Point(92, 80)
+        Me.cbPortable.Location = New System.Drawing.Point(6, 103)
         Me.cbPortable.Name = "cbPortable"
         Me.cbPortable.Size = New System.Drawing.Size(94, 17)
         Me.cbPortable.TabIndex = 4
@@ -1033,9 +1035,9 @@ Partial Class Options
         Me.cbURL.AutoSize = True
         Me.cbURL.Location = New System.Drawing.Point(6, 80)
         Me.cbURL.Name = "cbURL"
-        Me.cbURL.Size = New System.Drawing.Size(84, 17)
+        Me.cbURL.Size = New System.Drawing.Size(78, 17)
         Me.cbURL.TabIndex = 3
-        Me.cbURL.Text = "Show URL?"
+        Me.cbURL.Text = "Show URL"
         Me.cbURL.UseVisualStyleBackColor = True
         '
         'btnSetDefault
@@ -1220,6 +1222,16 @@ Partial Class Options
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
+        'cbRevealURL
+        '
+        Me.cbRevealURL.AutoSize = True
+        Me.cbRevealURL.Location = New System.Drawing.Point(96, 80)
+        Me.cbRevealURL.Name = "cbRevealURL"
+        Me.cbRevealURL.Size = New System.Drawing.Size(142, 17)
+        Me.cbRevealURL.TabIndex = 19
+        Me.cbRevealURL.Text = "Reveal Shortened URLs"
+        Me.cbRevealURL.UseVisualStyleBackColor = True
+        '
         'Options
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1379,4 +1391,5 @@ Partial Class Options
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents cbIntranet As System.Windows.Forms.ComboBox
     Friend WithEvents Label38 As System.Windows.Forms.Label
+    Friend WithEvents cbRevealURL As System.Windows.Forms.CheckBox
 End Class

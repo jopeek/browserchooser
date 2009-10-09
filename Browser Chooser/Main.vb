@@ -3,6 +3,8 @@ Imports System.IO
 Imports System.Net
 Imports Microsoft.WindowsAPICodePack.Taskbar
 Imports Microsoft.WindowsAPICodePack.Shell
+Imports System.Threading
+
 
 Public Class frmMain
     Private browserButtons As List(Of PictureBox)
@@ -57,6 +59,8 @@ APImissing:
 
         InitializeMain()
 
+        
+
         ' create the jump lists
         If TaskbarManager.IsPlatformSupported Then
 
@@ -90,8 +94,8 @@ APImissing:
     End Sub
 
     Private Sub LaunchBrowserInfo(ByVal browserNumber As Integer)
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name & " - " & strUrl
+        If BrowserConfig.ShowUrl = True And strShownUrl <> "" Then
+            Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name & " - " & strShownUrl
         Else
             Me.Text = "Open " & BrowserConfig.GetBrowser(browserNumber).Name
         End If
@@ -205,8 +209,16 @@ APImissing:
             strUrl = My.Application.CommandLineArgs.Item(i).ToString
         Next i
 
+        strShownUrl = strUrl
+
+        If BrowserConfig.RevealUrl = True And strUrl <> "" Then
+            Dim t As Thread
+            t = New Thread(AddressOf Me.RevealURL)
+            t.Start()
+        End If
+
         If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
+            Me.Text = DefaultMessage & " - " & strShownUrl
         Else
             Me.Text = DefaultMessage
         End If
@@ -238,24 +250,16 @@ APImissing:
         Me.Text = "About"
     End Sub
 
-    Private Sub btnInfo_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseLeave
-        Me.Text = DefaultMessage
+    Private Sub btnInfo_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseLeave, btnOptions.MouseLeave
+        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+            Me.Text = DefaultMessage & " - " & strShownUrl
+        Else
+            Me.Text = DefaultMessage
+        End If
     End Sub
 
     Private Sub btnOptions_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.MouseEnter, btnOptions.MouseHover
         Me.Text = "Options"
-    End Sub
-
-    Private Sub btnOptions_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.MouseLeave
-        Me.Text = DefaultMessage
-    End Sub
-
-    Private Sub btnClose_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Text = "Close"
-    End Sub
-
-    Private Sub btnClose_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Text = DefaultMessage
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click
@@ -374,8 +378,8 @@ APImissing:
     End Sub
 
     Private Sub btnApp_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnApp1.MouseLeave, btnApp2.MouseLeave, btnApp3.MouseLeave, btnApp4.MouseLeave, btnApp5.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
-            Me.Text = DefaultMessage & " - " & strUrl
+        If BrowserConfig.ShowUrl = True And strShownUrl <> "" Then
+            Me.Text = DefaultMessage & " - " & strShownUrl
         Else
             Me.Text = DefaultMessage
         End If
@@ -417,4 +421,23 @@ APImissing:
     End Sub
 
     
+    Private Sub RevealURL()
+        Dim ShortenedHosts As String = "301url.com,6url.com,bit.ly,budurl.com,canurl.com,c-o.in,cli.gs,co.nr,cuttr.info,decenturl.com,dn.vc,doiop.com,dwarfurl.com,easyurl.net,elfurl.com,ff.im,fire.to,flq.us,freak.to,fype.com,gamerdna.com,gonext.org,is.gd,ix.lt,jive.to,kurl.us,lilurl.us,lnkurl.com,memurl.com,miklos.dk,miny.info,myurl.in,nanoref.com,notlong.com,ow.ly,pic.gd,piurl.com,plexp.com,qicute.com,qurlyq.com,readthisurl.com,redir.fr,redirx.com,shorl.com,shorterlink.com,shortlinks.co.uk,shorturl.com,shout.to,shrinkurl.us,shurl.net,simurl.com,smarturl.eu,snipurl.com,snurl.com,starturl.com,surl.co.uk,thurly.net,tighturl.com,tinylink.com,tinypic.com,tinyurl.com,traceurl.com,tr.im,tumblr.com,twurl.nl,url9.com,urlcut.com,urlcutter.com,urlhawk.com,urlpass.com,url-press.com,urlsmash.com,urlsn.com,urltea.com,url.ly,urly.local,yuarel.com,x.se,xaddr.com,xil.in,xrl.us,yatuc.com,yep.it,yweb.com"
+
+        ShortenedHosts.Split(",").ToList()
+
+        Dim uri As UriBuilder = Nothing
+        uri = New UriBuilder(strUrl)
+
+        If ShortenedHosts.Contains(uri.Host.ToString) Then
+            strShownUrl = "Unshortening " & strUrl & " ...."
+            Me.Text = DefaultMessage & " - " & strShownUrl
+            Dim request As WebRequest = WebRequest.Create(strUrl)
+            Dim response As WebResponse = request.GetResponse()
+            strUrl = response.ResponseUri.ToString
+            strShownUrl = response.ResponseUri.ToString
+            Me.Text = DefaultMessage & " - " & strShownUrl
+        End If
+
+    End Sub
 End Class
