@@ -4,11 +4,14 @@ Imports System.Net
 Imports Microsoft.WindowsAPICodePack.Taskbar
 Imports Microsoft.WindowsAPICodePack.Shell
 Imports System.Threading
+Imports System.ComponentModel
 
 
 Public Class frmMain
     Private browserButtons As List(Of PictureBox)
     Private browserTooltips As List(Of ToolTip)
+    Private WithEvents backgroundWorker1 As System.ComponentModel.BackgroundWorker
+
     <StructLayout(LayoutKind.Sequential)> _
     Public Structure MARGINS
         Public cxLeftWidth As Integer
@@ -210,11 +213,18 @@ APImissing:
         Next i
 
         strShownUrl = strUrl
+        Dim uri As UriBuilder = Nothing
+        uri = New UriBuilder(strUrl)
 
         If BrowserConfig.RevealUrl = True And strUrl <> "" Then
-            Dim t As Thread
-            t = New Thread(AddressOf Me.RevealURL)
-            t.Start()
+            Dim ShortenedHosts As String = "301url.com,6url.com,bit.ly,budurl.com,canurl.com,c-o.in,cli.gs,co.nr,cuttr.info,decenturl.com,dn.vc,doiop.com,dwarfurl.com,easyurl.net,elfurl.com,ff.im,fire.to,flq.us,freak.to,fype.com,gamerdna.com,gonext.org,is.gd,ix.lt,jive.to,kurl.us,lilurl.us,lnkurl.com,memurl.com,miklos.dk,miny.info,myurl.in,nanoref.com,notlong.com,ow.ly,pic.gd,piurl.com,plexp.com,qicute.com,qurlyq.com,readthisurl.com,redir.fr,redirx.com,shorl.com,shorterlink.com,shortlinks.co.uk,shorturl.com,shout.to,shrinkurl.us,shurl.net,simurl.com,smarturl.eu,snipurl.com,snurl.com,starturl.com,surl.co.uk,thurly.net,tighturl.com,tinylink.com,tinypic.com,tinyurl.com,traceurl.com,tr.im,tumblr.com,twurl.nl,url9.com,urlcut.com,urlcutter.com,urlhawk.com,urlpass.com,url-press.com,urlsmash.com,urlsn.com,urltea.com,url.ly,urly.local,yuarel.com,x.se,xaddr.com,xil.in,xrl.us,yatuc.com,yep.it,yweb.com"
+            ShortenedHosts.Split(",").ToList()
+            If ShortenedHosts.Contains(Uri.Host.ToString) Then
+                strShownUrl = "Unshortening " & strUrl & " ...."
+                Me.Text = DefaultMessage & " - " & strShownUrl
+                backgroundWorker1 = New BackgroundWorker()
+                backgroundWorker1.RunWorkerAsync()
+            End If
         End If
 
         If BrowserConfig.ShowUrl = True And strUrl <> "" Then
@@ -420,24 +430,21 @@ APImissing:
         End If
     End Sub
 
-    
-    Private Sub RevealURL()
-        Dim ShortenedHosts As String = "301url.com,6url.com,bit.ly,budurl.com,canurl.com,c-o.in,cli.gs,co.nr,cuttr.info,decenturl.com,dn.vc,doiop.com,dwarfurl.com,easyurl.net,elfurl.com,ff.im,fire.to,flq.us,freak.to,fype.com,gamerdna.com,gonext.org,is.gd,ix.lt,jive.to,kurl.us,lilurl.us,lnkurl.com,memurl.com,miklos.dk,miny.info,myurl.in,nanoref.com,notlong.com,ow.ly,pic.gd,piurl.com,plexp.com,qicute.com,qurlyq.com,readthisurl.com,redir.fr,redirx.com,shorl.com,shorterlink.com,shortlinks.co.uk,shorturl.com,shout.to,shrinkurl.us,shurl.net,simurl.com,smarturl.eu,snipurl.com,snurl.com,starturl.com,surl.co.uk,thurly.net,tighturl.com,tinylink.com,tinypic.com,tinyurl.com,traceurl.com,tr.im,tumblr.com,twurl.nl,url9.com,urlcut.com,urlcutter.com,urlhawk.com,urlpass.com,url-press.com,urlsmash.com,urlsn.com,urltea.com,url.ly,urly.local,yuarel.com,x.se,xaddr.com,xil.in,xrl.us,yatuc.com,yep.it,yweb.com"
+    Private Sub backgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles backgroundWorker1.DoWork
+        Dim request As WebRequest = WebRequest.Create(strUrl)
+        request.Method = "HEAD"
+        Dim response As WebResponse = request.GetResponse()
+        e.Result = response.ResponseUri.ToString
+        strUrl = response.ResponseUri.ToString
+        strShownUrl = response.ResponseUri.ToString
+    End Sub
 
-        ShortenedHosts.Split(",").ToList()
-
-        Dim uri As UriBuilder = Nothing
-        uri = New UriBuilder(strUrl)
-
-        If ShortenedHosts.Contains(uri.Host.ToString) Then
-            strShownUrl = "Unshortening " & strUrl & " ...."
-            Me.Text = DefaultMessage & " - " & strShownUrl
-            Dim request As WebRequest = WebRequest.Create(strUrl)
-            Dim response As WebResponse = request.GetResponse()
-            strUrl = response.ResponseUri.ToString
-            strShownUrl = response.ResponseUri.ToString
-            Me.Text = DefaultMessage & " - " & strShownUrl
+    Private Sub backgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles backgroundWorker1.RunWorkerCompleted
+        ' First, handle the case where an exception was thrown.
+        If (e.Error IsNot Nothing) Then
+            Me.Text = DefaultMessage & " - " & strUrl
+        Else
+            Me.Text = DefaultMessage & " - " & e.Result.ToString()
         End If
-
     End Sub
 End Class
