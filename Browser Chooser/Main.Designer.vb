@@ -40,6 +40,7 @@ Partial Class frmMain
         Me.btn3TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn4TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn5TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.CopyUrlToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.browserButtonContextMenu.SuspendLayout()
@@ -75,9 +76,12 @@ Partial Class frmMain
         '
         'browserButtonContextMenu
         '
-        Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem})
-        Me.browserButtonContextMenu.Name = "btn1ContextMenu"
-        Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 26)
+        If Not String.IsNullOrEmpty(strUrl) Then
+            Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem, Me.CopyUrlToClipboardToolStripMenuItem})
+            Me.browserButtonContextMenu.Name = "btn1ContextMenu"
+            Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 70)
+        End If
+        
         '
         'AddUrlToAutoOpenToolStripMenuItem
         '
@@ -173,6 +177,12 @@ Partial Class frmMain
         Me.btnApp5.TabStop = False
         Me.btnApp5.Visible = False
         '
+        'CopyUrlToClipboardToolStripMenuItem
+        '
+        Me.CopyUrlToClipboardToolStripMenuItem.Name = "CopyUrlToClipboardToolStripMenuItem"
+        Me.CopyUrlToClipboardToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.CopyUrlToClipboardToolStripMenuItem.Text = "Copy Url To Clipboard"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -227,5 +237,6 @@ Partial Class frmMain
     Friend WithEvents btn5TT As System.Windows.Forms.ToolTip
     Friend WithEvents browserButtonContextMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents AddUrlToAutoOpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CopyUrlToClipboardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

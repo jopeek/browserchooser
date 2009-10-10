@@ -578,11 +578,6 @@ Public Class Options
         BrowseCustomImageClick(Browser5FileDialog, Browser5ImagePath, Browser5Image)
     End Sub
 
-    Private Sub Browser1Image_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Browser1Image.SelectedIndexChanged
-        If Browser1Image.SelectedItem <> "Custom" Then
-            Browser1ImagePath.Text = ""
-        End If
-    End Sub
 
     Public Sub New()
         ' This call is required by the Windows Form Designer.

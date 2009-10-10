@@ -125,13 +125,13 @@ Module Module1
                 strBrowser = target.Substring(0, InStr(target, ".exe") + 4)
                 strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
 
-                If strUrl <> "" Then
+                If Not String.IsNullOrEmpty(strUrl) Then
                     Process.Start(strBrowser, strParameters & """" & strUrl & """")
                 Else
                     Process.Start(strBrowser, strParameters)
                 End If
             Else
-                If strUrl <> "" Then
+                If Not String.IsNullOrEmpty(strUrl) Then
                     Process.Start(target, """" & strUrl & """")
                 Else
                     Process.Start(target)

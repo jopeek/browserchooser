@@ -216,10 +216,10 @@ APImissing:
         Dim uri As UriBuilder = Nothing
         uri = New UriBuilder(strUrl)
 
-        If BrowserConfig.RevealUrl = True And strUrl <> "" Then
+        If BrowserConfig.RevealUrl = True And Not String.IsNullOrEmpty(strUrl) Then
             Dim ShortenedHosts As String = "301url.com,6url.com,bit.ly,budurl.com,canurl.com,c-o.in,cli.gs,co.nr,cuttr.info,decenturl.com,dn.vc,doiop.com,dwarfurl.com,easyurl.net,elfurl.com,ff.im,fire.to,flq.us,freak.to,fype.com,gamerdna.com,gonext.org,is.gd,ix.lt,jive.to,kurl.us,lilurl.us,lnkurl.com,memurl.com,miklos.dk,miny.info,myurl.in,nanoref.com,notlong.com,ow.ly,pic.gd,piurl.com,plexp.com,qicute.com,qurlyq.com,readthisurl.com,redir.fr,redirx.com,shorl.com,shorterlink.com,shortlinks.co.uk,shorturl.com,shout.to,shrinkurl.us,shurl.net,simurl.com,smarturl.eu,snipurl.com,snurl.com,starturl.com,surl.co.uk,thurly.net,tighturl.com,tinylink.com,tinypic.com,tinyurl.com,traceurl.com,tr.im,tumblr.com,twurl.nl,url9.com,urlcut.com,urlcutter.com,urlhawk.com,urlpass.com,url-press.com,urlsmash.com,urlsn.com,urltea.com,url.ly,urly.local,yuarel.com,x.se,xaddr.com,xil.in,xrl.us,yatuc.com,yep.it,yweb.com"
             ShortenedHosts.Split(",").ToList()
-            If ShortenedHosts.Contains(Uri.Host.ToString) Then
+            If ShortenedHosts.Contains(uri.Host.ToString) Then
                 strShownUrl = "Unshortening " & strUrl & " ...."
                 Me.Text = DefaultMessage & " - " & strShownUrl
                 backgroundWorker1 = New BackgroundWorker()
@@ -227,7 +227,7 @@ APImissing:
             End If
         End If
 
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+        If BrowserConfig.ShowUrl = True And Not String.IsNullOrEmpty(strUrl) Then
             Me.Text = DefaultMessage & " - " & strShownUrl
         Else
             Me.Text = DefaultMessage
@@ -246,7 +246,7 @@ APImissing:
             If BrowserConfig.GetBrowser(index).IsActive Then
                 Dim strToolTip As String
 
-                If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+                If BrowserConfig.ShowUrl = True And Not String.IsNullOrEmpty(strUrl) Then
                     strToolTip = String.Format("Open {0} in {1}.{2}Hotkeys: ({3}) or ({4}).", strUrl, BrowserConfig.GetBrowser(index).Name, vbCrLf, index, BrowserConfig.GetBrowser(index).Name.Substring(0, 1))
                 Else
                     strToolTip = String.Format("Open {0}.{1}Hotkeys: ({2}) or ({3}).", BrowserConfig.GetBrowser(index).Name, vbCrLf, index, BrowserConfig.GetBrowser(index).Name.Substring(0, 1))
@@ -261,7 +261,7 @@ APImissing:
     End Sub
 
     Private Sub btnInfo_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfo.MouseLeave, btnOptions.MouseLeave
-        If BrowserConfig.ShowUrl = True And strUrl <> "" Then
+        If BrowserConfig.ShowUrl = True And Not String.IsNullOrEmpty(strUrl) Then
             Me.Text = DefaultMessage & " - " & strShownUrl
         Else
             Me.Text = DefaultMessage
@@ -432,8 +432,16 @@ APImissing:
 
     Private Sub backgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles backgroundWorker1.DoWork
         Dim request As WebRequest = WebRequest.Create(strUrl)
-        request.Method = "HEAD"
-        Dim response As WebResponse = request.GetResponse()
+        Dim response As WebResponse = Nothing
+        Try
+            request.Method = WebRequestMethods.Http.Head
+            response = request.GetResponse
+        Catch ex As WebException
+            request = WebRequest.Create(strUrl)
+            request.Method = WebRequestMethods.Http.Get
+            response = request.GetResponse
+        End Try
+
         e.Result = response.ResponseUri.ToString
         strUrl = response.ResponseUri.ToString
         strShownUrl = response.ResponseUri.ToString
@@ -445,6 +453,12 @@ APImissing:
             Me.Text = DefaultMessage & " - " & strUrl
         Else
             Me.Text = DefaultMessage & " - " & e.Result.ToString()
+        End If
+    End Sub
+
+    Private Sub CopyUrlToClipboardToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyUrlToClipboardToolStripMenuItem.Click
+        If Not String.IsNullOrEmpty(strUrl) Then
+            My.Computer.Clipboard.SetText(strUrl)
         End If
     End Sub
 End Class
