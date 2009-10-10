@@ -198,6 +198,7 @@ Partial Class frmMain
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Choose a Browser"
         Me.TopMost = True
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).EndInit()
