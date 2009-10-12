@@ -343,6 +343,34 @@ Public Class Options
                 Case Else
 
             End Select
+        Else
+            Dim SelectedBrowser As Browser
+            SelectedBrowser = SelectedComboBox.SelectedItem
+
+            Select Case SelectedComboBox.Name
+                Case "Browser1"
+                    Browser1Name.Text = ""
+                    Browser1Target.Text = ""
+                    Browser1Image.SelectedItem = "Custom"
+                Case "Browser2"
+                    Browser2Name.Text = ""
+                    Browser2Target.Text = ""
+                    Browser2Image.SelectedItem = "Custom"
+                Case "Browser3"
+                    Browser3Name.Text = ""
+                    Browser3Target.Text = ""
+                    Browser3Image.SelectedItem = "Custom"
+                Case "Browser4"
+                    Browser4Name.Text = ""
+                    Browser4Target.Text = ""
+                    Browser4Image.SelectedItem = "Custom"
+                Case "Browser5"
+                    Browser5Name.Text = ""
+                    Browser5Target.Text = ""
+                    Browser5Image.SelectedItem = "Custom"
+                Case Else
+
+            End Select
         End If
     End Sub
 

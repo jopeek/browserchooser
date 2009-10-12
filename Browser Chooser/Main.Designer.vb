@@ -28,6 +28,7 @@ Partial Class frmMain
         Me.btnApp1 = New System.Windows.Forms.PictureBox
         Me.browserButtonContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddUrlToAutoOpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.CopyUrlToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.btnOptions = New System.Windows.Forms.PictureBox
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnApp2 = New System.Windows.Forms.PictureBox
@@ -40,7 +41,6 @@ Partial Class frmMain
         Me.btn3TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn4TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn5TT = New System.Windows.Forms.ToolTip(Me.components)
-        Me.CopyUrlToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.browserButtonContextMenu.SuspendLayout()
@@ -76,18 +76,21 @@ Partial Class frmMain
         '
         'browserButtonContextMenu
         '
-        If Not String.IsNullOrEmpty(strUrl) Then
-            Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem, Me.CopyUrlToClipboardToolStripMenuItem})
-            Me.browserButtonContextMenu.Name = "btn1ContextMenu"
-            Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 70)
-        End If
-        
+        Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem, Me.CopyUrlToClipboardToolStripMenuItem})
+        Me.browserButtonContextMenu.Name = "btn1ContextMenu"
+        Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 48)
         '
         'AddUrlToAutoOpenToolStripMenuItem
         '
         Me.AddUrlToAutoOpenToolStripMenuItem.Name = "AddUrlToAutoOpenToolStripMenuItem"
         Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.AddUrlToAutoOpenToolStripMenuItem.Text = "Add Url To Auto Open List"
+        '
+        'CopyUrlToClipboardToolStripMenuItem
+        '
+        Me.CopyUrlToClipboardToolStripMenuItem.Name = "CopyUrlToClipboardToolStripMenuItem"
+        Me.CopyUrlToClipboardToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.CopyUrlToClipboardToolStripMenuItem.Text = "Copy Url To Clipboard"
         '
         'btnOptions
         '
@@ -176,12 +179,6 @@ Partial Class frmMain
         Me.btnApp5.TabIndex = 11
         Me.btnApp5.TabStop = False
         Me.btnApp5.Visible = False
-        '
-        'CopyUrlToClipboardToolStripMenuItem
-        '
-        Me.CopyUrlToClipboardToolStripMenuItem.Name = "CopyUrlToClipboardToolStripMenuItem"
-        Me.CopyUrlToClipboardToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
-        Me.CopyUrlToClipboardToolStripMenuItem.Text = "Copy Url To Clipboard"
         '
         'frmMain
         '

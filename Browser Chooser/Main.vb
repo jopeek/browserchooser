@@ -36,7 +36,7 @@ APImissing:
     End Function
 
     Private Sub styleXP()
-        Me.ControlBox = False
+        'Me.ControlBox = False
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
         If Options.OS_Version = "Windows XP" Then
             Me.BackgroundImage = My.Resources.bgxp
