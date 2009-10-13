@@ -213,11 +213,10 @@ APImissing:
         Next i
 
         strShownUrl = strUrl
-        Dim uri As UriBuilder = Nothing
-        uri = New UriBuilder(strUrl)
 
         If BrowserConfig.RevealUrl = True And Not String.IsNullOrEmpty(strUrl) Then
             Dim ShortenedHosts As String = "301url.com,6url.com,bit.ly,budurl.com,canurl.com,c-o.in,cli.gs,co.nr,cuttr.info,decenturl.com,dn.vc,doiop.com,dwarfurl.com,easyurl.net,elfurl.com,ff.im,fire.to,flq.us,freak.to,fype.com,gamerdna.com,gonext.org,is.gd,ix.lt,jive.to,kurl.us,lilurl.us,lnkurl.com,memurl.com,miklos.dk,miny.info,myurl.in,nanoref.com,notlong.com,ow.ly,pic.gd,piurl.com,plexp.com,qicute.com,qurlyq.com,readthisurl.com,redir.fr,redirx.com,shorl.com,shorterlink.com,shortlinks.co.uk,shorturl.com,shout.to,shrinkurl.us,shurl.net,simurl.com,smarturl.eu,snipurl.com,snurl.com,starturl.com,surl.co.uk,thurly.net,tighturl.com,tinylink.com,tinypic.com,tinyurl.com,traceurl.com,tr.im,tumblr.com,twurl.nl,url9.com,urlcut.com,urlcutter.com,urlhawk.com,urlpass.com,url-press.com,urlsmash.com,urlsn.com,urltea.com,url.ly,urly.local,yuarel.com,x.se,xaddr.com,xil.in,xrl.us,yatuc.com,yep.it,yweb.com"
+            Dim uri As UriBuilder = New UriBuilder(strUrl)
             ShortenedHosts.Split(",").ToList()
             If ShortenedHosts.Contains(uri.Host.ToString) Then
                 strShownUrl = "Unshortening " & strUrl & " ...."
@@ -235,7 +234,6 @@ APImissing:
 
         'If no URL is passed in, don't display context menu
         If (String.IsNullOrEmpty(strUrl)) Then
-
             For index As Integer = 1 To 5
                 browserButtons(index).ContextMenuStrip = Nothing
             Next
