@@ -110,6 +110,7 @@ Partial Class Options
         Me.Label22 = New System.Windows.Forms.Label
         Me.TabPage6 = New System.Windows.Forms.TabPage
         Me.Panel6 = New System.Windows.Forms.Panel
+        Me.cbRevealURL = New System.Windows.Forms.CheckBox
         Me.cbIntranet = New System.Windows.Forms.ComboBox
         Me.Label38 = New System.Windows.Forms.Label
         Me.cbPortable = New System.Windows.Forms.CheckBox
@@ -140,7 +141,6 @@ Partial Class Options
         Me.Button2 = New System.Windows.Forms.Button
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
         Me.btnHelp = New System.Windows.Forms.Button
-        Me.cbRevealURL = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -983,6 +983,16 @@ Partial Class Options
         Me.Panel6.Size = New System.Drawing.Size(416, 140)
         Me.Panel6.TabIndex = 23
         '
+        'cbRevealURL
+        '
+        Me.cbRevealURL.AutoSize = True
+        Me.cbRevealURL.Location = New System.Drawing.Point(96, 80)
+        Me.cbRevealURL.Name = "cbRevealURL"
+        Me.cbRevealURL.Size = New System.Drawing.Size(142, 17)
+        Me.cbRevealURL.TabIndex = 19
+        Me.cbRevealURL.Text = "Reveal Shortened URLs"
+        Me.cbRevealURL.UseVisualStyleBackColor = True
+        '
         'cbIntranet
         '
         Me.cbIntranet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -1053,11 +1063,11 @@ Partial Class Options
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.BrowserChooser4
-        Me.PictureBox1.Location = New System.Drawing.Point(7, 12)
+        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.bclogo1
+        Me.PictureBox1.Location = New System.Drawing.Point(5, 12)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(160, 160)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.Size = New System.Drawing.Size(166, 222)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -1221,16 +1231,6 @@ Partial Class Options
         Me.btnHelp.TabIndex = 1
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
-        '
-        'cbRevealURL
-        '
-        Me.cbRevealURL.AutoSize = True
-        Me.cbRevealURL.Location = New System.Drawing.Point(96, 80)
-        Me.cbRevealURL.Name = "cbRevealURL"
-        Me.cbRevealURL.Size = New System.Drawing.Size(142, 17)
-        Me.cbRevealURL.TabIndex = 19
-        Me.cbRevealURL.Text = "Reveal Shortened URLs"
-        Me.cbRevealURL.UseVisualStyleBackColor = True
         '
         'Options
         '

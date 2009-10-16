@@ -16,6 +16,8 @@
         Me.LabelVersion.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
         Me.LabelCopyright.Text = My.Application.Info.Copyright
         Me.LabelCompanyName.Text = My.Application.Info.CompanyName
+
+        txtContributors.Text = txtContributors.Text & vbCrLf & vbCrLf & "shahineo - Development" & vbCrLf & "bmwzero - Development" & vbCrLf & "StormPooper - Development" & vbCrLf & "Kukag - Logo & Icon" & vbCrLf & ""
     End Sub
 
     Private Sub OKButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKButton.Click
