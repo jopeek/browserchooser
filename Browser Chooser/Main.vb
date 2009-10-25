@@ -62,34 +62,6 @@ APImissing:
 
         InitializeMain()
 
-        
-
-        ' create the jump lists
-        If TaskbarManager.IsPlatformSupported Then
-
-            Dim jumpList As JumpList = jumpList.CreateJumpList()
-
-            For Each Browser In BrowserConfig.Browsers
-                If Browser.IsActive Then
-                    Dim target As String = NormalizeTarget(Browser.Target)
-
-                    Dim strBrowser As String = target
-                    Dim strParameters As String = ""
-
-                    If target.Contains(".exe ") Then
-                        strBrowser = target.Substring(0, InStr(target, ".exe") + 4)
-                        strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
-
-                    End If
-
-                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(strBrowser), "Open " + Browser.Name) With {.IconReference = New IconReference(NormalizeTarget(strBrowser), 0), .Arguments = strParameters})
-                End If
-            Next
-
-            ' Add our user tasks
-            jumpList.Refresh()
-        End If
-
         If Not IsAeroEnabled() Then
             styleXP()
         End If
@@ -458,5 +430,37 @@ APImissing:
         If Not String.IsNullOrEmpty(strUrl) Then
             My.Computer.Clipboard.SetText(strUrl)
         End If
+    End Sub
+
+    Private Sub AddJumpLists()
+        ' create the jump lists
+        If TaskbarManager.IsPlatformSupported Then
+
+            Dim jumpList As JumpList = jumpList.CreateJumpList()
+
+            For Each Browser In BrowserConfig.Browsers
+                If Browser.IsActive Then
+                    Dim target As String = NormalizeTarget(Browser.Target)
+
+                    Dim strBrowser As String = target
+                    Dim strParameters As String = ""
+
+                    If target.Contains(".exe ") Then
+                        strBrowser = target.Substring(0, InStr(target, ".exe") + 4)
+                        strParameters = target.Substring(InStr(target, ".exe") + 4, target.Length - (InStr(target, ".exe") + 4)) & " "
+
+                    End If
+
+                    jumpList.AddUserTasks(New JumpListLink(NormalizeTarget(strBrowser), "Open " + Browser.Name) With {.IconReference = New IconReference(NormalizeTarget(strBrowser), 0), .Arguments = strParameters})
+                End If
+            Next
+
+            ' Add our user tasks
+            jumpList.Refresh()
+        End If
+    End Sub
+
+    Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        AddJumpLists()
     End Sub
 End Class
