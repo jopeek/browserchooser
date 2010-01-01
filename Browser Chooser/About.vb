@@ -41,6 +41,6 @@
     End Sub
 
     Private Sub LinkLabel1_LinkClicked_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        Process.Start("http://browserchoose.codeplex.com")
+        Process.Start("http://browserchooser.codeplex.com")
     End Sub
 End Class
