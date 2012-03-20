@@ -4,13 +4,13 @@ Imports System.IO
 Imports System.Xml.Serialization
 
 Public Class BrowserList
-    Private _defaultBrowser As Boolean
-    Public Property DefaultBrowser() As Boolean
+    Private _iAmDefaultBrowser As Boolean
+    Public Property IamDefaultBrowser() As Boolean
         Get
-            Return _defaultBrowser
+            Return _iAmDefaultBrowser
         End Get
         Set(ByVal value As Boolean)
-            _defaultBrowser = value
+            _iAmDefaultBrowser = value
         End Set
     End Property
 
@@ -64,6 +64,16 @@ Public Class BrowserList
         End Set
     End Property
 
+    Private _defaultBrowser As Browser
+    Public Property DefaultBrowser() As Browser
+        Get
+            Return _defaultBrowser
+        End Get
+        Set(ByVal value As Browser)
+            _defaultBrowser = value
+        End Set
+    End Property
+
     Private _browsers As List(Of Browser) = New List(Of Browser)
     Public Property Browsers() As List(Of Browser)
         Get
@@ -86,18 +96,24 @@ Public Class BrowserList
     End Function
 
     Public Function GetBrowserByUrl(ByVal url As String) As Integer
-        If BrowserConfig.IntranetBrowser IsNot Nothing Then
+        Dim rez = 0
+
+        If Me.IntranetBrowser IsNot Nothing Then
             If IsIntranetUrl(url) Then
-                Return BrowserConfig.IntranetBrowser.BrowserNumber
+                rez = BrowserConfig.IntranetBrowser.BrowserNumber
             End If
         End If
 
-        Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.ToUpper().Contains(w.Trim().ToUpper())))
-        If (b Is Nothing) Then
-            Return 0
-        Else
-            Return b.BrowserNumber
+        If Me.DefaultBrowser IsNot Nothing And DefaultBrowser.BrowserNumber <> 0 Then
+            rez = BrowserConfig.DefaultBrowser.BrowserNumber
         End If
+
+        Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.ToUpper().Contains(w.Trim().ToUpper())))
+        If b IsNot Nothing Then
+            rez = b.BrowserNumber
+        End If
+
+        Return rez
     End Function
 
     Public Sub Save(ByVal browserChooserConfigDirectory As String)

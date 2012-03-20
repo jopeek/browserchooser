@@ -23,124 +23,128 @@ Partial Class Options
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Options))
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Browser1Target = New System.Windows.Forms.TextBox
-        Me.btnBrowser1 = New System.Windows.Forms.Button
-        Me.Browser1FileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.Browser1Name = New System.Windows.Forms.TextBox
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Browser1Image = New System.Windows.Forms.ComboBox
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.btnBrowseCustomImage1 = New System.Windows.Forms.Button
-        Me.Browser1ImagePath = New System.Windows.Forms.TextBox
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.Browser1Urls = New System.Windows.Forms.TextBox
-        Me.Label28 = New System.Windows.Forms.Label
-        Me.Browser1 = New System.Windows.Forms.ComboBox
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.btnBrowseCustomImage2 = New System.Windows.Forms.Button
-        Me.Browser2ImagePath = New System.Windows.Forms.TextBox
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.Browser2Urls = New System.Windows.Forms.TextBox
-        Me.Label29 = New System.Windows.Forms.Label
-        Me.Browser2 = New System.Windows.Forms.ComboBox
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.Browser2Image = New System.Windows.Forms.ComboBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.btnBrowser2 = New System.Windows.Forms.Button
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Browser2Name = New System.Windows.Forms.TextBox
-        Me.Browser2Target = New System.Windows.Forms.TextBox
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.btnBrowseCustomImage3 = New System.Windows.Forms.Button
-        Me.Browser3ImagePath = New System.Windows.Forms.TextBox
-        Me.Label35 = New System.Windows.Forms.Label
-        Me.Browser3Urls = New System.Windows.Forms.TextBox
-        Me.Label30 = New System.Windows.Forms.Label
-        Me.Browser3 = New System.Windows.Forms.ComboBox
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.Browser3Image = New System.Windows.Forms.ComboBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.btnBrowser3 = New System.Windows.Forms.Button
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Browser3Name = New System.Windows.Forms.TextBox
-        Me.Browser3Target = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.TabPage4 = New System.Windows.Forms.TabPage
-        Me.Panel4 = New System.Windows.Forms.Panel
-        Me.btnBrowseCustomImage4 = New System.Windows.Forms.Button
-        Me.Browser4ImagePath = New System.Windows.Forms.TextBox
-        Me.Label36 = New System.Windows.Forms.Label
-        Me.Browser4Urls = New System.Windows.Forms.TextBox
-        Me.Label31 = New System.Windows.Forms.Label
-        Me.Browser4 = New System.Windows.Forms.ComboBox
-        Me.Label26 = New System.Windows.Forms.Label
-        Me.Browser4Image = New System.Windows.Forms.ComboBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.btnBrowser4 = New System.Windows.Forms.Button
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.Browser4Name = New System.Windows.Forms.TextBox
-        Me.Browser4Target = New System.Windows.Forms.TextBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.TabPage5 = New System.Windows.Forms.TabPage
-        Me.Panel5 = New System.Windows.Forms.Panel
-        Me.btnBrowseCustomImage5 = New System.Windows.Forms.Button
-        Me.Browser5ImagePath = New System.Windows.Forms.TextBox
-        Me.Label37 = New System.Windows.Forms.Label
-        Me.Browser5Urls = New System.Windows.Forms.TextBox
-        Me.Label32 = New System.Windows.Forms.Label
-        Me.Browser5 = New System.Windows.Forms.ComboBox
-        Me.Label27 = New System.Windows.Forms.Label
-        Me.Browser5Image = New System.Windows.Forms.ComboBox
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.btnBrowser5 = New System.Windows.Forms.Button
-        Me.Label21 = New System.Windows.Forms.Label
-        Me.Browser5Name = New System.Windows.Forms.TextBox
-        Me.Browser5Target = New System.Windows.Forms.TextBox
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.TabPage6 = New System.Windows.Forms.TabPage
-        Me.Panel6 = New System.Windows.Forms.Panel
-        Me.cbRevealURL = New System.Windows.Forms.CheckBox
-        Me.cbIntranet = New System.Windows.Forms.ComboBox
-        Me.Label38 = New System.Windows.Forms.Label
-        Me.cbPortable = New System.Windows.Forms.CheckBox
-        Me.btnUpdateCheck = New System.Windows.Forms.Button
-        Me.cbAutoCheck = New System.Windows.Forms.CheckBox
-        Me.cbURL = New System.Windows.Forms.CheckBox
-        Me.btnSetDefault = New System.Windows.Forms.Button
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.Browser2FileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.Browser3FileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.Browser4FileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.TextBox2 = New System.Windows.Forms.TextBox
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.TextBox3 = New System.Windows.Forms.TextBox
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.TextBox4 = New System.Windows.Forms.TextBox
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog
-        Me.btnHelp = New System.Windows.Forms.Button
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Browser1Target = New System.Windows.Forms.TextBox()
+        Me.btnBrowser1 = New System.Windows.Forms.Button()
+        Me.Browser1FileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Browser1Name = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Browser1Image = New System.Windows.Forms.ComboBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnBrowseCustomImage1 = New System.Windows.Forms.Button()
+        Me.Browser1ImagePath = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Browser1Urls = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Browser1 = New System.Windows.Forms.ComboBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnBrowseCustomImage2 = New System.Windows.Forms.Button()
+        Me.Browser2ImagePath = New System.Windows.Forms.TextBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Browser2Urls = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Browser2 = New System.Windows.Forms.ComboBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Browser2Image = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnBrowser2 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Browser2Name = New System.Windows.Forms.TextBox()
+        Me.Browser2Target = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnBrowseCustomImage3 = New System.Windows.Forms.Button()
+        Me.Browser3ImagePath = New System.Windows.Forms.TextBox()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Browser3Urls = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Browser3 = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Browser3Image = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnBrowser3 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Browser3Name = New System.Windows.Forms.TextBox()
+        Me.Browser3Target = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnBrowseCustomImage4 = New System.Windows.Forms.Button()
+        Me.Browser4ImagePath = New System.Windows.Forms.TextBox()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Browser4Urls = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Browser4 = New System.Windows.Forms.ComboBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Browser4Image = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnBrowser4 = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Browser4Name = New System.Windows.Forms.TextBox()
+        Me.Browser4Target = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnBrowseCustomImage5 = New System.Windows.Forms.Button()
+        Me.Browser5ImagePath = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Browser5Urls = New System.Windows.Forms.TextBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Browser5 = New System.Windows.Forms.ComboBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Browser5Image = New System.Windows.Forms.ComboBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.btnBrowser5 = New System.Windows.Forms.Button()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Browser5Name = New System.Windows.Forms.TextBox()
+        Me.Browser5Target = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.cbDefault = New System.Windows.Forms.ComboBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.cbRevealURL = New System.Windows.Forms.CheckBox()
+        Me.cbIntranet = New System.Windows.Forms.ComboBox()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.cbPortable = New System.Windows.Forms.CheckBox()
+        Me.btnUpdateCheck = New System.Windows.Forms.Button()
+        Me.cbAutoCheck = New System.Windows.Forms.CheckBox()
+        Me.cbURL = New System.Windows.Forms.CheckBox()
+        Me.btnSetDefault = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Browser2FileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.Browser3FileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.Browser4FileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.btnHelp = New System.Windows.Forms.Button()
+        Me.cbDefault = New System.Windows.Forms.ComboBox
+        Me.Label39 = New System.Windows.Forms.Label
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -969,6 +973,8 @@ Partial Class Options
         '
         'Panel6
         '
+        Me.Panel6.Controls.Add(Me.cbDefault)
+        Me.Panel6.Controls.Add(Me.Label39)
         Me.Panel6.Controls.Add(Me.cbRevealURL)
         Me.Panel6.Controls.Add(Me.cbIntranet)
         Me.Panel6.Controls.Add(Me.Label38)
@@ -983,10 +989,28 @@ Partial Class Options
         Me.Panel6.Size = New System.Drawing.Size(416, 140)
         Me.Panel6.TabIndex = 23
         '
+        'cbDefault
+        '
+        Me.cbDefault.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDefault.FormattingEnabled = True
+        Me.cbDefault.Location = New System.Drawing.Point(128, 51)
+        Me.cbDefault.Name = "cbDefault"
+        Me.cbDefault.Size = New System.Drawing.Size(141, 21)
+        Me.cbDefault.TabIndex = 20
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(3, 54)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(124, 13)
+        Me.Label39.TabIndex = 21
+        Me.Label39.Text = "Open not defined Urls in:"
+        '
         'cbRevealURL
         '
         Me.cbRevealURL.AutoSize = True
-        Me.cbRevealURL.Location = New System.Drawing.Point(96, 80)
+        Me.cbRevealURL.Location = New System.Drawing.Point(96, 107)
         Me.cbRevealURL.Name = "cbRevealURL"
         Me.cbRevealURL.Size = New System.Drawing.Size(142, 17)
         Me.cbRevealURL.TabIndex = 19
@@ -1014,7 +1038,7 @@ Partial Class Options
         'cbPortable
         '
         Me.cbPortable.AutoSize = True
-        Me.cbPortable.Location = New System.Drawing.Point(6, 103)
+        Me.cbPortable.Location = New System.Drawing.Point(319, 7)
         Me.cbPortable.Name = "cbPortable"
         Me.cbPortable.Size = New System.Drawing.Size(94, 17)
         Me.cbPortable.TabIndex = 4
@@ -1023,7 +1047,7 @@ Partial Class Options
         '
         'btnUpdateCheck
         '
-        Me.btnUpdateCheck.Location = New System.Drawing.Point(194, 51)
+        Me.btnUpdateCheck.Location = New System.Drawing.Point(194, 78)
         Me.btnUpdateCheck.Name = "btnUpdateCheck"
         Me.btnUpdateCheck.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdateCheck.TabIndex = 2
@@ -1033,7 +1057,7 @@ Partial Class Options
         'cbAutoCheck
         '
         Me.cbAutoCheck.AutoSize = True
-        Me.cbAutoCheck.Location = New System.Drawing.Point(6, 55)
+        Me.cbAutoCheck.Location = New System.Drawing.Point(6, 82)
         Me.cbAutoCheck.Name = "cbAutoCheck"
         Me.cbAutoCheck.Size = New System.Drawing.Size(180, 17)
         Me.cbAutoCheck.TabIndex = 1
@@ -1043,7 +1067,7 @@ Partial Class Options
         'cbURL
         '
         Me.cbURL.AutoSize = True
-        Me.cbURL.Location = New System.Drawing.Point(6, 80)
+        Me.cbURL.Location = New System.Drawing.Point(6, 107)
         Me.cbURL.Name = "cbURL"
         Me.cbURL.Size = New System.Drawing.Size(78, 17)
         Me.cbURL.TabIndex = 3
@@ -1052,22 +1076,21 @@ Partial Class Options
         '
         'btnSetDefault
         '
-        Me.btnSetDefault.AutoSize = True
         Me.btnSetDefault.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnSetDefault.Location = New System.Drawing.Point(3, 3)
+        Me.btnSetDefault.Location = New System.Drawing.Point(6, 3)
         Me.btnSetDefault.Name = "btnSetDefault"
-        Me.btnSetDefault.Size = New System.Drawing.Size(253, 23)
+        Me.btnSetDefault.Size = New System.Drawing.Size(263, 23)
         Me.btnSetDefault.TabIndex = 0
         Me.btnSetDefault.Text = "Activate Browser Chooser (Make Default Browser)"
         Me.btnSetDefault.UseVisualStyleBackColor = True
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.bclogo1
-        Me.PictureBox1.Location = New System.Drawing.Point(5, 12)
+        Me.PictureBox1.Image = Global.Browser_Chooser.My.Resources.Resources.Settings_icon
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 44)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(166, 222)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.Size = New System.Drawing.Size(166, 166)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -1232,6 +1255,24 @@ Partial Class Options
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
+        'cbDefault
+        '
+        Me.cbDefault.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDefault.FormattingEnabled = True
+        Me.cbDefault.Location = New System.Drawing.Point(128, 51)
+        Me.cbDefault.Name = "cbDefault"
+        Me.cbDefault.Size = New System.Drawing.Size(141, 21)
+        Me.cbDefault.TabIndex = 20
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(3, 54)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(124, 13)
+        Me.Label39.TabIndex = 21
+        Me.Label39.Text = "Open not defined Urls in:"
+        '
         'Options
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1392,4 +1433,6 @@ Partial Class Options
     Friend WithEvents cbIntranet As System.Windows.Forms.ComboBox
     Friend WithEvents Label38 As System.Windows.Forms.Label
     Friend WithEvents cbRevealURL As System.Windows.Forms.CheckBox
+    Friend WithEvents cbDefault As System.Windows.Forms.ComboBox
+    Friend WithEvents Label39 As System.Windows.Forms.Label
 End Class

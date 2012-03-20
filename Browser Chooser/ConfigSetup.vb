@@ -27,7 +27,7 @@ Public Class ConfigSetup
                 Do While Not sLine Is Nothing
                     Select Case GetRowValue(sLine)
                         Case "DefaultBrowser"
-                            importedConfig.DefaultBrowser = sLine.Substring(15, sLine.Length - 15)
+                            importedConfig.IamDefaultBrowser = sLine.Substring(15, sLine.Length - 15)
                         Case "ShowURL"
                             importedConfig.ShowUrl = sLine.Substring(8, sLine.Length - 8)
                         Case "AutoUpdateCheck"

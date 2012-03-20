@@ -114,15 +114,15 @@ Public Class Options
         'reset the in memory list of browsers object
         BrowserConfig.Browsers.Clear()
 
-        If Not BrowserConfig.DefaultBrowser Then
+        If Not BrowserConfig.IamDefaultBrowser Then
 
             Dim Answer As MsgBoxResult = MsgBox("Browser Chooser is not currently set as your default browser. Would you like to make it so now?" & vbCrLf & "(Without being the default browser, Browser Chooser's usefullness rapidly declines...)", MsgBoxStyle.YesNo)
 
             If Answer = MsgBoxResult.Yes Then
-                BrowserConfig.DefaultBrowser = True
+                BrowserConfig.IamDefaultBrowser = True
                 SetDefaultBrowserPath()
             Else
-                BrowserConfig.DefaultBrowser = False
+                BrowserConfig.IamDefaultBrowser = False
             End If
 
         End If
@@ -135,6 +135,12 @@ Public Class Options
             BrowserConfig.IntranetBrowser = Nothing
         ElseIf cbIntranet.SelectedItem IsNot Nothing Then
             BrowserConfig.IntranetBrowser = cbIntranet.SelectedItem
+        End If
+
+        If cbDefault.SelectedIndex = 0 Then
+            BrowserConfig.DefaultBrowser = Nothing
+        ElseIf cbDefault.SelectedItem IsNot Nothing Then
+            BrowserConfig.DefaultBrowser = cbDefault.SelectedItem
         End If
 
         If (Not String.IsNullOrEmpty(Browser1Name.Text)) Then
@@ -265,6 +271,22 @@ Public Class Options
                 cbIntranet.Items.Add(Browser)
                 If (target = Browser.Target) Then
                     cbIntranet.SelectedItem = Browser
+                End If
+            End If
+        Next
+
+        target = ""
+        If (BrowserConfig.DefaultBrowser IsNot Nothing) Then
+            target = BrowserConfig.DefaultBrowser.Target
+        End If
+
+        cbDefault.Items.Add("None")
+        cbDefault.SelectedIndex = 0
+        For Each Browser In BrowserConfig.Browsers
+            If (Browser.IsActive) Then
+                cbDefault.Items.Add(Browser)
+                If (target = Browser.Target) Then
+                    cbDefault.SelectedItem = Browser
                 End If
             End If
         Next
@@ -453,11 +475,11 @@ Public Class Options
                 Registry.CurrentUser.CreateSubKey("SOFTWARE\Microsoft\Internet Explorer\Main").SetValue("IgnoreDefCheck", "Yes", RegistryValueKind.String)
 
             Catch ex As Exception
-                BrowserConfig.DefaultBrowser = False
+                BrowserConfig.IamDefaultBrowser = False
                 Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
             End Try
 
-        ElseIf OS_Version() = "Windows 7" Or OS_Version() = "Windows Vista" Then
+        ElseIf OS_Version() = "Windows 7" Or OS_Version() = "Windows Vista" Or OS_Version() = "Windows 8" Then
 
             Try
                 Registry.LocalMachine.CreateSubKey("SOFTWARE\RegisteredApplications").SetValue("Browser Chooser", "Software\\Browser Chooser\\Capabilities", RegistryValueKind.String)
@@ -505,7 +527,7 @@ Public Class Options
                 End Try
 
             Catch ex As Exception
-                BrowserConfig.DefaultBrowser = False
+                BrowserConfig.IamDefaultBrowser = False
                 Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
             End Try
 
@@ -515,9 +537,9 @@ Public Class Options
 
         End If
 
-        
 
-        BrowserConfig.DefaultBrowser = True
+
+        BrowserConfig.IamDefaultBrowser = True
 
         Return "Default browser has been set to Browser Chooser."
 
@@ -659,6 +681,8 @@ Public Class Options
                                 sAns = "Windows Vista"
                             ElseIf .Version.Minor = 1 Then
                                 sAns = "Windows 7"
+                            ElseIf .Version.Minor = 2 Then
+                                sAns = "Windows 8"
                             Else 'Future version maybe update
                                 'as needed
                                 sAns = "Unknown Windows Version"

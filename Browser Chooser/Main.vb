@@ -387,6 +387,10 @@ APImissing:
             bClose = False
         End If
 
+        If e.KeyCode = Keys.O Then
+            openOptions()
+        End If
+
         If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
             LaunchBrowserAndClose(1, bClose)
         ElseIf BrowserConfig.GetBrowser(2).IsActive = True AndAlso (e.KeyCode = Keys.D2 Or BrowserConfig.GetBrowser(2).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
