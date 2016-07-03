@@ -5,14 +5,16 @@ Imports Microsoft.WindowsAPICodePack.Taskbar
 Imports Microsoft.WindowsAPICodePack.Shell
 Imports System.Threading
 Imports System.ComponentModel
-
+Imports Microsoft.Win32
+Imports System.Text
+Imports System.Security.Principal
 
 Public Class frmMain
     Private browserButtons As List(Of PictureBox)
     Private browserTooltips As List(Of ToolTip)
     Private WithEvents backgroundWorker1 As System.ComponentModel.BackgroundWorker
 
-    <StructLayout(LayoutKind.Sequential)> _
+    <StructLayout(LayoutKind.Sequential)>
     Public Structure MARGINS
         Public cxLeftWidth As Integer
         Public cxRightWidth As Integer
@@ -20,7 +22,7 @@ Public Class frmMain
         Public cyButtomheight As Integer
     End Structure
 
-    <DllImport("dwmapi.dll")> _
+    <DllImport("dwmapi.dll")>
     Public Shared Function DwmExtendFrameIntoClientArea(ByVal hWnd As IntPtr, ByRef pMarinset As MARGINS) As Integer
     End Function
 
@@ -60,12 +62,23 @@ APImissing:
         Dim hwnd As IntPtr = Me.Handle
         Dim result As Integer = DwmExtendFrameIntoClientArea(hwnd, margins)
 
+        CheckIfRegistered()
+
         InitializeMain()
 
         If Not IsAeroEnabled() Then
             styleXP()
         End If
 
+    End Sub
+
+    Private Sub CheckIfRegistered()
+        Dim data As Object
+        data = My.Computer.Registry.GetValue("HKEY_CLASSES_ROOT\BrowserChooserHTML\DefaultIcon",
+                                            String.Empty, String.Empty)
+        If (String.IsNullOrEmpty(data)) Then
+            RegisterNow.ShowDialog()
+        End If
     End Sub
 
     Private Sub LaunchBrowserInfo(ByVal browserNumber As Integer)
@@ -80,7 +93,7 @@ APImissing:
         If (Not LaunchBrowser(browserNumber)) Then
             MsgBox("The target browser does not exist in the target location.", MsgBoxStyle.Critical)
         Else
-            If bClose then
+            If bClose Then
                 Me.Close()
             End If
         End If
@@ -94,6 +107,10 @@ APImissing:
                 SetImage = My.Resources.Flock
             Case "Internet Explorer"
                 SetImage = My.Resources.InternetExplorer
+            Case "Internet Explorer InPrivate"
+                SetImage = My.Resources.InternetExplorerInPrivate
+            Case "Edge"
+                SetImage = My.Resources.Edge
             Case "Google Chrome"
                 SetImage = My.Resources.GoogleChrome
             Case "Opera"
@@ -151,13 +168,7 @@ APImissing:
 
         If (BrowserConfig Is Nothing OrElse BrowserConfig.Browsers.Count = 0) Then
             'Force open Options screen
-#If DEBUG Then
-            ' this switch allows us to debug Options without having to attach to process due to UAC
             Options.ShowDialog()
-#Else
-            openOptions()
-#End If
-
         Else
             For index As Integer = 1 To 5
                 If (BrowserConfig.GetBrowser(index).IsActive) Then
@@ -243,21 +254,7 @@ APImissing:
     End Sub
 
     Private Sub btnOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOptions.Click
-#If DEBUG Then
         Options.Show()
-#Else
-        openOptions()
-#End If
-    End Sub
-
-    Private Sub openOptions()
-        Dim myProcess As New Process
-        myProcess.StartInfo.UseShellExecute = True
-        myProcess.StartInfo.Verb = "runas"
-        myProcess.StartInfo.FileName = Application.ExecutablePath
-        myProcess.StartInfo.Arguments = "gooptions"
-        myProcess.Start()
-        System.Environment.Exit(-1)
     End Sub
 
     Public Sub CheckforUpdate(ByVal strMode As String)
@@ -372,6 +369,19 @@ APImissing:
     Private Sub btnApp_Click(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles btnApp1.MouseClick, btnApp2.MouseClick, btnApp3.MouseClick, btnApp4.MouseClick, btnApp5.MouseClick
         Dim browserIndex As Integer = browserButtons.IndexOf(sender)
 
+        If (RememberForThisURL.Checked) Then
+            Dim browser = Module1.BrowserConfig.Browsers(browserIndex - 1)
+            Dim uri As UriBuilder = Nothing
+            Try
+                uri = New UriBuilder(strUrl)
+            Catch ex As Exception
+                MsgBox(String.Format("Error reading {0} as a valid URL.{1}{2}", strUrl, vbCrLf, ex.Message, MsgBoxStyle.Critical))
+            End Try
+            uri.Path = ""
+            browser.Urls.Add(uri.Host)
+            Options.SaveConfig()
+        End If
+
         If (My.Computer.Keyboard.CtrlKeyDown) And (e.Button = Windows.Forms.MouseButtons.Left) Then
             LaunchBrowserAndClose(browserIndex, False)
         ElseIf (e.Button = Windows.Forms.MouseButtons.Left) Then
@@ -388,7 +398,7 @@ APImissing:
         End If
 
         If e.KeyCode = Keys.O Then
-            openOptions()
+            Options.Show()
         End If
 
         If BrowserConfig.GetBrowser(1).IsActive = True AndAlso (e.KeyCode = Keys.D1 Or BrowserConfig.GetBrowser(1).Name.StartsWith(firstChar, StringComparison.InvariantCultureIgnoreCase)) Then
@@ -440,7 +450,7 @@ APImissing:
         ' create the jump lists
         If TaskbarManager.IsPlatformSupported Then
 
-            Dim jumpList As JumpList = jumpList.CreateJumpList()
+            Dim jumpList As JumpList = JumpList.CreateJumpList()
 
             For Each Browser In BrowserConfig.Browsers
                 If Browser.IsActive Then

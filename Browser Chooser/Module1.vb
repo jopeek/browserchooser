@@ -4,7 +4,7 @@ Imports Microsoft.WindowsAPICodePack.Taskbar
 
 Module Module1
     Friend Is64Bit As Boolean = False
-    Friend PortableMode = False
+    Friend PortableMode As Boolean = False
     Friend DefaultMessage As String = "Choose a Browser"
     Friend strUrl As String
     Friend strShownUrl As String
@@ -69,6 +69,8 @@ Module Module1
             cmdLineOption = My.Application.CommandLineArgs.Item(0)
             If (cmdLineOption = "gooptions") Then
                 Application.Run(Options)
+            ElseIf (cmdLineOption = "registerbrowser") Then
+                Console.WriteLine(Options.SetDefaultBrowserPath())
             Else
                 strUrl = cmdLineOption
 

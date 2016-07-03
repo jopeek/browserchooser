@@ -9,16 +9,16 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Browser Chooser")> 
-<Assembly: AssemblyDescription("Small app that let's you choose what browser to open a url in. Visit my website for more information.")> 
-<Assembly: AssemblyCompany("Jan Ole Peek")> 
-<Assembly: AssemblyProduct("Browser Chooser")> 
-<Assembly: AssemblyCopyright("Copyright ©  2009 - 2012")> 
+<Assembly: AssemblyDescription("Small app that let's you choose what browser to open a url in. Visit my website for more information.")>
+<Assembly: AssemblyCompany("Jan Ole Peek & Jukka Paajanen")>
+<Assembly: AssemblyProduct("Browser Chooser")>
+<Assembly: AssemblyCopyright("Copyright ©  2009 - 2015")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("4bfe1fae-af33-44f9-9f10-f65e825d5ec1")> 
+<Assembly: Guid("4bfe1fae-af33-44f9-9f10-f65e825d5ec1")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.16.*")> 
+<Assembly: AssemblyVersion("1.1.0.*")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 

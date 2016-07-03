@@ -1,6 +1,9 @@
 ﻿Imports Microsoft.Win32
 Imports System.IO
 Imports Microsoft.WindowsAPICodePack
+Imports System.Threading
+Imports System.Security.Principal
+Imports System.Runtime.InteropServices
 
 Public Class Options
 
@@ -20,6 +23,7 @@ Public Class Options
         End If
 
         Dim appData As String = Directory.GetParent(My.Computer.FileSystem.SpecialDirectories.Temp).FullName
+        Dim system As String = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.System)).FullName
 
         ' Add Firefox
         Dim firefox As String = Path.Combine(programFiles, "Mozilla Firefox\firefox.exe")
@@ -36,15 +40,23 @@ Public Class Options
         End If
 
         ' Add Google Chrome
-        Dim chrome As String = Path.Combine(appData, "Google\Chrome\Application\chrome.exe")
+        Dim chrome As String = Path.Combine(programFiles, "Google\Chrome\Application\chrome.exe")
         If File.Exists(chrome) Then
             InstalledBrowsers.Add(New Browser With {.Name = "Google Chrome", .Target = chrome})
+            InstalledBrowsers.Add(New Browser With {.Name = "Google Chrome Incognito", .Target = chrome + " -incognito"})
         End If
 
         ' Add Internet Explorer
         Dim internetExplorer As String = Path.Combine(programFiles, "Internet Explorer\iexplore.exe")
         If File.Exists(internetExplorer) Then
             InstalledBrowsers.Add(New Browser With {.Name = "Internet Explorer", .Target = internetExplorer})
+            InstalledBrowsers.Add(New Browser With {.Name = "Internet Explorer InPrivate", .Target = internetExplorer + " -private"})
+        End If
+
+        ' Add Edge
+        Dim edge As String = Path.Combine(system, "SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\MicrosoftEdge.exe")
+        If File.Exists(edge) Then
+            InstalledBrowsers.Add(New Browser With {.Name = "Edge", .Target = edge})
         End If
 
         ' Add Opera
@@ -129,7 +141,7 @@ Public Class Options
 
         BrowserConfig.ShowUrl = cbURL.Checked
         BrowserConfig.AutoUpdateCheck = cbAutoCheck.Checked
-        BrowserConfig.RevealURL = cbRevealURL.Checked
+        BrowserConfig.RevealUrl = cbRevealURL.Checked
 
         If cbIntranet.SelectedIndex = 0 Then
             BrowserConfig.IntranetBrowser = Nothing
@@ -306,6 +318,41 @@ Public Class Options
                 BrowserConfig.AutoUpdateCheck = True
             End If
         End If
+
+        Dim ad As AppDomain = Thread.GetDomain()
+        ad.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal)
+        Dim user As WindowsPrincipal = Thread.CurrentPrincipal
+        ' Decorate Activate Browser button with the BCM_SETSHIELD method if the user Is an non admin
+        Dim ElevationRequired = False
+        If (Not user.IsInRole(WindowsBuiltInRole.Administrator)) Then
+            ElevationRequired = True
+            ElevateIcon_BCM_SETSHIELD(btnSetDefault, True)
+        Else
+            ElevateIcon_BCM_SETSHIELD(btnSetDefault, False)
+        End If
+    End Sub
+
+    '    P/Invoke setup for user32.dll!SendMessage
+    <DllImport(“user32.dll”)>
+    Public Shared Function SendMessage(ByVal hWnd As HandleRef, Msg As UInt32, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    End Function
+
+    Sub ElevateIcon_BCM_SETSHIELD(ThisButton As Button, Enable As Boolean)
+        'Input validation, validate that ThisControl Is Not null
+        If (ThisButton Is Nothing) Then
+            Return
+        End If
+        ' Define BCM_SETSHIELD locally, declared originally in Commctrl.h
+        Dim BCM_SETSHIELD As UInt32 = 5644
+        '   Set button style to the system style
+        ThisButton.FlatStyle = FlatStyle.System
+        'Send the BCM_SETSHIELD message to the button control
+        If (Enable) Then
+            SendMessage(New HandleRef(ThisButton, ThisButton.Handle), BCM_SETSHIELD, New IntPtr(0), New IntPtr(1))
+        Else
+            SendMessage(New HandleRef(ThisButton, ThisButton.Handle), BCM_SETSHIELD, New IntPtr(0), New IntPtr(0))
+        End If
+        Return
     End Sub
 
     Private Sub SelectBrowser(ByVal BrowserPath As String, ByVal BrowserName As String, ByVal currentComboBox As ComboBox)
@@ -405,7 +452,21 @@ Public Class Options
     End Sub
 
     Private Sub btnSetDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetDefault.Click
-        MsgBox(SetDefaultBrowserPath)
+        Dim pricipal As WindowsPrincipal = New WindowsPrincipal(WindowsIdentity.GetCurrent())
+        Dim hasAdministrativeRight As Boolean = pricipal.IsInRole(WindowsBuiltInRole.Administrator)
+        If (Not hasAdministrativeRight) Then
+            Dim startInfo As ProcessStartInfo = New ProcessStartInfo()
+            startInfo.UseShellExecute = True
+            startInfo.WorkingDirectory = Environment.CurrentDirectory
+            startInfo.FileName = Application.ExecutablePath
+            startInfo.Arguments = "registerbrowser"
+            startInfo.Verb = "runas"
+            startInfo.CreateNoWindow = True
+            Dim p As Process = Process.Start(startInfo)
+            p.WaitForExit()
+        Else
+            MsgBox(SetDefaultBrowserPath)
+        End If
     End Sub
 
     Public Function SetDefaultBrowserPath() As String
@@ -479,7 +540,7 @@ Public Class Options
                 Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
             End Try
 
-        ElseIf OS_Version() = "Windows 7" Or OS_Version() = "Windows Vista" Or OS_Version() = "Windows 8" Then
+        ElseIf OS_Version() = "Windows 7" Or OS_Version() = "Windows Vista" Or OS_Version() = "Windows 8" Or OS_Version() = "Windows 10" Then
 
             Try
                 Registry.LocalMachine.CreateSubKey("SOFTWARE\RegisteredApplications").SetValue("Browser Chooser", "Software\\Browser Chooser\\Capabilities", RegistryValueKind.String)
@@ -511,36 +572,36 @@ Public Class Options
                 Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Shell\Associations\UrlAssociations\ftp\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
 
                 Try
-                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice")
-                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice")
-                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice")
-                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice")
-                    Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice")
+                    If (OS_Version() = "Windows 10" Or OS_Version() = "Windows 8") Then
+                        ' Win 8 and above no longer support setting the default apps - must show the dialog to the end user
+                        Dim result = Process.Start("ms-settings:defaultapps")
+                        MsgBox("Please select Browser Chooser as the default Web Browser")
+                        Return ""
+                    Else
+                        Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice")
+                        Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice")
+                        Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice")
+                        Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice")
+                        Registry.CurrentUser.DeleteSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice")
 
-                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
-                    Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                        Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                        Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                        Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                        Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xht\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                        Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.xhtml\UserChoice").SetValue("Progid", "BrowserChooserHTML", Microsoft.Win32.RegistryValueKind.String)
+                    End If
                 Catch ex As Exception
                     MsgBox("An error may have occured registering the file extensions. You may want to check in the 'Default Programs' option in your start menu to confirm this worked." & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
                 End Try
-
             Catch ex As Exception
                 BrowserConfig.IamDefaultBrowser = False
                 Return "Problem writing or reading Registry: " & vbCrLf & vbCrLf & ex.Message
             End Try
-
         Else
-
             Return "Unable to determine what version of Windows you are running, so we can't set Browser Chooser as the default. Sorry."
-
         End If
 
-
-
         BrowserConfig.IamDefaultBrowser = True
-
         Return "Default browser has been set to Browser Chooser."
 
     End Function
@@ -640,7 +701,7 @@ Public Class Options
     Public Function OS_Version() As String
 
         Dim osInfo As OperatingSystem
-        Dim sAns As String
+        Dim sAns As String = "Unknown"
 
         osInfo = System.Environment.OSVersion
 
@@ -682,7 +743,13 @@ Public Class Options
                             ElseIf .Version.Minor = 1 Then
                                 sAns = "Windows 7"
                             ElseIf .Version.Minor = 2 Then
-                                sAns = "Windows 8"
+                                Dim vs As Version = Environment.OSVersion.Version
+                                Dim w10 As Boolean = IsWindows10()
+                                If (w10) Then
+                                    sAns = "Windows 10"
+                                Else
+                                    sAns = "Windows 8"
+                                End If
                             Else 'Future version maybe update
                                 'as needed
                                 sAns = "Unknown Windows Version"
@@ -697,5 +764,11 @@ Public Class Options
         Return sAns
     End Function
 
-    
+    Public Function IsWindows10() As Boolean
+        ' Not a great way, but the only reliable way I was able to find
+        Dim reg = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Windows NT\CurrentVersion")
+        Dim ProductName = reg.GetValue("ProductName")
+        Return ProductName.StartsWith("Windows 10")
+    End Function
 End Class
+

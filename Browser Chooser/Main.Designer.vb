@@ -22,25 +22,26 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.btnInfo = New System.Windows.Forms.PictureBox
-        Me.btnApp1 = New System.Windows.Forms.PictureBox
+        Me.btnInfo = New System.Windows.Forms.PictureBox()
+        Me.btnApp1 = New System.Windows.Forms.PictureBox()
         Me.browserButtonContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.AddUrlToAutoOpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CopyUrlToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnOptions = New System.Windows.Forms.PictureBox
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnApp2 = New System.Windows.Forms.PictureBox
-        Me.btnApp3 = New System.Windows.Forms.PictureBox
-        Me.btnApp4 = New System.Windows.Forms.PictureBox
-        Me.lblEmpty = New System.Windows.Forms.Label
-        Me.btnApp5 = New System.Windows.Forms.PictureBox
+        Me.AddUrlToAutoOpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyUrlToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnOptions = New System.Windows.Forms.PictureBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnApp2 = New System.Windows.Forms.PictureBox()
+        Me.btnApp3 = New System.Windows.Forms.PictureBox()
+        Me.btnApp4 = New System.Windows.Forms.PictureBox()
+        Me.lblEmpty = New System.Windows.Forms.Label()
+        Me.btnApp5 = New System.Windows.Forms.PictureBox()
         Me.btn1TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn2TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn3TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn4TT = New System.Windows.Forms.ToolTip(Me.components)
         Me.btn5TT = New System.Windows.Forms.ToolTip(Me.components)
+        Me.RememberForThisURL = New System.Windows.Forms.CheckBox()
         CType(Me.btnInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnApp1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.browserButtonContextMenu.SuspendLayout()
@@ -78,18 +79,18 @@ Partial Class frmMain
         '
         Me.browserButtonContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUrlToAutoOpenToolStripMenuItem, Me.CopyUrlToClipboardToolStripMenuItem})
         Me.browserButtonContextMenu.Name = "btn1ContextMenu"
-        Me.browserButtonContextMenu.Size = New System.Drawing.Size(214, 48)
+        Me.browserButtonContextMenu.Size = New System.Drawing.Size(213, 48)
         '
         'AddUrlToAutoOpenToolStripMenuItem
         '
         Me.AddUrlToAutoOpenToolStripMenuItem.Name = "AddUrlToAutoOpenToolStripMenuItem"
-        Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.AddUrlToAutoOpenToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
         Me.AddUrlToAutoOpenToolStripMenuItem.Text = "Add Url To Auto Open List"
         '
         'CopyUrlToClipboardToolStripMenuItem
         '
         Me.CopyUrlToClipboardToolStripMenuItem.Name = "CopyUrlToClipboardToolStripMenuItem"
-        Me.CopyUrlToClipboardToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.CopyUrlToClipboardToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
         Me.CopyUrlToClipboardToolStripMenuItem.Text = "Copy Url To Clipboard"
         '
         'btnOptions
@@ -180,13 +181,24 @@ Partial Class frmMain
         Me.btnApp5.TabStop = False
         Me.btnApp5.Visible = False
         '
+        'RememberForThisURL
+        '
+        Me.RememberForThisURL.AutoSize = True
+        Me.RememberForThisURL.Location = New System.Drawing.Point(56, 88)
+        Me.RememberForThisURL.Name = "RememberForThisURL"
+        Me.RememberForThisURL.Size = New System.Drawing.Size(197, 17)
+        Me.RememberForThisURL.TabIndex = 12
+        Me.RememberForThisURL.Text = "Remember my selection for this URL"
+        Me.RememberForThisURL.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(501, 80)
+        Me.ClientSize = New System.Drawing.Size(501, 110)
+        Me.Controls.Add(Me.RememberForThisURL)
         Me.Controls.Add(Me.lblEmpty)
         Me.Controls.Add(Me.btnApp5)
         Me.Controls.Add(Me.btnApp4)
@@ -216,6 +228,7 @@ Partial Class frmMain
         CType(Me.btnApp4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnApp5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnInfo As System.Windows.Forms.PictureBox
@@ -235,5 +248,5 @@ Partial Class frmMain
     Friend WithEvents browserButtonContextMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents AddUrlToAutoOpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CopyUrlToClipboardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
+    Friend WithEvents RememberForThisURL As CheckBox
 End Class

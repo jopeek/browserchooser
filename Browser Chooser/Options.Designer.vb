@@ -143,8 +143,6 @@ Partial Class Options
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Browser5FileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.btnHelp = New System.Windows.Forms.Button()
-        Me.cbDefault = New System.Windows.Forms.ComboBox
-        Me.Label39 = New System.Windows.Forms.Label
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -236,7 +234,7 @@ Partial Class Options
         '
         Me.Browser1Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser1Image.FormattingEnabled = True
-        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser1Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Internet Explorer InPrivate", "Edge", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser1Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser1Image.Name = "Browser1Image"
         Me.Browser1Image.Size = New System.Drawing.Size(134, 21)
@@ -445,7 +443,7 @@ Partial Class Options
         '
         Me.Browser2Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser2Image.FormattingEnabled = True
-        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser2Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Internet Explorer InPrivate", "Edge", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser2Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser2Image.Name = "Browser2Image"
         Me.Browser2Image.Size = New System.Drawing.Size(134, 21)
@@ -598,7 +596,7 @@ Partial Class Options
         '
         Me.Browser3Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser3Image.FormattingEnabled = True
-        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser3Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Internet Explorer InPrivate", "Edge", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser3Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser3Image.Name = "Browser3Image"
         Me.Browser3Image.Size = New System.Drawing.Size(134, 21)
@@ -751,7 +749,7 @@ Partial Class Options
         '
         Me.Browser4Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser4Image.FormattingEnabled = True
-        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser4Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Internet Explorer InPrivate", "Edge", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser4Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser4Image.Name = "Browser4Image"
         Me.Browser4Image.Size = New System.Drawing.Size(134, 21)
@@ -904,7 +902,7 @@ Partial Class Options
         '
         Me.Browser5Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Browser5Image.FormattingEnabled = True
-        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Opera", "Safari", "Google Chrome", "Custom"})
+        Me.Browser5Image.Items.AddRange(New Object() {"Firefox", "Flock", "Internet Explorer", "Internet Explorer InPrivate", "Edge", "Opera", "Safari", "Google Chrome", "Custom"})
         Me.Browser5Image.Location = New System.Drawing.Point(272, 52)
         Me.Browser5Image.Name = "Browser5Image"
         Me.Browser5Image.Size = New System.Drawing.Size(134, 21)
@@ -1254,24 +1252,6 @@ Partial Class Options
         Me.btnHelp.TabIndex = 1
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
-        '
-        'cbDefault
-        '
-        Me.cbDefault.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDefault.FormattingEnabled = True
-        Me.cbDefault.Location = New System.Drawing.Point(128, 51)
-        Me.cbDefault.Name = "cbDefault"
-        Me.cbDefault.Size = New System.Drawing.Size(141, 21)
-        Me.cbDefault.TabIndex = 20
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(3, 54)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(124, 13)
-        Me.Label39.TabIndex = 21
-        Me.Label39.Text = "Open not defined Urls in:"
         '
         'Options
         '

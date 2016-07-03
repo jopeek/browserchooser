@@ -104,8 +104,10 @@ Public Class BrowserList
             End If
         End If
 
-        If Me.DefaultBrowser IsNot Nothing And DefaultBrowser.BrowserNumber <> 0 Then
-            rez = BrowserConfig.DefaultBrowser.BrowserNumber
+        If Me.DefaultBrowser IsNot Nothing Then
+            If DefaultBrowser.BrowserNumber <> 0 Then
+                rez = BrowserConfig.DefaultBrowser.BrowserNumber
+            End If
         End If
 
         Dim b As Browser = Me.Browsers.FirstOrDefault(Function(c) c.Urls.Any(Function(w) url.ToUpper().Contains(w.Trim().ToUpper())))
